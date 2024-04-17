@@ -1,0 +1,51 @@
+﻿@model MediaFileScanVM
+@{
+    List<MediaFileVM> mp3s = Model.MediaFileList.Where(x => x.FileType == MediaFileTypeEnum.Audio).ToList() ?? new();
+
+    List<MediaFileVM> mp4s = Model.MediaFileList.Where(x => x.FileType == MediaFileTypeEnum.Video).ToList() ?? new();
+
+    List<MediaFolderVM> folders = Model.MediaFolderList ?? new();
+}
+
+<div class="">
+    <div class="row">
+        --資料夾--
+    </div>
+    <div class="row g-3">
+        @foreach (var item in folders)
+        {
+            <div class="col-4 col-xs-12 col-sm-12 col-md-4" ondblclick="subFolder('@item.RelativePath')">
+                <div class="card mb-4">
+                    <div class=""><i class="fa-solid fa-folder" style="font-size:80px;"></i></div>
+                    <div class="card-body">
+                        <span>@item.FolderName</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="row g-3">
+    @foreach (var item in mp4s)
+    {
+        <div class="col-4 col-xs-12 col-sm-12 col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Free</h4>
+                </div>
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+<script>
+    function subFolder(path) {
+        let url = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname + "/?path=" + encodeURI(path);
+        window.location = url;
+        console.log(url);
+    }
+</script>

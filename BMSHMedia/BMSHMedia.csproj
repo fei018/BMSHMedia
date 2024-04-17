@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <CopyRefAssembliesToPublishDirectory>true</CopyRefAssembliesToPublishDirectory>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <Nullable>disable</Nullable>  
+  
+    <CopyRefAssembliesToPublishDirectory>true</CopyRefAssembliesToPublishDirectory>
+</PropertyGroup>
+
+
+
+
+  <ItemGroup>
+    <PackageReference Include="Elsa.Designer.Components.Web" Version="2.14.1" />
+    <PackageReference Include="WalkingTec.Mvvm.TagHelpers.LayUI" Version="8.0.8" />
+    <PackageReference Include="WalkingTec.Mvvm.Mvc" Version="8.0.8" />
+</ItemGroup>
+
+  <ItemGroup>
+   <ProjectReference Include="..\BMSHMedia.Model\BMSHMedia.Model.csproj" />
+    <ProjectReference Include="..\BMSHMedia.DataAccess\BMSHMedia.DataAccess.csproj" />
+    <ProjectReference Include="..\BMSHMedia.ViewModel\BMSHMedia.ViewModel.csproj" />
+ </ItemGroup>
+</Project>
+
+
