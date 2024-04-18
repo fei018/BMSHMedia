@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BMSHMedia.Model")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3f20c7ceb0920be38cfe73ffb29cb8bbd9e7e47c")]
 [assembly: System.Reflection.AssemblyProductAttribute("BMSHMedia.Model")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BMSHMedia.Model")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

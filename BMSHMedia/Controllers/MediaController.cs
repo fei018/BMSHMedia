@@ -7,14 +7,15 @@ namespace BMSHMedia.Controllers
 {
     public class MediaController : Controller
     {
-        public IActionResult Index(string path)
+        public IActionResult Index()
         {
-            
+            return View();
+        }
 
+        public IActionResult List(string path)
+        {
             if (string.IsNullOrEmpty(path))
             {
-
-
                 var vm = new MediaFileScanVM();
                 vm.ScanFolders(SiteConfigInfo.MediaRootPath, true);
 
@@ -22,15 +23,12 @@ namespace BMSHMedia.Controllers
             }
             else
             {
-                path = Uri.UnescapeDataString(path);
 
                 var vm = new MediaFileScanVM();
                 vm.ScanFolders(path, false);
 
-                return View(vm);
+                return PartialView(vm);
             }
-
-            
         }
     }
 }

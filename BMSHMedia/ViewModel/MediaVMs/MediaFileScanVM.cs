@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,6 +24,8 @@ namespace BMSHMedia.ViewModel.MediaVMs
             }
             else
             {
+                path = Uri.UnescapeDataString(path);
+
                 folderPath = Path.Combine(SiteConfigInfo.MediaRootPath, path);
 
                 if (SiteConfigInfo.IsMediaRootPath(folderPath))
@@ -53,7 +56,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
 
                     f.ParentPath = f.FullPath.Substring(0, f.FullPath.LastIndexOf("\\"));
 
-                    f.RelativePath = f.FullPath.Substring(SiteConfigInfo.MediaRootPath.Length).TrimStart('\\');
+                    f.RelativePath = Uri.EscapeDataString(f.FullPath.Substring(SiteConfigInfo.MediaRootPath.Length).TrimStart('\\'));
 
                     MediaFolderList.Add(f);
                 }
