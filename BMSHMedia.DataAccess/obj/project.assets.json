@@ -5874,23 +5874,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Fei\\.nuget\\packages\\": {},
+    "C:\\Users\\fei\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia.DataAccess\\BMSHMedia.DataAccess.csproj",
+      "projectUniqueName": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia.DataAccess\\BMSHMedia.DataAccess.csproj",
       "projectName": "BMSHMedia.DataAccess",
-      "projectPath": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia.DataAccess\\BMSHMedia.DataAccess.csproj",
-      "packagesPath": "C:\\Users\\Fei\\.nuget\\packages\\",
-      "outputPath": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia.DataAccess\\obj\\",
+      "projectPath": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia.DataAccess\\BMSHMedia.DataAccess.csproj",
+      "packagesPath": "C:\\Users\\fei\\.nuget\\packages\\",
+      "outputPath": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia.DataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Fei\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\fei\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -5906,8 +5906,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia.Model\\BMSHMedia.Model.csproj": {
-              "projectPath": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia.Model\\BMSHMedia.Model.csproj"
+            "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia.Model\\BMSHMedia.Model.csproj": {
+              "projectPath": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia.Model\\BMSHMedia.Model.csproj"
             }
           }
         }
@@ -5942,7 +5942,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -349,3 +349,4 @@ C:\CodeProject\GitHub\BMSHMedia\BMSHMedia.Model\obj\Debug\net8.0\BMSHMedia.Model
 C:\CodeProject\GitHub\BMSHMedia\BMSHMedia.Model\obj\Debug\net8.0\refint\BMSHMedia.Model.dll
 C:\CodeProject\GitHub\BMSHMedia\BMSHMedia.Model\obj\Debug\net8.0\BMSHMedia.Model.pdb
 C:\CodeProject\GitHub\BMSHMedia\BMSHMedia.Model\obj\Debug\net8.0\ref\BMSHMedia.Model.dll
+C:\Fei\code project\Github\BMSHMedia\BMSHMedia.Model\obj\Debug\net8.0\BMSHMedia.Model.sourcelink.json

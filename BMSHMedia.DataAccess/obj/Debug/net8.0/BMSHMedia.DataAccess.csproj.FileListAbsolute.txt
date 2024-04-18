@@ -355,3 +355,4 @@ C:\CodeProject\GitHub\BMSHMedia\BMSHMedia.DataAccess\obj\Debug\net8.0\BMSHMedia.
 C:\CodeProject\GitHub\BMSHMedia\BMSHMedia.DataAccess\obj\Debug\net8.0\refint\BMSHMedia.DataAccess.dll
 C:\CodeProject\GitHub\BMSHMedia\BMSHMedia.DataAccess\obj\Debug\net8.0\BMSHMedia.DataAccess.pdb
 C:\CodeProject\GitHub\BMSHMedia\BMSHMedia.DataAccess\obj\Debug\net8.0\ref\BMSHMedia.DataAccess.dll
+C:\Fei\code project\Github\BMSHMedia\BMSHMedia.DataAccess\obj\Debug\net8.0\BMSHMedia.DataAccess.sourcelink.json

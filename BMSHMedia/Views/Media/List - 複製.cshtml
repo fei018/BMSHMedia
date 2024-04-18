@@ -1,0 +1,121 @@
+﻿@model MediaFileScanVM
+@{
+    Layout = null;
+
+    List<MediaFileVM> mp3s = Model.MediaFileList.Where(x => x.FileType == MediaFileTypeEnum.Audio).ToList() ?? new();
+
+    List<MediaFileVM> mp4s = Model.MediaFileList.Where(x => x.FileType == MediaFileTypeEnum.Video).ToList() ?? new();
+
+    List<MediaFolderVM> folders = Model.MediaFolderList ?? new();
+}
+
+<style>
+    
+    .media-folder {
+        
+        text-align: center;
+        
+    }
+        .media-folder .card {
+            background-color: ghostwhite;
+            padding: 3px;
+            width: 220px;
+            height: 80px;
+            cursor:pointer;
+            margin:10px;
+        }
+
+        .media-folder .card i {
+                font-size: 50px;
+                color: dodgerblue;
+        }
+
+    .media-folder-name{
+        font-size:14px;
+    }
+
+    .media-row{
+        flex-wrap: wrap;
+        display: flex;
+        margin:5px;
+    }
+
+    @@media screen and (max-width:500px) {
+        .media-folder {
+            width: 100%;
+            text-align: center;          
+        }
+
+        .media-row {
+            display: block;
+        }
+
+        .media-folder .card {
+            background-color: ghostwhite;
+            padding: 3px;
+            width: 100%;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+    }
+</style>
+
+<div class="">
+    <div class="media-row">
+        --資料夾--
+    </div>
+    <div class="media-row">
+        @foreach (var item in folders)
+        {
+            <div class="media-folder" >
+                <div class="card" data-path="@item.RelativePath_Encode">
+                    <div class="row g-0">
+                        <div class="col-3">
+                            <i class="fa fa-folder"></i>                           
+                        </div>
+                        <div class="col-9">
+                            <span class="media-folder-name">@item.FolderName</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="row g-3">
+    @foreach (var item in mp4s)
+    {
+        <div class="col-4 col-xs-12 col-sm-12 col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Free</h4>
+                </div>
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+<script>
+    var touchtime = 0;
+    $('.media-folder .card').on("click", function () {
+        if (touchtime == 0) {
+            // set first click
+            touchtime = new Date().getTime();
+        } else {
+            // compare first click to this click and see if they occurred within double click threshold
+            if (((new Date().getTime()) - touchtime) < 800) {
+                // double click occurred
+
+                scanSubFolder($(this).attr('data-path'));
+
+                touchtime = 0;
+            } else {
+                // not a double click so set as a new first click
+                touchtime = new Date().getTime();
+            }
+        }
+    });
+</script>

@@ -12,21 +12,41 @@ namespace BMSHMedia.ViewModel.MediaVMs
 
         public List<MediaFolderVM> MediaFolderList { get; set; } = new();
 
+        public string UpLevelPath { get; set; }
+
+        #region contr
+        public MediaFileScanVM(string encodePath)
+        {
+            if (!string.IsNullOrEmpty(encodePath))
+            {
+                string fullpath = MediaFolderVM.UncodeAndGetSysFullPath(encodePath);
+
+                if (MediaFolderVM.IsMediaRootPath(fullpath))
+                {
+                    UpLevelPath = null;
+                }
+                else
+                {
+                    string path = MediaFolderVM.GetParentPath(fullpath);
+                    UpLevelPath = MediaFolderVM.GetEncodeRelativePath(path);
+                }
+            }
+        }
+        #endregion
+
 
         #region Scan Folder
-        public void ScanFolders(string path, bool first)
+        public void ScanFolders(string encodePath, bool first=false)
         {
             string folderPath;
 
             if (first)
             {
-                folderPath = path;
+                folderPath = SiteConfigInfo.MediaRootPath;
             }
             else
             {
-                path = Uri.UnescapeDataString(path);
-
-                folderPath = Path.Combine(SiteConfigInfo.MediaRootPath, path);
+                folderPath = MediaFolderVM.UncodeAndGetSysFullPath(encodePath);
 
                 if (SiteConfigInfo.IsMediaRootPath(folderPath))
                 {
@@ -36,27 +56,18 @@ namespace BMSHMedia.ViewModel.MediaVMs
 
             var dirs = Directory.EnumerateDirectories(folderPath).Order().ToList();
 
+            MediaFolderList = new();
+
             if (dirs.Count == 0)
             {
-                MediaFolderList.Clear();
                 return;
             }
 
             if (dirs.Count > 0)
             {
-                MediaFolderList.Clear();
-
                 foreach (var dir in dirs)
                 {
-                    var f = new MediaFolderVM()
-                    {
-                        FolderName = dir.Substring(dir.LastIndexOf('\\') + 1),
-                        FullPath = dir,
-                    };
-
-                    f.ParentPath = f.FullPath.Substring(0, f.FullPath.LastIndexOf("\\"));
-
-                    f.RelativePath = Uri.EscapeDataString(f.FullPath.Substring(SiteConfigInfo.MediaRootPath.Length).TrimStart('\\'));
+                    var f = new MediaFolderVM(dir);
 
                     MediaFolderList.Add(f);
                 }
@@ -71,22 +82,13 @@ namespace BMSHMedia.ViewModel.MediaVMs
 
             var mp4s = Directory.EnumerateFiles(folderPath, "*.mp4", SearchOption.TopDirectoryOnly).Order().ToList();
 
-            MediaFileList?.Clear();
+            MediaFileList = new();
 
             if (mp4s.Count > 0)
             {
                 foreach (var item in mp4s)
                 {
-                    var mp4 = new MediaFileVM()
-                    {
-                        FileName = Path.GetFileName(item),
-                        FileRelativeParentPath = MediaFileVM.GetFileRelativeParentPath(item),
-                        FileType = MediaFileTypeEnum.Video,
-                        FileExtention = Path.GetExtension(item),
-                        MineType = "video/mp4",
-                    };
-
-                    mp4.Url = $"{SiteConfigInfo.SiteHostName}{SiteConfigInfo.CustomStaticWebPath}" + Uri.EscapeUriString($"{mp4.FileRelativeParentPath}{mp4.FileName}".Replace('\\', '/'));
+                    var mp4 = new MediaFileVM(item, "video/mp4");
 
                     MediaFileList.Add(mp4);
                 }
@@ -99,20 +101,20 @@ namespace BMSHMedia.ViewModel.MediaVMs
 
                 foreach (var item in mp3s)
                 {
-                    var mp3 = new MediaFileVM()
-                    {
-                        FileName = Path.GetFileName(item),
-                        FileRelativeParentPath = MediaFileVM.GetFileRelativeParentPath(item),
-                        FileType = MediaFileTypeEnum.Audio,
-                        FileExtention = Path.GetExtension(item),
-                        MineType = "audio/mpeg",
-                    };
-
-                    mp3.Url = $"{SiteConfigInfo.SiteHostName}{SiteConfigInfo.CustomStaticWebPath}" + Uri.EscapeUriString($"{mp3.FileRelativeParentPath}{mp3.FileName}".Replace('\\', '/'));
+                    var mp3 = new MediaFileVM(item, "audio/mpeg");
 
                     MediaFileList.Add(mp3);
                 }
             }
+        }
+        #endregion
+
+        #region ScanFolderAndFiles
+        public void ScanFolderAndFiles(string encodePath, bool first)
+        {
+            ScanFolders(encodePath, first);
+            string path = Uri.UnescapeDataString(encodePath);
+            ScanFiles(path);
         }
         #endregion
     }

@@ -11,6 +11,10 @@ namespace BMSHMedia.ViewModel.MediaVMs
         //[Required(ErrorMessage = "Validate.{0}required")]
         public string FileName { get; set; }
 
+        [Display(Name = "文件Full名")]
+        //[Required(ErrorMessage = "Validate.{0}required")]
+        public string FileFullName { get; set; }
+
         [Display(Name = "文件擴展名")]
         //[Required(ErrorMessage = "Validate.{0}required")]
         public string FileExtention { get; set; }
@@ -30,6 +34,26 @@ namespace BMSHMedia.ViewModel.MediaVMs
 
         public string Url { get; set; }
 
+
+        public MediaFileVM(string fullName, string mineType=null)
+        {
+            FileFullName = fullName;
+            FileName = Path.GetFileName(fullName);
+            FileRelativeParentPath = GetFileRelativeParentPath(fullName);
+            FileType = MediaFileTypeEnum.Video;
+            FileExtention = Path.GetExtension(fullName);
+            MineType = mineType;
+            Url = GetUrl(fullName);
+        }
+
+        public static string GetUrl(string fullName)
+        {
+            string relative = GetFileRelativeParentPath(fullName);
+            string fileName = Path.GetFileName(fullName);
+
+            return $"{SiteConfigInfo.SiteHostName}{SiteConfigInfo.CustomStaticWebPath}" + Uri.EscapeUriString($"{relative}{fileName}".Replace('\\', '/'));
+        }
+
         /// <summary>
         /// 獲取 相對父路徑
         /// </summary>
@@ -37,13 +61,15 @@ namespace BMSHMedia.ViewModel.MediaVMs
         /// <returns></returns>
         public static string GetFileRelativeParentPath(string fileFullName)
         {
-            var path = fileFullName.Replace(SiteConfigInfo.MediaRootPath, "", StringComparison.OrdinalIgnoreCase);
+            // 去掉 設置的根路徑
+            var path = fileFullName.Replace(SiteConfigInfo.MediaRootPath, "", StringComparison.OrdinalIgnoreCase).TrimStart('\\');
 
             var filename = Path.GetFileName(fileFullName);
 
-            path = path.Replace(filename, "", StringComparison.OrdinalIgnoreCase);
+            path = path.Replace(filename, "", StringComparison.OrdinalIgnoreCase).TrimEnd('\\');
 
             return path;
         }
+
     }
 }

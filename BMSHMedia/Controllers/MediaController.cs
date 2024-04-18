@@ -16,16 +16,16 @@ namespace BMSHMedia.Controllers
         {
             if (string.IsNullOrEmpty(path))
             {
-                var vm = new MediaFileScanVM();
-                vm.ScanFolders(SiteConfigInfo.MediaRootPath, true);
+                var vm = new MediaFileScanVM(path);
+                vm.ScanFolderAndFiles(SiteConfigInfo.MediaRootPath, true);
 
                 return View(vm);
             }
             else
             {
 
-                var vm = new MediaFileScanVM();
-                vm.ScanFolders(path, false);
+                var vm = new MediaFileScanVM(path);
+                vm.ScanFolderAndFiles(path, false);
 
                 return PartialView(vm);
             }

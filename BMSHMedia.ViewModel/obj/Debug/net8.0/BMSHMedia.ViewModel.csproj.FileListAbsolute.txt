@@ -355,3 +355,4 @@ C:\CodeProject\GitHub\BMSHMedia\BMSHMedia.ViewModel\obj\Debug\net8.0\BMSHMedia.V
 C:\CodeProject\GitHub\BMSHMedia\BMSHMedia.ViewModel\obj\Debug\net8.0\refint\BMSHMedia.ViewModel.dll
 C:\CodeProject\GitHub\BMSHMedia\BMSHMedia.ViewModel\obj\Debug\net8.0\BMSHMedia.ViewModel.pdb
 C:\CodeProject\GitHub\BMSHMedia\BMSHMedia.ViewModel\obj\Debug\net8.0\ref\BMSHMedia.ViewModel.dll
+C:\Fei\code project\Github\BMSHMedia\BMSHMedia.ViewModel\obj\Debug\net8.0\BMSHMedia.ViewModel.sourcelink.json

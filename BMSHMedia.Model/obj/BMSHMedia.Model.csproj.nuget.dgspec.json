@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia.Model\\BMSHMedia.Model.csproj": {}
+    "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia.Model\\BMSHMedia.Model.csproj": {}
   },
   "projects": {
-    "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia.Model\\BMSHMedia.Model.csproj": {
+    "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia.Model\\BMSHMedia.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia.Model\\BMSHMedia.Model.csproj",
+        "projectUniqueName": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia.Model\\BMSHMedia.Model.csproj",
         "projectName": "BMSHMedia.Model",
-        "projectPath": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia.Model\\BMSHMedia.Model.csproj",
-        "packagesPath": "C:\\Users\\Fei\\.nuget\\packages\\",
-        "outputPath": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia.Model\\obj\\",
+        "projectPath": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia.Model\\BMSHMedia.Model.csproj",
+        "packagesPath": "C:\\Users\\fei\\.nuget\\packages\\",
+        "outputPath": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia.Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Fei\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\fei\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -71,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

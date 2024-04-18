@@ -1117,3 +1117,4 @@ C:\CodeProject\GitHub\BMSHMedia\BMSHMedia\obj\Debug\net8.0\refint\BMSHMedia.dll
 C:\CodeProject\GitHub\BMSHMedia\BMSHMedia\obj\Debug\net8.0\BMSHMedia.pdb
 C:\CodeProject\GitHub\BMSHMedia\BMSHMedia\obj\Debug\net8.0\BMSHMedia.genruntimeconfig.cache
 C:\CodeProject\GitHub\BMSHMedia\BMSHMedia\obj\Debug\net8.0\ref\BMSHMedia.dll
+C:\Fei\code project\Github\BMSHMedia\BMSHMedia\obj\Debug\net8.0\BMSHMedia.sourcelink.json

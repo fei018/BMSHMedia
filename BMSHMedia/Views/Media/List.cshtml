@@ -7,100 +7,103 @@
     List<MediaFileVM> mp4s = Model.MediaFileList.Where(x => x.FileType == MediaFileTypeEnum.Video).ToList() ?? new();
 
     List<MediaFolderVM> folders = Model.MediaFolderList ?? new();
+
+    string uplevel = Model.UpLevelPath;
 }
 
-<style>
-    
-    .media-folder {
-        
-        text-align: center;
-        
-    }
-        .media-folder .card {
-            background-color: ghostwhite;
-            padding: 3px;
-            width: 220px;
-            height: 80px;
-            cursor:pointer;
-            margin:10px;
-        }
 
-        .media-folder .card i {
-                font-size: 50px;
-                color: dodgerblue;
-        }
 
-    .media-folder-name{
-        font-size:14px;
-    }
-
-    .media-row{
-        flex-wrap: wrap;
-        display: flex;
-        margin:5px;
-    }
-
-    @@media screen and (max-width:500px) {
-        .media-folder {
-            width: 100%;
-            text-align: center;          
-        }
-
-        .media-row {
-            display: block;
-        }
-
-        .media-folder .card {
-            background-color: ghostwhite;
-            padding: 3px;
-            width: 100%;
-            height: 80px;
-            margin-bottom: 20px;
-        }
-    }
-</style>
-
-<div class="">
-    <div class="media-row">
-        --資料夾--
-    </div>
-    <div class="media-row">
-        @foreach (var item in folders)
-        {
-            <div class="media-folder" >
-                <div class="card" data-path="@item.RelativePath">
-                    <div class="row g-0">
-                        <div class="col-3">
-                            <i class="fa fa-folder"></i>                           
-                        </div>
-                        <div class="col-9">
-                            <span class="media-folder-name">@item.FolderName</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-</div>
-<div class="row g-3">
-    @foreach (var item in mp4s)
+<div class="file-manager-container file-manager-col-view">
+@*     <div class="file-manager-row-header">
+        <div class="file-item-name pb-2">Filename</div>
+        <div class="file-item-changed pb-2">Changed</div>
+    </div>  *@ 
+    @* @if (!string.IsNullOrEmpty(uplevel) && !MediaFolderVM.IsMediaRootPath(MediaFolderVM.UncodeAndGetSysFullPath(uplevel)))
     {
-        <div class="col-4 col-xs-12 col-sm-12 col-md-4">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">Free</h4>
+        <div class="file-item media-folder-item" data-path="@uplevel">
+            <div class="file-item-icon file-item-level-up fa fa-level-up text-secondary"></div>
+            <a href="javascript:void(0)" class="file-item-name">
+                ..
+            </a>
+        </div>
+    } *@
+    <div class="file-item media-folder-item" data-path="@uplevel">
+        <div class="file-item-icon file-item-level-up fa fa-level-up text-secondary"></div>
+        <a href="javascript:void(0)" class="file-item-name">
+            ..
+        </a>
+    </div>
+    @foreach (var item in folders)
+    {
+         <div class="file-item media-folder-item" data-path="@item.RelativePath_Encode">
+            <div class="file-item-select-bg bg-primary"></div>
+            <label class="file-item-checkbox custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" />
+                <span class="custom-control-label"></span>
+            </label>
+            <div class="file-item-icon text-secondary fa fa-folder-o"></div>
+            <a href="javascript:void(0)" class="file-item-name">
+                @item.FolderName
+            </a>
+            @* <div class="file-item-actions btn-group">
+                <button type="button" class="btn btn-default btn-sm rounded-pill icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="javascript:void(0)">Rename</a>
                 </div>
-                <div class="card-body">
-                </div>
-            </div>
+            </div> *@
         </div>
     }
+</div>
 
+<div class="file-manager-container file-manager-col-view">
+    @foreach (var item in mp4s)
+    {
+        <div class="file-item">
+            <div class="file-item-select-bg bg-primary"></div>
+            <label class="file-item-checkbox custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" />
+                <span class="custom-control-label"></span>
+            </label>
+            <div class="file-item-icon text-secondary fa fa-folder-o"></div>
+            <a href="javascript:void(0)" class="file-item-name">
+                @item.FileName
+            </a>
+            @* <div class="file-item-actions btn-group">
+        <button type="button" class="btn btn-default btn-sm rounded-pill icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></button>
+        <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="javascript:void(0)">Rename</a>
+        </div>
+        </div> *@
+        </div>
+    }
+</div>
+
+<div class="file-manager-container file-manager-col-view">
+    @foreach (var item in mp3s)
+    {
+        <div class="file-item">
+            <div class="file-item-select-bg bg-primary"></div>
+            <label class="file-item-checkbox custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" />
+                <span class="custom-control-label"></span>
+            </label>
+            <div class="file-item-icon text-secondary fa fa-folder-o"></div>
+            <a href="javascript:void(0)" class="file-item-name">
+                @item.FileName
+            </a>
+            @* <div class="file-item-actions btn-group">
+        <button type="button" class="btn btn-default btn-sm rounded-pill icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></button>
+        <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="javascript:void(0)">Rename</a>
+        </div>
+        </div> *@
+        </div>
+    }
 </div>
 
 <script>
     var touchtime = 0;
-    $('.media-folder .card').on("click", function () {
+    $('.media-folder-item').on("click", function () {
         if (touchtime == 0) {
             // set first click
             touchtime = new Date().getTime();
@@ -118,4 +121,7 @@
             }
         }
     });
+
+
+    //dbclick_media();
 </script>
