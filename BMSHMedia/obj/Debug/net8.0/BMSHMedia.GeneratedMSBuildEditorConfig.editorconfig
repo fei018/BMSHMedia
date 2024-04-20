@@ -234,20 +234,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWFcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Fei/code project/Github/BMSHMedia/BMSHMedia/Views/Media/Layout - 複製.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWFcTGF5b3V0IC0g6KSH6KO9LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Fei/code project/Github/BMSHMedia/BMSHMedia/Views/Media/Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWFcTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Fei/code project/Github/BMSHMedia/BMSHMedia/Views/Media/List - 複製.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWFcTGlzdCAtIOikh+ijvS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Fei/code project/Github/BMSHMedia/BMSHMedia/Views/Media/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWFcTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Fei/code project/Github/BMSHMedia/BMSHMedia/Views/Media/Play.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWFcUGxheS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Fei/code project/Github/BMSHMedia/BMSHMedia/Views/Media/_ViewImports.cshtml]

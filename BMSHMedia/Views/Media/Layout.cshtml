@@ -3,21 +3,24 @@
 <head>
     <meta charset="utf-8">
 
-    <title>check file manager - Bootdey.com</title>
+    <title>佛教愍生講堂</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="~/media-file/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/media-file/css/layout.css" rel="stylesheet" />
+    <link href="~/media-file/css/media.css" rel="stylesheet" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    @* <link href="~/media-file/css/video-js.min.css" rel="stylesheet" /> *@
+
     <script src="~/jquery.min.js"></script>
+    <script src="~/layui/layui.js"></script>
+    @* <script src="~/media-file/js/video.min.js"></script> *@
 
     @RenderSection("ScriptTop", false)
 </head>
 <body>
-    <div class="container flex-grow-1 light-style container-p-y">
+    <div class="container flex-grow-1 light-style container-p-y" style="margin-top:5px;">
         @RenderBody()
     </div>
-    
-    @* <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script> *@
     
     <script src="~/media-file/js/bootstrap.bundle.min.js"></script>
 

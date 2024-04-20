@@ -12,6 +12,7 @@ namespace BMSHMedia.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult List(string path)
         {
             if (string.IsNullOrEmpty(path))
@@ -19,7 +20,7 @@ namespace BMSHMedia.Controllers
                 var vm = new MediaFileScanVM(path);
                 vm.ScanFolderAndFiles(SiteConfigInfo.MediaRootPath, true);
 
-                return View(vm);
+                return PartialView(vm);
             }
             else
             {
@@ -29,6 +30,13 @@ namespace BMSHMedia.Controllers
 
                 return PartialView(vm);
             }
+        }
+
+        [HttpPost]
+        public IActionResult Play(MediaPlayVM vm)
+        {
+            
+            return View(vm);
         }
     }
 }

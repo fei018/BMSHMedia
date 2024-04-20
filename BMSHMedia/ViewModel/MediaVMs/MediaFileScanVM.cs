@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Buffers.Text;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
 
 namespace BMSHMedia.ViewModel.MediaVMs
 {
@@ -28,7 +28,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
                 else
                 {
                     string path = MediaFolderVM.GetParentPath(fullpath);
-                    UpLevelPath = MediaFolderVM.GetEncodeRelativePath(path);
+                    UpLevelPath = MediaFolderVM.GetEncodeRelativeRequestPath(path);
                 }
             }
         }
@@ -36,7 +36,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
 
 
         #region Scan Folder
-        public void ScanFolders(string encodePath, bool first=false)
+        public void ScanFolders(string encodePath, bool first = false)
         {
             string folderPath;
 
@@ -88,7 +88,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
             {
                 foreach (var item in mp4s)
                 {
-                    var mp4 = new MediaFileVM(item, "video/mp4");
+                    var mp4 = new MediaFileVM(item, MediaFileTypeEnum.Video, "video/mp4");
 
                     MediaFileList.Add(mp4);
                 }
@@ -101,7 +101,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
 
                 foreach (var item in mp3s)
                 {
-                    var mp3 = new MediaFileVM(item, "audio/mpeg");
+                    var mp3 = new MediaFileVM(item, MediaFileTypeEnum.Audio, "audio/mpeg");
 
                     MediaFileList.Add(mp3);
                 }

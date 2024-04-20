@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
+using System.Text.Json;
 
 namespace BMSHMedia.ViewModel.MediaVMs
 {
@@ -35,27 +36,34 @@ namespace BMSHMedia.ViewModel.MediaVMs
         public string Url { get; set; }
 
 
-        public MediaFileVM(string fullName, string mineType=null)
+        public MediaFileVM(string fullName, MediaFileTypeEnum fileType, string mineType=null)
         {
             FileFullName = fullName;
             FileName = Path.GetFileName(fullName);
             FileRelativeParentPath = GetFileRelativeParentPath(fullName);
-            FileType = MediaFileTypeEnum.Video;
+            FileType = fileType;
             FileExtention = Path.GetExtension(fullName);
             MineType = mineType;
             Url = GetUrl(fullName);
         }
 
+
+        public string ToJsonString()
+        {
+            return JsonSerializer.Serialize(this);
+        }
+
         public static string GetUrl(string fullName)
         {
-            string relative = GetFileRelativeParentPath(fullName);
-            string fileName = Path.GetFileName(fullName);
+            //string relative = GetFileRelativeParentPath(fullName);
+            //string fileName = Path.GetFileName(fullName);
+            var path = fullName.Replace(SiteConfigInfo.MediaRootPath, "", StringComparison.OrdinalIgnoreCase).TrimStart('\\');
 
-            return $"{SiteConfigInfo.SiteHostName}{SiteConfigInfo.CustomStaticWebPath}" + Uri.EscapeUriString($"{relative}{fileName}".Replace('\\', '/'));
+            return $"{SiteConfigInfo.CustomStaticWebPath}/" + Uri.EscapeUriString(path.Replace('\\', '/'));
         }
 
         /// <summary>
-        /// 獲取 相對父路徑
+        /// 獲取 相對父路徑, 不包含根路徑
         /// </summary>
         /// <param name="fileFullName"></param>
         /// <returns></returns>

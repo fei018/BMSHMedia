@@ -22,7 +22,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
         /// <summary>
         /// 取掉設置的根路徑的 相對路徑, 已編碼, 放在List頁面裡
         /// </summary>
-        public string RelativePath_Encode { get; set; }
+        public string RelativeRequestPath { get; set; }
 
 
         public MediaFolderVM(string fullPath)
@@ -33,7 +33,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
 
             ParentPath = GetParentPath(fullPath);
 
-            RelativePath_Encode = GetEncodeRelativePath(fullPath);
+            RelativeRequestPath = GetEncodeRelativeRequestPath(fullPath);
         }
 
 
@@ -47,7 +47,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
         /// </summary>
         /// <param name="fullPath"></param>
         /// <returns></returns>
-        public static string GetEncodeRelativePath(string fullPath)
+        public static string GetEncodeRelativeRequestPath(string fullPath)
         {
             return Uri.EscapeDataString(fullPath.Substring(SiteConfigInfo.MediaRootPath.Length).TrimStart('\\'));
         }

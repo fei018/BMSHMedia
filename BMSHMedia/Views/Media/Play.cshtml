@@ -1,0 +1,23 @@
+﻿@model MediaPlayVM
+
+@{
+    Layout = null;
+}
+
+<div>
+    @if (Model.FileType == MediaFileTypeEnum.Audio)
+    {
+        <audio controls preload="none" autoplay>
+            <source src="@Model.Url" type="audio/mp3">
+            ???
+        </audio>
+    }
+
+    @if (Model.FileType == MediaFileTypeEnum.Video)
+    {
+        <video controls autoplay preload="none" width="400" >
+            <source src="@Model.Url" type="video/mp4"/>
+            ???
+        </video>
+    }
+</div>

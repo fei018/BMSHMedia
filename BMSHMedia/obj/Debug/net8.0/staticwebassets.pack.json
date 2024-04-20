@@ -2041,8 +2041,12 @@
       "PackagePath": "staticwebassets\\media-file\\css\\ionicons.min.css"
     },
     {
-      "Id": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\wwwroot\\media-file\\css\\layout.css",
-      "PackagePath": "staticwebassets\\media-file\\css\\layout.css"
+      "Id": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\wwwroot\\media-file\\css\\media.css",
+      "PackagePath": "staticwebassets\\media-file\\css\\media.css"
+    },
+    {
+      "Id": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\wwwroot\\media-file\\css\\video-js.min.css",
+      "PackagePath": "staticwebassets\\media-file\\css\\video-js.min.css"
     },
     {
       "Id": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\wwwroot\\media-file\\fonts\\ionicons.eot",
@@ -4851,6 +4855,10 @@
     {
       "Id": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\wwwroot\\media-file\\js\\bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets\\media-file\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\wwwroot\\media-file\\js\\video.min.js",
+      "PackagePath": "staticwebassets\\media-file\\js\\video.min.js"
     },
     {
       "Id": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\wwwroot\\sitecss\\logincss.css",
