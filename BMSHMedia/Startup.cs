@@ -68,6 +68,7 @@ namespace BMSHMedia
             // http response html 拉丁中文不编码
             services.AddSingleton(HtmlEncoder.Create(new[] { UnicodeRanges.BasicLatin, UnicodeRanges.CjkUnifiedIdeographs }));
 
+            SiteConfigInfo.SetSiteConfig(ConfigRoot.GetSection("AppSettings").GetSection("MediaRootPath").Value);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,7 +80,7 @@ namespace BMSHMedia
             app.UseStaticFiles();
 
             app.UseStaticFiles(new StaticFileOptions()
-            {
+            {      
                 FileProvider = new PhysicalFileProvider(SiteConfigInfo.MediaRootPath),
                 RequestPath = SiteConfigInfo.CustomStaticWebPath,
             });

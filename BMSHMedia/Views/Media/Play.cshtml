@@ -4,20 +4,38 @@
     Layout = null;
 }
 
-<div>
-    @if (Model.FileType == MediaFileTypeEnum.Audio)
-    {
-        <audio controls preload="none" autoplay>
-            <source src="@Model.Url" type="audio/mp3">
-            ???
-        </audio>
-    }
 
-    @if (Model.FileType == MediaFileTypeEnum.Video)
-    {
-        <video controls autoplay preload="none" width="400" >
-            <source src="@Model.Url" type="video/mp4"/>
-            ???
-        </video>
-    }
-</div>
+<!DOCTYPE html>
+<html lang="zh-hk">
+<head>
+    <meta charset="utf-8">
+    <title>佛教愍生講堂</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <style>
+        #mediaPlayer312313 {
+            margin: auto;
+        }
+    </style>
+
+
+    <div id="mediaPlayer312313">
+        @if (Model.FileType == MediaFileTypeEnum.Audio)
+        {
+            <audio controls preload="none" autoplay>
+                <source src="@Model.Url" type="audio/mp3">
+                ???
+            </audio>
+        }
+
+        @if (Model.FileType == MediaFileTypeEnum.Video)
+        {
+            <video controls autoplay preload="none" width="400">
+                <source src="@Model.Url" type="video/mp4" />
+                ???
+            </video>
+        }
+    </div>
+</body>
+</html>

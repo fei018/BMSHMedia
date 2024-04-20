@@ -55,7 +55,7 @@
 <div class="file-manager-container file-manager-col-view">
     @foreach (var item in Model.MediaFileList)
     {
-        <div class="file-item media-item-file" data-path="@item.Url">
+        <div class="file-item media-item-file" >
             <div class="file-item-select-bg bg-primary"></div>
             @*  <label class="file-item-checkbox custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input" />
@@ -69,7 +69,11 @@
             {
                 <div class="file-item-icon text-secondary fa fa-youtube-play"></div>
             }
-            <a href="javascript:void(0)" class="file-item-name" onclick="mediaPlay(this)" style="text-decoration:underline;"
+            @* <a href="javascript:void(0)" class="file-item-name" onclick="mediaPlay(this)" style="text-decoration:underline;"
+               data-path="@item.Url" data-title="@item.FileName" data-fileType="@item.FileType">
+                @item.FileName
+            </a> *@
+            <a href="@item.Url" class="file-item-name"  style="text-decoration:underline;" target="_blank"
                data-path="@item.Url" data-title="@item.FileName" data-fileType="@item.FileType">
                 @item.FileName
             </a>

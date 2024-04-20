@@ -7,28 +7,14 @@ namespace BMSHMedia.ViewModel.MediaVMs
     {
         public const string CustomStaticWebPath = "/fileget";
 
-        public static string MediaRootPath { get; private set; } = @"\\192.168.0.201\BMSHFile\Video";
+        public static string MediaRootPath { get; private set; }  //@"\\192.168.0.201\BMSHFile\Video";
 
-        public static string SiteHostName { get; set; } = "http://localhost:30002";
+        //public static string SiteHostName { get; set; } //= "http://localhost:30002";
 
 
-        public static void SetSiteConfig(WTMContext wtm)
+        public static void SetSiteConfig(string mediarootPath)
         {
-            //var site = wtm.DC.Set<SiteConfigInfo>().ToList().FirstOrDefault();
-
-            //if (site == null)
-            //{
-            //    throw new ArgumentNullException(nameof(SiteConfigInfo));
-            //}
-
-            //if (string.IsNullOrEmpty(site.MediaRootPath))
-            //{
-            //    throw new ArgumentNullException(nameof(SiteConfigInfo.MediaRootPath));
-            //}           
-
-            //MediaRootPath = site.MediaRootPath;
-
-            //SiteHostName = site.SiteHostName;
+            MediaRootPath = mediarootPath;
         }
 
         public static bool IsMediaRootPath(string path)
@@ -48,7 +34,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
                 }
             }
 
-            throw new Exception("路徑 IsNullOrEmpty.");
+            throw new Exception(nameof(MediaRootPath) + " 路徑 IsNullOrEmpty.");
         }
     }
 }

@@ -32,7 +32,7 @@ namespace BMSHMedia.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Play(MediaPlayVM vm)
         {
             
