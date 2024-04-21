@@ -4,7 +4,7 @@ using System.IO;
 
 namespace BMSHMedia.ViewModel.MediaVMs
 {
-    public class MediaFolderVM
+    public class MediaFolderVM : MediaBaseVM
     {
         [Display(Name = "文件夾名")]
         public string FolderName { get; set; }
@@ -33,7 +33,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
 
             ParentPath = GetParentPath(fullPath);
 
-            RelativeRequestPath = GetEncodeRelativeRequestPath(fullPath);
+            RelativeRequestPath = GetEncodeListPagePath(fullPath);
         }
 
 
@@ -43,35 +43,13 @@ namespace BMSHMedia.ViewModel.MediaVMs
         }
 
         /// <summary>
-        /// 取掉設置的根路徑的 相對路徑, 已編碼, 放在List頁面裡
+        /// 取掉設置的根路徑的 然後編碼 相對路徑, 放在List頁面裡
         /// </summary>
         /// <param name="fullPath"></param>
         /// <returns></returns>
-        public static string GetEncodeRelativeRequestPath(string fullPath)
+        public static string GetEncodeListPagePath(string sysFullPath)
         {
-            return Uri.EscapeDataString(fullPath.Substring(SiteConfigInfo.MediaRootPath.Length).TrimStart('\\'));
-        }
-
-        /// <summary>
-        /// 由相對目錄獲得系統全路徑, relativePath 是已 encode
-        /// </summary>
-        /// <param name="relativePath"></param>
-        /// <returns></returns>
-        public static string UncodeAndGetSysFullPath(string relativePath)
-        {
-            return Path.Combine(SiteConfigInfo.MediaRootPath, Uri.UnescapeDataString(relativePath));
-        }
-
-        public static bool IsMediaRootPath(string path)
-        {
-            if (SiteConfigInfo.IsMediaRootPath(path))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return EncodePath(CutMediaRootPath(sysFullPath));
         }
     }
 }

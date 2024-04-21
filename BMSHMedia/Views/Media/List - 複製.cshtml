@@ -1,4 +1,4 @@
-﻿@model MediaFileScanVM
+﻿@model MediaScanVM
 @{
     Layout = null;
 
@@ -8,7 +8,7 @@
 
     List<MediaFolderVM> folders = Model.MediaFolderList;
 
-    string uplevel = Model.UpLevelPath;
+    string uplevel = Model.UpLevelFolderPath;
 }
 
 <style>

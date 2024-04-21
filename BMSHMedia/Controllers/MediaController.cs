@@ -1,6 +1,7 @@
 ﻿using BMSHMedia.ViewModel.MediaVMs;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 
 namespace BMSHMedia.Controllers
@@ -9,34 +10,30 @@ namespace BMSHMedia.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var vm = new MediaScanVM();
+            vm.UpLevelFolderPath = MediaBaseVM.EncodePath(SiteConfigInfo.MediaRootPath);
+            return View(vm);
         }
 
         [HttpPost]
         public IActionResult List(string path)
         {
-            if (string.IsNullOrEmpty(path))
-            {
-                var vm = new MediaFileScanVM(path);
-                vm.ScanFolderAndFiles(SiteConfigInfo.MediaRootPath, true);
+            var vm = new MediaScanVM();
+            vm.ScanFolderAndFiles(path);
 
-                return PartialView(vm);
-            }
-            else
-            {
-
-                var vm = new MediaFileScanVM(path);
-                vm.ScanFolderAndFiles(path, false);
-
-                return PartialView(vm);
-            }
+            return PartialView(vm);
         }
 
-        [HttpGet]
-        public IActionResult Play(MediaPlayVM vm)
-        {
-            
+        [HttpPost]
+        public IActionResult Play(MediaFileVM vm)
+        {           
             return View(vm);
         }
+
+
+        //public Task<IActionResult> DownloadFile(string url)
+        //{
+        //    return File()
+        //}
     }
 }

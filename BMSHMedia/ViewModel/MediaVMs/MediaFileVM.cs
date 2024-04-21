@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace BMSHMedia.ViewModel.MediaVMs
 {
-    public class MediaFileVM
+    public class MediaFileVM : MediaBaseVM
     {
         [Display(Name = "文件名")]
         //[Required(ErrorMessage = "Validate.{0}required")]
@@ -35,6 +35,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
 
         public string Url { get; set; }
 
+        public MediaFileVM() { }
 
         public MediaFileVM(string fullName, MediaFileTypeEnum fileType, string mineType=null)
         {
@@ -55,11 +56,10 @@ namespace BMSHMedia.ViewModel.MediaVMs
 
         public static string GetUrl(string fullName)
         {
-            //string relative = GetFileRelativeParentPath(fullName);
-            //string fileName = Path.GetFileName(fullName);
-            var path = fullName.Replace(SiteConfigInfo.MediaRootPath, "", StringComparison.OrdinalIgnoreCase).TrimStart('\\');
+            // 去掉 MediaRootPath
+            var path =CutMediaRootPath(fullName);
 
-            return $"{SiteConfigInfo.CustomStaticWebPath}/" + Uri.EscapeUriString(path.Replace('\\', '/'));
+            return $"{SiteConfigInfo.CustomStaticWebPath}/" + EncodeFilePathUrl(path);
         }
 
         /// <summary>
@@ -69,8 +69,8 @@ namespace BMSHMedia.ViewModel.MediaVMs
         /// <returns></returns>
         public static string GetFileRelativeParentPath(string fileFullName)
         {
-            // 去掉 設置的根路徑
-            var path = fileFullName.Replace(SiteConfigInfo.MediaRootPath, "", StringComparison.OrdinalIgnoreCase).TrimStart('\\');
+            // 去掉 MediaRootPath
+            var path = CutMediaRootPath(fileFullName);
 
             var filename = Path.GetFileName(fileFullName);
 
@@ -79,5 +79,6 @@ namespace BMSHMedia.ViewModel.MediaVMs
             return path;
         }
 
+        
     }
 }
