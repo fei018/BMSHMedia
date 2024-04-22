@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace BMSHMedia.ViewModel.MediaVMs
 {
@@ -37,6 +38,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
 
         public MediaFileVM() { }
 
+
         public MediaFileVM(string fullName, MediaFileTypeEnum fileType, string mineType=null)
         {
             FileFullName = fullName;
@@ -48,7 +50,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
             Url = GetUrl(fullName);
         }
 
-
+        
         public string ToJsonString()
         {
             return JsonSerializer.Serialize(this);

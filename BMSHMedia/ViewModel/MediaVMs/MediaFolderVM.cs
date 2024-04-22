@@ -12,12 +12,12 @@ namespace BMSHMedia.ViewModel.MediaVMs
         /// <summary>
         /// 系統FullPath
         /// </summary>
-        public string FullPath { get; set; }
+        public string SysFullPath { get; set; }
 
         /// <summary>
         /// 系統父路徑
         /// </summary>
-        public string ParentPath { get; set; }
+        public string SysParentPath { get; set; }
 
         /// <summary>
         /// 取掉設置的根路徑的 相對路徑, 已編碼, 放在List頁面裡
@@ -29,15 +29,15 @@ namespace BMSHMedia.ViewModel.MediaVMs
         {
             FolderName = fullPath.Substring(fullPath.TrimEnd('\\').LastIndexOf('\\') + 1);
 
-            FullPath = fullPath;
+            SysFullPath = fullPath;
 
-            ParentPath = GetParentPath(fullPath);
+            SysParentPath = GetSysParentPath(fullPath);
 
             RelativeRequestPath = GetEncodeListPagePath(fullPath);
         }
 
 
-        public static string GetParentPath(string fullPath)
+        public static string GetSysParentPath(string fullPath)
         {
             return fullPath.Substring(0, fullPath.TrimEnd('\\').LastIndexOf("\\")).TrimEnd('\\');
         }

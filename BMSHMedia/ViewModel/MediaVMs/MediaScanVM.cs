@@ -8,65 +8,55 @@ namespace BMSHMedia.ViewModel.MediaVMs
 {
     public class MediaScanVM
     {
-        public List<MediaFileVM> MediaFileList { get; set; } = new();
+        public List<MediaFileVM> MediaFileList { get; set; }
 
-        public List<MediaFolderVM> MediaFolderList { get; set; } = new();
+        public List<MediaFolderVM> MediaFolderList { get; set; }
 
         public string UpLevelFolderPath { get; set; }
 
         /// <summary>
         /// 是否顯示 上一級目錄Icon
         /// </summary>
-        public bool IsShowUpLevelLinkIcon {  get; set; } = true;
+        public bool IsShowUpLevelLinkIcon { get; set; } = true;
 
         #region contr
         public MediaScanVM() { }
         #endregion
 
-        #region MyRegion
-
-        #endregion
-
-        #region Scan Folder
-        public void ScanFolders(string postRelativePath)
+        #region CheckRootPath
+        private void CheckRootPath(string sysFullPath)
         {
-            string sysFullPath;
-
-            if (!string.IsNullOrEmpty(postRelativePath))
+            //// 判斷是否 mediarootpath
+            if (MediaBaseVM.IsMediaRootPath(sysFullPath))
             {
-                sysFullPath = MediaBaseVM.GetSysFullPath(postRelativePath);
-
-                //// 判斷是否 mediarootpath
-                if (MediaBaseVM.IsMediaRootPath(sysFullPath))
-                {
-                    IsShowUpLevelLinkIcon = false;
-                    UpLevelFolderPath = MediaBaseVM.EncodePath(SiteConfigInfo.MediaRootPath); //上一級目錄                
-                }
-                else
-                {
-                    IsShowUpLevelLinkIcon = true;
-
-                    // 獲取父目錄路徑
-                    string path = MediaFolderVM.GetParentPath(sysFullPath);
-
-                    if (!MediaBaseVM.IsMediaRootPath(path))
-                    {
-                        // cut meadia root path
-                        path = MediaBaseVM.CutMediaRootPath(path);
-                    }
-                    
-                    // encode path
-                    UpLevelFolderPath = MediaBaseVM.EncodePath(path); //上一級目錄              
-                }
+                IsShowUpLevelLinkIcon = false;
+                UpLevelFolderPath = MediaBaseVM.EncodePath(SiteConfigInfo.MediaRootPath); //上一級目錄                
             }
             else
             {
-                throw new Exception("ScanFolders(string encodePath): encodePath IsNullOrEmpty");
+                IsShowUpLevelLinkIcon = true;
+
+                // 獲取父目錄路徑
+                string path = MediaFolderVM.GetSysParentPath(sysFullPath);
+
+                if (!MediaBaseVM.IsMediaRootPath(path))
+                {
+                    // cut meadia root path
+                    path = MediaBaseVM.CutMediaRootPath(path);
+                }
+
+                // encode path
+                UpLevelFolderPath = MediaBaseVM.EncodePath(path); //上一級目錄              
             }
+        }
+        #endregion
+
+        #region Scan Folder
+        public void ScanFolders(string sysFullPath)
+        {
+            MediaFolderList = new();
 
             var dirs = Directory.EnumerateDirectories(sysFullPath).Order().ToList();
-
-            MediaFolderList = new();
 
             if (dirs.Count == 0)
             {
@@ -86,13 +76,9 @@ namespace BMSHMedia.ViewModel.MediaVMs
         #endregion
 
         #region Scan File
-        public void ScanFiles(string postRelativePath)
+        public void ScanFiles(string sysfolderPath)
         {
             MediaFileList = new();
-
-            string sysfolderPath = MediaBaseVM.GetSysFullPath(postRelativePath);
-
-            if (!Directory.Exists(sysfolderPath)) { throw new Exception(postRelativePath + " 不存在."); }
 
             var mp4s = Directory.EnumerateFiles(sysfolderPath, "*.mp4", SearchOption.TopDirectoryOnly).Order().ToList();
 
@@ -124,11 +110,22 @@ namespace BMSHMedia.ViewModel.MediaVMs
         #region ScanFolderAndFiles
         public void ScanFolderAndFiles(string encodePostPath)
         {
+            if (string.IsNullOrEmpty(encodePostPath))
+            {
+                throw new Exception("ScanFolderAndFiles(string encodePostPath) IsNullOrEmpty.");
+            }
+
             string path = MediaBaseVM.DecodePath(encodePostPath);
 
-            ScanFolders(path);
+            string sysFullPath = MediaBaseVM.GetSysFullPath(path);
 
-            ScanFiles(path);
+            if (!Directory.Exists(sysFullPath)) { throw new Exception(path + " 不存在."); }
+
+            CheckRootPath(sysFullPath);
+
+            ScanFolders(sysFullPath);
+
+            ScanFiles(sysFullPath);
         }
         #endregion
     }
