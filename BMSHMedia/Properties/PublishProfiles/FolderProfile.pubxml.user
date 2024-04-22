@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Fei\code project\Github\BMSHMedia\BMSHMedia\..\publish\</_PublishTargetUrl>
-    <History>True|2024-04-20T12:36:22.4289082Z;False|2024-04-20T20:35:30.7350741+08:00;True|2024-04-20T18:20:23.1428271+08:00;True|2024-04-19T17:50:57.8331807+08:00;</History>
+    <History>True|2024-04-22T06:46:29.8836369Z;True|2024-04-22T10:07:29.1068145+08:00;True|2024-04-20T20:36:22.4289082+08:00;False|2024-04-20T20:35:30.7350741+08:00;True|2024-04-20T18:20:23.1428271+08:00;True|2024-04-19T17:50:57.8331807+08:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

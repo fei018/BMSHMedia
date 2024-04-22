@@ -1,38 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\CodeProject\\GitHub\\BMSHMedia\\",
+  "WorkspaceRootPath": "C:\\Fei\\code project\\Github\\BMSHMedia\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|c:\\codeproject\\github\\bmshmedia\\bmshmedia\\views\\media\\play.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|solutionrelative:bmshmedia\\views\\media\\play.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|c:\\codeproject\\github\\bmshmedia\\bmshmedia\\views\\media\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|c:\\fei\\code project\\github\\bmshmedia\\bmshmedia\\views\\media\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|solutionrelative:bmshmedia\\views\\media\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|c:\\codeproject\\github\\bmshmedia\\bmshmedia\\controllers\\mediacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|solutionrelative:bmshmedia\\controllers\\mediacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|c:\\fei\\code project\\github\\bmshmedia\\bmshmedia\\views\\media\\play.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|solutionrelative:bmshmedia\\views\\media\\play.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|c:\\codeproject\\github\\bmshmedia\\bmshmedia\\viewmodel\\mediavms\\mediascanvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|solutionrelative:bmshmedia\\viewmodel\\mediavms\\mediascanvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|c:\\codeproject\\github\\bmshmedia\\bmshmedia\\viewmodel\\mediavms\\mediafoldervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|solutionrelative:bmshmedia\\viewmodel\\mediavms\\mediafoldervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|c:\\codeproject\\github\\bmshmedia\\bmshmedia\\viewmodel\\mediavms\\mediafilevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|solutionrelative:bmshmedia\\viewmodel\\mediavms\\mediafilevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|c:\\codeproject\\github\\bmshmedia\\bmshmedia\\views\\media\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|c:\\fei\\code project\\github\\bmshmedia\\bmshmedia\\views\\media\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|solutionrelative:bmshmedia\\views\\media\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|c:\\codeproject\\github\\bmshmedia\\bmshmedia\\viewmodel\\mediavms\\siteconfiginfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|c:\\fei\\code project\\github\\bmshmedia\\bmshmedia\\viewmodel\\mediavms\\siteconfiginfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|solutionrelative:bmshmedia\\viewmodel\\mediavms\\siteconfiginfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|c:\\fei\\code project\\github\\bmshmedia\\bmshmedia\\views\\media\\layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|solutionrelative:bmshmedia\\views\\media\\layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|c:\\fei\\code project\\github\\bmshmedia\\bmshmedia\\controllers\\mediacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|solutionrelative:bmshmedia\\controllers\\mediacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|c:\\fei\\code project\\github\\bmshmedia\\bmshmedia\\viewmodel\\mediavms\\mediascanvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|solutionrelative:bmshmedia\\viewmodel\\mediavms\\mediascanvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|c:\\fei\\code project\\github\\bmshmedia\\bmshmedia\\viewmodel\\mediavms\\mediafoldervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|solutionrelative:bmshmedia\\viewmodel\\mediavms\\mediafoldervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|c:\\fei\\code project\\github\\bmshmedia\\bmshmedia\\viewmodel\\mediavms\\mediafilevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39B7559E-8CBA-4E21-89B8-A2F9054EDF15}|BMSHMedia\\BMSHMedia.csproj|solutionrelative:bmshmedia\\viewmodel\\mediavms\\mediafilevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,111 +46,116 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MediaScanVM.cs",
-              "DocumentMoniker": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia\\ViewModel\\MediaVMs\\MediaScanVM.cs",
-              "RelativeDocumentMoniker": "BMSHMedia\\ViewModel\\MediaVMs\\MediaScanVM.cs",
-              "ToolTip": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia\\ViewModel\\MediaVMs\\MediaScanVM.cs",
-              "RelativeToolTip": "BMSHMedia\\ViewModel\\MediaVMs\\MediaScanVM.cs",
-              "ViewState": "AQIAACkAAAAAAAAAAIAwwDYAAAArAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-18T07:32:43.705Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "MediaFolderVM.cs",
-              "DocumentMoniker": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia\\ViewModel\\MediaVMs\\MediaFolderVM.cs",
-              "RelativeDocumentMoniker": "BMSHMedia\\ViewModel\\MediaVMs\\MediaFolderVM.cs",
-              "ToolTip": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia\\ViewModel\\MediaVMs\\MediaFolderVM.cs",
-              "RelativeToolTip": "BMSHMedia\\ViewModel\\MediaVMs\\MediaFolderVM.cs",
-              "ViewState": "AQIAACcAAAAAAAAAAIA6wDMAAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-18T08:10:27.035Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MediaFileVM.cs",
-              "DocumentMoniker": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia\\ViewModel\\MediaVMs\\MediaFileVM.cs",
-              "RelativeDocumentMoniker": "BMSHMedia\\ViewModel\\MediaVMs\\MediaFileVM.cs",
-              "ToolTip": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia\\ViewModel\\MediaVMs\\MediaFileVM.cs",
-              "RelativeToolTip": "BMSHMedia\\ViewModel\\MediaVMs\\MediaFileVM.cs",
-              "ViewState": "AQIAADwAAAAAAAAAAAAnwEgAAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-18T07:47:45.24Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "SiteConfigInfo.cs",
-              "DocumentMoniker": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia\\ViewModel\\MediaVMs\\SiteConfigInfo.cs",
-              "RelativeDocumentMoniker": "BMSHMedia\\ViewModel\\MediaVMs\\SiteConfigInfo.cs",
-              "ToolTip": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia\\ViewModel\\MediaVMs\\SiteConfigInfo.cs",
-              "RelativeToolTip": "BMSHMedia\\ViewModel\\MediaVMs\\SiteConfigInfo.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAASwBUAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-18T05:37:44.853Z",
-              "EditorCaption": ""
+              "Title": "Layout.cshtml",
+              "DocumentMoniker": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\Views\\Media\\Layout.cshtml",
+              "RelativeDocumentMoniker": "BMSHMedia\\Views\\Media\\Layout.cshtml",
+              "ToolTip": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\Views\\Media\\Layout.cshtml",
+              "RelativeToolTip": "BMSHMedia\\Views\\Media\\Layout.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAB9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-22T03:54:02.983Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia\\Views\\Media\\Index.cshtml",
-              "RelativeDocumentMoniker": "BMSHMedia\\Views\\Media\\Index.cshtml",
-              "ToolTip": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia\\Views\\Media\\Index.cshtml",
-              "RelativeToolTip": "BMSHMedia\\Views\\Media\\Index.cshtml",
-              "ViewState": "AQIAAFEAAAAAAAAAAAAAAF8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-18T05:15:48.127Z",
-              "EditorCaption": ""
+              "Title": "MediaScanVM.cs",
+              "DocumentMoniker": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\ViewModel\\MediaVMs\\MediaScanVM.cs",
+              "RelativeDocumentMoniker": "BMSHMedia\\ViewModel\\MediaVMs\\MediaScanVM.cs",
+              "ToolTip": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\ViewModel\\MediaVMs\\MediaScanVM.cs",
+              "RelativeToolTip": "BMSHMedia\\ViewModel\\MediaVMs\\MediaScanVM.cs",
+              "ViewState": "AQIAACkAAAAAAAAAAIAwwDYAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-18T07:32:43.705Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Play.cshtml",
-              "DocumentMoniker": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia\\Views\\Media\\Play.cshtml",
-              "RelativeDocumentMoniker": "BMSHMedia\\Views\\Media\\Play.cshtml",
-              "ToolTip": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia\\Views\\Media\\Play.cshtml",
-              "RelativeToolTip": "BMSHMedia\\Views\\Media\\Play.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAATAAAA",
+              "DocumentIndex": 7,
+              "Title": "MediaFolderVM.cs",
+              "DocumentMoniker": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\ViewModel\\MediaVMs\\MediaFolderVM.cs",
+              "RelativeDocumentMoniker": "BMSHMedia\\ViewModel\\MediaVMs\\MediaFolderVM.cs",
+              "ToolTip": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\ViewModel\\MediaVMs\\MediaFolderVM.cs",
+              "RelativeToolTip": "BMSHMedia\\ViewModel\\MediaVMs\\MediaFolderVM.cs",
+              "ViewState": "AQIAACcAAAAAAAAAAIA6wDMAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-18T08:10:27.035Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MediaFileVM.cs",
+              "DocumentMoniker": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\ViewModel\\MediaVMs\\MediaFileVM.cs",
+              "RelativeDocumentMoniker": "BMSHMedia\\ViewModel\\MediaVMs\\MediaFileVM.cs",
+              "ToolTip": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\ViewModel\\MediaVMs\\MediaFileVM.cs",
+              "RelativeToolTip": "BMSHMedia\\ViewModel\\MediaVMs\\MediaFileVM.cs",
+              "ViewState": "AQIAADwAAAAAAAAAAAAnwEgAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-18T07:47:45.24Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SiteConfigInfo.cs",
+              "DocumentMoniker": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\ViewModel\\MediaVMs\\SiteConfigInfo.cs",
+              "RelativeDocumentMoniker": "BMSHMedia\\ViewModel\\MediaVMs\\SiteConfigInfo.cs",
+              "ToolTip": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\ViewModel\\MediaVMs\\SiteConfigInfo.cs",
+              "RelativeToolTip": "BMSHMedia\\ViewModel\\MediaVMs\\SiteConfigInfo.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAIAwwBEAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-18T05:37:44.853Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\Views\\Media\\Index.cshtml",
+              "RelativeDocumentMoniker": "BMSHMedia\\Views\\Media\\Index.cshtml",
+              "ToolTip": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\Views\\Media\\Index.cshtml",
+              "RelativeToolTip": "BMSHMedia\\Views\\Media\\Index.cshtml",
+              "ViewState": "AQIAAFEAAAAAAAAAAAAAAF8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-20T11:45:36.256Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-18T05:15:48.127Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Play.cshtml",
+              "DocumentMoniker": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\Views\\Media\\Play.cshtml",
+              "RelativeDocumentMoniker": "BMSHMedia\\Views\\Media\\Play.cshtml",
+              "ToolTip": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\Views\\Media\\Play.cshtml",
+              "RelativeToolTip": "BMSHMedia\\Views\\Media\\Play.cshtml",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAAAoAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-20T11:45:36.256Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "List.cshtml",
-              "DocumentMoniker": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia\\Views\\Media\\List.cshtml",
+              "DocumentMoniker": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\Views\\Media\\List.cshtml",
               "RelativeDocumentMoniker": "BMSHMedia\\Views\\Media\\List.cshtml",
-              "ToolTip": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia\\Views\\Media\\List.cshtml",
+              "ToolTip": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\Views\\Media\\List.cshtml",
               "RelativeToolTip": "BMSHMedia\\Views\\Media\\List.cshtml",
-              "ViewState": "AQIAACQAAAAAAAAAAAAAAG8AAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-04-18T06:41:17.002Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "MediaController.cs",
-              "DocumentMoniker": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia\\Controllers\\MediaController.cs",
+              "DocumentMoniker": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\Controllers\\MediaController.cs",
               "RelativeDocumentMoniker": "BMSHMedia\\Controllers\\MediaController.cs",
-              "ToolTip": "C:\\CodeProject\\GitHub\\BMSHMedia\\BMSHMedia\\Controllers\\MediaController.cs",
+              "ToolTip": "C:\\Fei\\code project\\Github\\BMSHMedia\\BMSHMedia\\Controllers\\MediaController.cs",
               "RelativeToolTip": "BMSHMedia\\Controllers\\MediaController.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAUwCAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-20T11:53:41.428Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-20T11:53:41.428Z"
             }
           ]
         }

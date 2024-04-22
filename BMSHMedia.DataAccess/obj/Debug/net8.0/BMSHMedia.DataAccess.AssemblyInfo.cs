@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BMSHMedia.DataAccess")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+21d2a95e171e9e01e54a49cd64dcd3228eaf4343")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+627f74fd15efaf441f774f9a9d96bc5c41d9221a")]
 [assembly: System.Reflection.AssemblyProductAttribute("BMSHMedia.DataAccess")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BMSHMedia.DataAccess")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
