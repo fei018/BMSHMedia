@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using WalkingTec.Mvvm.Core;
-using System.Text.Json.Serialization;
-using BMSHMedia.Model;
 
 namespace WalkingTec.Mvvm.Core
 {
@@ -43,6 +38,6 @@ namespace WalkingTec.Mvvm.Core
         [RegularExpression("^[0-9]{6,6}$", ErrorMessage = "Validate.{0}formaterror")]
         public string ZipCode { get; set; }
 
-	}
+    }
 
 }

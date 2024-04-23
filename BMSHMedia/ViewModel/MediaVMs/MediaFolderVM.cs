@@ -6,7 +6,6 @@ namespace BMSHMedia.ViewModel.MediaVMs
 {
     public class MediaFolderVM : MediaBaseVM
     {
-        [Display(Name = "文件夾名")]
         public string FolderName { get; set; }
 
         /// <summary>
@@ -22,7 +21,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
         /// <summary>
         /// 取掉設置的根路徑的 相對路徑, 已編碼, 放在List頁面裡
         /// </summary>
-        public string RelativeRequestPath { get; set; }
+        public string RelativeEncodePath { get; set; }
 
 
         public MediaFolderVM(string fullPath)
@@ -33,7 +32,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
 
             SysParentPath = GetSysParentPath(fullPath);
 
-            RelativeRequestPath = GetEncodeListPagePath(fullPath);
+            RelativeEncodePath = GetEncodeListPagePath(fullPath);
         }
 
 

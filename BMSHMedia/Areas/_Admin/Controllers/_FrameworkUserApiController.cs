@@ -1,14 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BMSHMedia.ViewModel._Admin.FrameworkUserVMs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WalkingTec.Mvvm.Core;
 using WalkingTec.Mvvm.Mvc;
-using WalkingTec.Mvvm.Core.Extensions;
-using System.Linq;
-using System.Collections.Generic;
-using BMSHMedia.ViewModel._Admin.FrameworkUserVMs;
-using BMSHMedia.Model;
 
 namespace BMSHMedia._Admin.Controllers
 {
@@ -27,17 +23,17 @@ namespace BMSHMedia._Admin.Controllers
             }
             if (!ModelState.IsValid)
             {
-                
+
                 return PartialView(vm.FromView, vm);
             }
             else
             {
                 vm.Entity.Password = Utils.GetMD5String(vm.Entity.Password);
                 await vm.DoAddAsync();
-                
+
                 if (!ModelState.IsValid)
                 {
-                    
+
                     vm.DoReInit();
                     return PartialView("../FrameworkUser/Create", vm);
                 }
@@ -50,7 +46,7 @@ namespace BMSHMedia._Admin.Controllers
         #endregion
 
         #region Edit
-       
+
         [ActionDescription("Sys.Edit")]
         [HttpPost]
         [ValidateFormItemOnly]
@@ -62,7 +58,7 @@ namespace BMSHMedia._Admin.Controllers
             }
             if (!ModelState.IsValid)
             {
-                
+
                 return PartialView(vm.FromView, vm);
             }
             else
@@ -74,7 +70,7 @@ namespace BMSHMedia._Admin.Controllers
                 await vm.DoEditAsync();
                 if (!ModelState.IsValid)
                 {
-                    
+
                     vm.DoReInit();
                     return PartialView("../FrameworkUser/Edit", vm);
                 }
@@ -85,8 +81,8 @@ namespace BMSHMedia._Admin.Controllers
             }
         }
         #endregion
-      
-                
+
+
 
 
         #region BatchEdit
@@ -126,11 +122,11 @@ namespace BMSHMedia._Admin.Controllers
             }
             else
             {
-                return FFResult().RefreshGrid(CurrentWindowId).Alert(Localizer["Sys.BatchDeleteSuccess",vm.Ids.Length]);
+                return FFResult().RefreshGrid(CurrentWindowId).Alert(Localizer["Sys.BatchDeleteSuccess", vm.Ids.Length]);
             }
         }
         #endregion
-      
+
         #region Import
         [HttpPost]
         [ActionDescription("Sys.Import")]
@@ -165,7 +161,7 @@ namespace BMSHMedia._Admin.Controllers
             return JsonMore(users);
         }
 
-                [AllRights]
+        [AllRights]
         public IActionResult GetFrameworkRoles()
         {
             WalkingTec.Mvvm.Admin.Api.AccountController userapi = new WalkingTec.Mvvm.Admin.Api.AccountController();
@@ -203,5 +199,5 @@ namespace BMSHMedia._Admin.Controllers
 
 
 
-            }
+    }
 }

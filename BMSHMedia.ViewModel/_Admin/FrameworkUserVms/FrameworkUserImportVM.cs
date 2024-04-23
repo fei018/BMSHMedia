@@ -1,18 +1,11 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using WalkingTec.Mvvm.Core;
-using WalkingTec.Mvvm.Core.Extensions;
-using BMSHMedia.Model;
 
 namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
 {
     public partial class FrameworkUserTemplateVM : BaseTemplateVM
     {
-        
+
         [Display(Name = "_Model._FrameworkUser._Email")]
         public ExcelPropety Email_Excel = ExcelPropety.CreateProperty<FrameworkUser>(x => x.Email);
         [Display(Name = "_Model._FrameworkUser._Gender")]
@@ -42,16 +35,16 @@ namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
         [Display(Name = "_Model._FrameworkUser._UpdateBy")]
         public ExcelPropety UpdateBy_Excel = ExcelPropety.CreateProperty<FrameworkUser>(x => x.UpdateBy);
 
-	    protected override void InitVM()
+        protected override void InitVM()
         {
-            
+
         }
 
     }
 
     public class FrameworkUserImportVM : BaseImportVM<FrameworkUserTemplateVM, FrameworkUser>
     {
-            public override bool BatchSaveData()
+        public override bool BatchSaveData()
         {
             SetEntityList();
             foreach (var item in EntityList)
@@ -61,7 +54,7 @@ namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
             }
             return base.BatchSaveData();
         }
-            //import
+        //import
 
     }
 

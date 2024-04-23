@@ -1,17 +1,11 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using WalkingTec.Mvvm.Core;
-using WalkingTec.Mvvm.Core.Extensions;
-using BMSHMedia.Model;
 namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
 {
     public partial class FrameworkUserSearcher : BaseSearcher
     {
-        
+
         public List<string> _AdminFrameworkUserSTempSelected { get; set; }
         [Display(Name = "_Model._FrameworkUser._ITCode")]
         public string ITCode { get; set; }
@@ -22,7 +16,7 @@ namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
 
         protected override void InitVM()
         {
-            
+
         }
     }
 

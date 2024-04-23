@@ -1,15 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 using WalkingTec.Mvvm.Core;
-using WalkingTec.Mvvm.Core.Attributes;
-using BMSHMedia.Model;
-using System.Collections.Generic;
 using WalkingTec.Mvvm.Core.Extensions;
 using WalkingTec.Mvvm.Core.Models;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BMSHMedia.DataAccess
 {
@@ -54,7 +51,7 @@ namespace BMSHMedia.DataAccess
                     Password = Utils.GetMD5String("000000"),
                     IsValid = true,
                     Name = "Admin",
-                                        
+
                 };
 
                 var userrole = new FrameworkUserRole
@@ -65,17 +62,20 @@ namespace BMSHMedia.DataAccess
                 Set<FrameworkUser>().Add(user);
                 Set<FrameworkUserRole>().Add(userrole);
                 await SaveChangesAsync();
-                                
-                try{
+
+                try
+                {
                     Dictionary<string, List<object>> data = new Dictionary<string, List<object>>();
-                     new Task(() =>{
+                    new Task(() =>
+                    {
                     }).Start();
-                    }catch{}
+                }
+                catch { }
             }
             return state;
         }
 
-        private void SetWorkflowData(string name,string modelname)
+        private void SetWorkflowData(string name, string modelname)
         {
             using (var dc = this.CreateNew())
             {
@@ -219,10 +219,10 @@ namespace BMSHMedia.DataAccess
         private void SetTestData(Type modelType, Dictionary<string, List<object>> data, int count = 100)
         {
             int exist = 0;
-            if (data.ContainsKey(modelType.FullName)) 
+            if (data.ContainsKey(modelType.FullName))
             {
                 exist = data[modelType.FullName].Count;
-                if(exist > 0)
+                if (exist > 0)
                     return;
             }
             using (var dc = this.CreateNew())
@@ -231,12 +231,12 @@ namespace BMSHMedia.DataAccess
                 data[modelType.FullName] = new List<object>();
                 int retry = 0;
                 List<string> ids = new List<string>();
-                for (int i = 0; i < count-exist; i++)
+                for (int i = 0; i < count - exist; i++)
                 {
                     var modelprops = modelType.GetRandomValuesForTestData();
                     var newobj = modelType.GetConstructor(Type.EmptyTypes).Invoke(null);
-                    var idvalue = modelprops.Where(x => x.Key == "ID").Select(x=>x.Value).SingleOrDefault();
-                    if (idvalue != null )
+                    var idvalue = modelprops.Where(x => x.Key == "ID").Select(x => x.Value).SingleOrDefault();
+                    if (idvalue != null)
                     {
                         if (ids.Contains(idvalue.ToLower()) == false)
                         {
@@ -259,13 +259,13 @@ namespace BMSHMedia.DataAccess
                         {
                             var fkpro = modelType.GetSingleProperty(pro.Key[0..^2]);
                             var fktype = fkpro?.PropertyType;
-                            if (fktype != modelType && typeof(TopBasePoco).IsAssignableFrom(fktype)==true)
+                            if (fktype != modelType && typeof(TopBasePoco).IsAssignableFrom(fktype) == true)
                             {
                                 try
                                 {
-                                        SetTestData(fktype, data, count);
-                                        newobj.SetPropertyValue(pro.Key, (data[fktype.FullName][r.Next(0, data[fktype.FullName].Count)] as TopBasePoco).GetID());
-                                
+                                    SetTestData(fktype, data, count);
+                                    newobj.SetPropertyValue(pro.Key, (data[fktype.FullName][r.Next(0, data[fktype.FullName].Count)] as TopBasePoco).GetID());
+
                                 }
                                 catch { }
                             }
@@ -284,7 +284,7 @@ namespace BMSHMedia.DataAccess
                             newobj.SetPropertyValue(pro.Key, v);
                         }
                     }
-                    if(modelType == typeof(FileAttachment))
+                    if (modelType == typeof(FileAttachment))
                     {
                         newobj.SetPropertyValue("Path", "./wwwroot/logo.png");
                         newobj.SetPropertyValue("SaveMode", "local");
@@ -297,7 +297,7 @@ namespace BMSHMedia.DataAccess
                     }
                     if (typeof(IPersistPoco).IsAssignableFrom(modelType))
                     {
-                        newobj.SetPropertyValue("IsValid",true);
+                        newobj.SetPropertyValue("IsValid", true);
                     }
                     try
                     {
@@ -308,7 +308,7 @@ namespace BMSHMedia.DataAccess
                     {
                         retry++;
                         i--;
-                        if(retry > count)
+                        if (retry > count)
                         {
                             break;
                         }
@@ -321,7 +321,7 @@ namespace BMSHMedia.DataAccess
                 catch { }
             }
         }
-            }
+    }
 
     /// <summary>
     /// DesignTimeFactory for EF Migration, use your full connection string,

@@ -1,18 +1,15 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 using WalkingTec.Mvvm.Core;
-using WalkingTec.Mvvm.Core.Extensions;
-using Microsoft.EntityFrameworkCore;
-
-using BMSHMedia.Model;
 namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
 {
     public partial class FrameworkUserVM : BaseCRUDVM<FrameworkUser>
     {
-        
+
         public List<string> _AdminFrameworkUserFTempSelected { get; set; }
         [Display(Name = "_Model.FrameworkRole")]
         public List<string> SelectedFrameworkUserRolesIDs { get; set; }
@@ -21,15 +18,15 @@ namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
 
         public FrameworkUserVM()
         {
-            
+
 
         }
 
         protected override void InitVM()
         {
-            
+
             SelectedFrameworkUserRolesIDs = DC.Set<FrameworkUserRole>().Where(x => x.UserCode == Entity.ITCode).Select(x => x.RoleCode).ToList();
-            SelectedFrameworkUserGroupsIDs =  DC.Set<FrameworkUserGroup>().Where(x => x.UserCode == Entity.ITCode).Select(x => x.GroupCode).ToList();
+            SelectedFrameworkUserGroupsIDs = DC.Set<FrameworkUserGroup>().Where(x => x.UserCode == Entity.ITCode).Select(x => x.GroupCode).ToList();
 
         }
 
@@ -40,9 +37,9 @@ namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
 
         }
 
-        public override async Task DoAddAsync()        
+        public override async Task DoAddAsync()
         {
-            
+
             if (SelectedFrameworkUserRolesIDs != null)
             {
                 List<Guid> todelete = new List<Guid>();
@@ -65,7 +62,7 @@ namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
 
             if (SelectedFrameworkUserGroupsIDs != null)
             {
-                 List<Guid> todelete = new List<Guid>();
+                List<Guid> todelete = new List<Guid>();
                 todelete.AddRange(DC.Set<FrameworkUserGroup>().AsNoTracking().Where(x => x.UserCode == Entity.ITCode).Select(x => x.ID));
                 foreach (var item in todelete)
                 {
@@ -89,7 +86,7 @@ namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
 
         public override async Task DoEditAsync(bool updateAllFields = false)
         {
-            
+
             if (SelectedFrameworkUserRolesIDs != null)
             {
                 List<Guid> todelete = new List<Guid>();
@@ -112,7 +109,7 @@ namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
 
             if (SelectedFrameworkUserGroupsIDs != null)
             {
-                 List<Guid> todelete = new List<Guid>();
+                List<Guid> todelete = new List<Guid>();
                 todelete.AddRange(DC.Set<FrameworkUserGroup>().AsNoTracking().Where(x => x.UserCode == Entity.ITCode).Select(x => x.ID));
                 foreach (var item in todelete)
                 {

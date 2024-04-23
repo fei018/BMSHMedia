@@ -1,4 +1,5 @@
-﻿using BMSHMedia.ViewModel.MediaVMs;
+﻿using BMSHMedia.ViewModel.MediaApiVMs;
+using BMSHMedia.ViewModel.MediaVMs;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -31,9 +32,9 @@ namespace BMSHMedia.Controllers
         }
 
 
-        //public Task<IActionResult> DownloadFile(string url)
-        //{
-        //    return File()
-        //}
+        public async Task<string> FolderListJson()
+        {
+            return await new MediaApiVM().GetJsonData();
+        }
     }
 }

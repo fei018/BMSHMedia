@@ -128,5 +128,14 @@ namespace BMSHMedia.ViewModel.MediaVMs
             ScanFiles(sysFullPath);
         }
         #endregion
+
+        #region static Scan
+        public static List<MediaFileVM> SearchFiles(string dir)
+        {
+            var scan = new MediaScanVM();
+            scan.ScanFiles(dir);
+            return scan.MediaFileList;
+        }
+        #endregion
     }
 }

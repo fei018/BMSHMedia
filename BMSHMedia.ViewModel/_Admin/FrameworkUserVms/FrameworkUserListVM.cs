@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 using WalkingTec.Mvvm.Core;
 using WalkingTec.Mvvm.Core.Extensions;
-using BMSHMedia.Model;
 
 namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
 {
     public partial class FrameworkUserListVM : BasePagedListVM<FrameworkUser_View, FrameworkUserSearcher>
     {
-        
+
         protected override List<GridAction> InitGridAction()
         {
             return new List<GridAction>
@@ -27,12 +24,12 @@ namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
                 this.MakeAction("FrameworkUser","Password",@Localizer["Login.ChangePassword"].Value,@Localizer["Login.ChangePassword"].Value,GridActionParameterTypesEnum.SingleIdWithNull,"_Admin",800).SetShowInRow(true).SetHideOnToolBar(true).SetIconCls("fa fa-unlock-alt").SetButtonClass("layui-btn-warm"),
             };
         }
- 
+
 
         protected override IEnumerable<IGridColumn<FrameworkUser_View>> InitGridHeader()
         {
             return new List<GridColumn<FrameworkUser_View>>{
-                
+
                 this.MakeGridHeader(x => x.FrameworkUser_ITCode).SetTitle(@Localizer["Sys.Account"].Value),
                 this.MakeGridHeader(x => x.FrameworkUser_Name).SetTitle(@Localizer["_Admin.Name"].Value),
                 this.MakeGridHeader(x => x.FrameworkUser_Gender).SetTitle(@Localizer["_Admin.Gender"].Value),
@@ -46,7 +43,7 @@ namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
             };
         }
 
-        
+
         private List<ColumnFormatInfo> FrameworkUser_PhotoFormat(FrameworkUser_View entity, object val)
         {
             return new List<ColumnFormatInfo>
@@ -60,22 +57,22 @@ namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
         public override IOrderedQueryable<FrameworkUser_View> GetSearchQuery()
         {
             var query = DC.Set<FrameworkUser>()
-                
-                .CheckContain(Searcher.ITCode, x=>x.ITCode)
-                .CheckContain(Searcher.Name, x=>x.Name)
-                .CheckEqual(Searcher.IsValid, x=>x.IsValid)
+
+                .CheckContain(Searcher.ITCode, x => x.ITCode)
+                .CheckContain(Searcher.Name, x => x.Name)
+                .CheckEqual(Searcher.IsValid, x => x.IsValid)
                 .Select(x => new FrameworkUser_View
                 {
-				    ID = x.ID,
-                    
+                    ID = x.ID,
+
                     FrameworkUser_ITCode = x.ITCode,
                     FrameworkUser_Name = x.Name,
                     FrameworkUser_Gender = x.Gender,
                     FrameworkUser_CellPhone = x.CellPhone,
                     FrameworkUser_Role = DC.Set<FrameworkUserRole>().Where(y => y.UserCode == x.ITCode)
-                        .Join(DC.Set<FrameworkRole>(), ur => ur.RoleCode, role => role.RoleCode, (ur, role) => role).Select(y0=>y0.RoleName).ToSepratedString(null,","),
+                        .Join(DC.Set<FrameworkRole>(), ur => ur.RoleCode, role => role.RoleCode, (ur, role) => role).Select(y0 => y0.RoleName).ToSepratedString(null, ","),
                     FrameworkUser_Group = DC.Set<FrameworkUserGroup>().Where(y => y.UserCode == x.ITCode)
-                        .Join(DC.Set<FrameworkGroup>(), ug => ug.GroupCode, group => group.GroupCode, (ug, group) => group ).Select(y0=>y0.GroupName).ToSepratedString(null,","),
+                        .Join(DC.Set<FrameworkGroup>(), ug => ug.GroupCode, group => group.GroupCode, (ug, group) => group).Select(y0 => y0.GroupName).ToSepratedString(null, ","),
                     FrameworkUser_IsValid = x.IsValid,
                     FrameworkUser_Photo = x.PhotoId,
                 })
@@ -83,11 +80,11 @@ namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
             return query;
         }
 
-        
+
     }
-    public class FrameworkUser_View: FrameworkUser
+    public class FrameworkUser_View : FrameworkUser
     {
-        
+
         public string FrameworkUser_ITCode { get; set; }
         public string FrameworkUser_Name { get; set; }
         public GenderEnum? FrameworkUser_Gender { get; set; }

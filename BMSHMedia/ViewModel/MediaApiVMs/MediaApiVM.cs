@@ -1,16 +1,19 @@
 ﻿using BMSHMedia.ViewModel.MediaVMs;
-using Microsoft.AspNetCore.WebUtilities;
-using NPOI.OpenXmlFormats.Wordprocessing;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.IO.Compression;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace BMSHMedia.ViewModel.MediaApiVMs
 {
     public class MediaApiVM
     {
-        public List<MediaContentVM> MediaContentList { get; set; }
+
+        public List<MediaFolderVM2> MediaFolderVM2List { get; set; }
+
+        public bool Success { get; set; }
 
         private readonly MediaScanVM _scan;
 
@@ -19,66 +22,91 @@ namespace BMSHMedia.ViewModel.MediaApiVMs
             _scan = new MediaScanVM();
         }
 
+        #region ScanAll
         public void ScanAll()
         {
-            MediaContentList = new List<MediaContentVM>();
+            MediaFolderVM2List = new();
 
-            var scan = new MediaScanVM();
+            string root = SiteConfigInfo.MediaRootPath;
 
-            scan.ScanFolders(SiteConfigInfo.MediaRootPath);
-            scan.ScanFiles(SiteConfigInfo.MediaRootPath);
-
-            var topContentVM = new MediaContentVM
+            if (!Directory.Exists(root))
             {
-                FolderList = scan.MediaFolderList,
-                FileList = scan.MediaFileList,
-                IsTop = true,
-                Key = SiteConfigInfo.MediaRootPath,
-            };
-
-            MediaContentList.Add(topContentVM);
-            
-            foreach (var topSubDir in topContentVM.FolderList)
-            {
-                var subDir = Directory.EnumerateDirectories(topSubDir.SysFullPath);
-
-                foreach (var dir in subDir)
-                {
-                    if (!Directory.Exists(dir)) continue;
-
-                    
-                }
+                Success = false;
+                return;
             }
-        }
 
-        private void DiGuiDir(string currentDir, string parentKey)
-        {
-            _scan.ScanFolders(currentDir);
-            _scan.ScanFiles(currentDir);
+            _scan.ScanFolders(root);
+            _scan.ScanFiles(root);
 
-            string key = Guid.NewGuid().ToString();
+            var subDirs = _scan.MediaFolderList;
+            var subFiles = _scan.MediaFileList;
 
-            var vm = new MediaContentVM
+            var folder = new MediaFolderVM2(root)
             {
-                FolderList = _scan.MediaFolderList,
-                FileList = _scan.MediaFileList,
-                IsTop = false,
-                Key = key,
-                ParentKey = parentKey,
-                SysFolderPath = currentDir
+                Id = Guid.NewGuid().ToString(),
+                IsTop = true,
+                Files = subFiles
             };
 
-            if (_scan.MediaFolderList.Count <= 0)
+            MediaFolderVM2List.Add(folder);
+
+            foreach (var dir in subDirs)
+            {
+                RecursiveDir(dir.SysFullPath, folder.Id);
+            }
+
+            Success = true;
+        }
+        #endregion
+
+        #region RecursiveDir
+        private void RecursiveDir(string currentDir, string parentId)
+        {
+            if (!Directory.Exists(currentDir))
             {
                 return;
             }
-            
-            MediaContentList.Add(vm);
 
-            foreach (var f in vm.FolderList)
+            _scan.ScanFolders(currentDir);
+            _scan.ScanFiles(currentDir);
+
+            var subDirs = _scan.MediaFolderList;
+            var files = _scan.MediaFileList;
+
+            var vm = new MediaFolderVM2(currentDir)
             {
-                DiGuiDir(f.SysFullPath, key);
+                Id = Guid.NewGuid().ToString(),
+                IsTop = false,
+                Files = files,
+                ParentId = parentId,
+            };
+
+            MediaFolderVM2List.Add(vm);
+
+            if (subDirs.Count > 0)
+            {
+                foreach (var dir in subDirs)
+                {
+                    RecursiveDir(dir.SysFullPath, vm.Id);
+                }
             }
         }
+        #endregion
+
+        #region GetJsonData
+        public async Task<string> GetJsonData()
+        {
+            string json = string.Empty;
+            await Task.Run(() =>
+            {
+                ScanAll();
+                json = JsonSerializer.Serialize(MediaFolderVM2List, new JsonSerializerOptions(JsonSerializerDefaults.Web));
+                
+            });
+
+            return json;
+        }
+        #endregion
+
     }
 }

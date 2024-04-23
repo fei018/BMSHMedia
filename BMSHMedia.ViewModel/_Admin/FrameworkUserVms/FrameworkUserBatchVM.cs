@@ -1,13 +1,11 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;
 using WalkingTec.Mvvm.Core;
 using WalkingTec.Mvvm.Core.Extensions;
-using Microsoft.EntityFrameworkCore;
-using BMSHMedia.Model;
 
 namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
 {
@@ -22,13 +20,13 @@ namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
         public override bool DoBatchEdit()
         {
             var entityList = DC.Set<FrameworkUser>().AsNoTracking().CheckIDs(Ids.ToList()).ToList();
-                List<Guid> todelete = new List<Guid>();
-                foreach (var entity in entityList)
+            List<Guid> todelete = new List<Guid>();
+            foreach (var entity in entityList)
             {
 
                 if (LinkedVM.SelectedFrameworkUserRolesIDs != null)
                 {
-                    
+
                     var newids = LinkedVM.SelectedFrameworkUserRolesIDs;
                     todelete = new List<Guid>();
                     todelete.AddRange(DC.Set<FrameworkUserRole>().AsNoTracking().Where(x => x.UserCode == entity.ITCode).Select(x => x.ID));
@@ -43,14 +41,14 @@ namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
                             RoleCode = id,
                             UserCode = entity.ITCode
                         };
-                         r.SetPropertyValue("TenantCode", LoginUserInfo.CurrentTenant);
+                        r.SetPropertyValue("TenantCode", LoginUserInfo.CurrentTenant);
                         DC.AddEntity(r);
                     }
                 }
 
                 if (LinkedVM.SelectedFrameworkUserGroupsIDs != null)
                 {
-                    
+
                     var newids = LinkedVM.SelectedFrameworkUserGroupsIDs;
                     todelete = new List<Guid>();
                     todelete.AddRange(DC.Set<FrameworkUserGroup>().AsNoTracking().Where(x => x.UserCode == entity.ITCode).Select(x => x.ID));
@@ -65,7 +63,7 @@ namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
                             GroupCode = id,
                             UserCode = entity.ITCode
                         };
-                         r.SetPropertyValue("TenantCode", LoginUserInfo.CurrentTenant);
+                        r.SetPropertyValue("TenantCode", LoginUserInfo.CurrentTenant);
                         DC.AddEntity(r);
                     }
                 }
@@ -75,13 +73,13 @@ namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
         }
     }
 
-	/// <summary>
+    /// <summary>
     /// Class to define batch edit fields
     /// </summary>
     public class FrameworkUser_BatchEdit : BaseVM
     {
 
-        
+
         public List<string> _AdminFrameworkUserBTempSelected { get; set; }
         [Display(Name = "_Model._FrameworkUser._Email")]
         public string Email { get; set; }
@@ -106,7 +104,7 @@ namespace BMSHMedia.ViewModel._Admin.FrameworkUserVMs
 
         protected override void InitVM()
         {
-           
+
         }
     }
 

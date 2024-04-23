@@ -1,19 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using WalkingTec.Mvvm.Core;
-using WalkingTec.Mvvm.Mvc;
 using WalkingTec.Mvvm.Core.Extensions;
-using System.Collections.Generic;
-using BMSHMedia.Model;
+using WalkingTec.Mvvm.Mvc;
 
 namespace BMSHMedia._Admin.Controllers
 {
     public partial class FrameworkUserController : BaseController
     {
-        
+
         [ActionDescription("_Page._Admin.FrameworkUser.Create")]
         public ActionResult Create()
         {
@@ -27,7 +21,7 @@ namespace BMSHMedia._Admin.Controllers
             return PartialView(vm);
         }
 
-        
+
         [ActionDescription("_Page._Admin.FrameworkUser.Edit")]
         public ActionResult Edit(string id)
         {
@@ -42,7 +36,7 @@ namespace BMSHMedia._Admin.Controllers
             return PartialView(vm);
         }
 
-        
+
         [ActionDescription("_Page._Admin.FrameworkUser.Index", IsPage = true)]
         public ActionResult Index(string id)
         {
@@ -59,7 +53,7 @@ namespace BMSHMedia._Admin.Controllers
             return PartialView(vm);
         }
 
-        
+
         [ActionDescription("_Page._Admin.FrameworkUser.Password")]
         public ActionResult Password(string id)
         {
@@ -74,7 +68,7 @@ namespace BMSHMedia._Admin.Controllers
             return PartialView(vm);
         }
 
-        
+
         [ActionDescription("_Page._Admin.FrameworkUser.Details")]
         public ActionResult Details(string id)
         {
@@ -88,7 +82,7 @@ namespace BMSHMedia._Admin.Controllers
             return PartialView(vm);
         }
 
-        
+
         [ActionDescription("_Page._Admin.FrameworkUser.Import")]
         public ActionResult Import()
         {
@@ -102,7 +96,7 @@ namespace BMSHMedia._Admin.Controllers
             return PartialView(vm);
         }
 
-        
+
         [ActionDescription("_Page._Admin.FrameworkUser.BatchEdit")]
         [HttpPost]
         public ActionResult BatchEdit(string[] IDs)
@@ -150,7 +144,7 @@ namespace BMSHMedia._Admin.Controllers
             }
             return vm.GetExportData();
         }
-        
+
     }
 }
 
