@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -11,7 +10,7 @@ namespace BMSHMedia.ViewModel.MediaApiVMs
     public class MediaApiVM
     {
 
-        public List<MediaFolderVM2> MediaFolderVM2List { get; set; }
+        public static List<MediaFolderVM2> MediaFolderVM2List { get; set; } = new();
 
         public bool Success { get; set; }
 
@@ -101,10 +100,20 @@ namespace BMSHMedia.ViewModel.MediaApiVMs
             {
                 ScanAll();
                 json = JsonSerializer.Serialize(MediaFolderVM2List, new JsonSerializerOptions(JsonSerializerDefaults.Web));
-                
+
             });
 
             return json;
+        }
+        #endregion
+
+        #region async ScanAll
+        public static async Task ScanAllAsync()
+        {
+            await Task.Run(()=>
+            {
+                new MediaApiVM().ScanAll();
+            });
         }
         #endregion
 

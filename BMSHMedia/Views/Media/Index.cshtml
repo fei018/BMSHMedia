@@ -1,89 +1,78 @@
-﻿@model MediaScanVM
+﻿
 @{
-    var topPath = MediaBaseVM.EncodePath(SiteConfigInfo.MediaRootPath);
-}
-
-@section ScriptTop {
-    <script>
-        function scanSubFolder(path) {
-            let url = "/media/list"
-
-            $.post(url, { path: path }, function (data) {
-                $('#mediaFileList').html(data);
-                
-            }, 'html');
-        }
-
-        function addLisenter_dbclick_media(selector) {
-            var touchtime = 0;
-            $(selector).on("click", function () {
-                if (touchtime == 0) {
-                    // set first click
-                    touchtime = new Date().getTime();
-                } else {
-                    // compare first click to this click and see if they occurred within double click threshold
-                    if (((new Date().getTime()) - touchtime) < 800) {
-                        // double click occurred
-
-                        scanSubFolder($(this).attr('data-path'));
-
-                        touchtime = 0;
-                    } else {
-                        // not a double click so set as a new first click
-                        touchtime = new Date().getTime();
-                    }
-                }
-            });
-        }
-
-        function playMediaContent(obj) {
-            
-        }
-        // 彈出窗口
-        // function mediaPlay(obj) {
-        //     let url = $(obj).attr('data-path');
-        //     let title = $(obj).attr('data-title');
-        //     let filetype = $(obj).attr('data-fileType');
-
-        //     $.post('/media/play', { url: url, fileType: filetype }, function (html) {
-        //         layui.layer.open({
-        //             type: 1,
-        //             content: html,
-        //             title: title,
-        //             resize: false,
-        //                     yes: function (index, layero) {
-        //                 layui.layer.close(index);
-        //             }
-        //         });
-        //     })
-           
-        // }
-    </script>
-
+    var id = MediaApiVM.MediaFolderVM2List.Find(x => x.IsTop)?.Id;
+    
 }
 
 <style>
     .media-row {
-        height:30px;
+        height: 30px;
     }
-    .media-dir-home {
-        line-height:30px;
-        margin-left:10px;
-    }
+
     .media-icon {
-        font-size:25px;
+        font-size: 25px;
+    }
+
+        .media-icon.layui-icon-home {
+            font-size: 30px;
+            line-height: 30px;
+            /*  margin-left: 10px; */
+        }
+
+    .layui-card {
+        /*         border-style:solid;
+                border-width:1px;
+                border-color: #1d99f3; */
+        background-color: ghostwhite;
+        height: 105px;
+        border-radius:10px;
+    }
+
+        .layui-card .layui-card-body .media-folder-name {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+    .media-icon.media-icon-folder {
+        color: #1d99f3;
+    }
+
+    .layui-card-body .more-line-ellipsis {
+        text-decoration: underline;
+    }
+
+    .play-btn-submit {
+        cursor: pointer;
+        border: none;
+        background: none;
+        text-decoration: underline;
+        outline: none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    #mediaDirList{
+        margin-bottom:50px;
     }
 </style>
-<div class="media-row layui-row">
-    <div class="layui-col-xs12 layui-col-sm12">
-        <a class="" href="/media/index"><i class="media-icon layui-icon layui-icon-home"></i></a>
-    </div>
-</div>
-
-<div id="mediaFileList" style="margin-bottom:50px;">
-</div>
-
 
 <script>
-    scanSubFolder('@topPath');  
+    function getMediaFolderById(id) {
+        $.get('/media/list', { Id: id }, function (data) {
+            $('#mediaDirList').html(data);
+        }, 'html');
+    }
+</script>
+
+<div class="media-row layui-row">
+    <div class="layui-col-xs12 layui-col-sm12">
+        <a class="layui-btn layui-btn-primary layui-border-blue" href="/media/index"><i class="media-icon layui-icon layui-icon-home"></i></a>
+    </div>
+</div>
+<div id="mediaDirList">
+    
+</div>
+
+<script>
+    getMediaFolderById('@id');
 </script>

@@ -1,0 +1,91 @@
+﻿@model MediaScanVM
+@{
+    var topPath = MediaBaseVM.EncodePath(SiteConfigInfo.MediaRootPath);
+}
+
+@section ScriptTop {
+    <script>
+        function scanSubFolder(path) {
+            let url = "/media2/list"
+
+            $.post(url, { path: path }, function (data) {
+                $('#mediaFileList').html(data);
+                
+            }, 'html');
+        }
+
+        function addLisenter_dbclick_media(selector) {
+            var touchtime = 0;
+            $(selector).on("click", function () {
+                if (touchtime == 0) {
+                    // set first click
+                    touchtime = new Date().getTime();
+                } else {
+                    // compare first click to this click and see if they occurred within double click threshold
+                    if (((new Date().getTime()) - touchtime) < 800) {
+                        // double click occurred
+
+                        scanSubFolder($(this).attr('data-path'));
+
+                        touchtime = 0;
+                    } else {
+                        // not a double click so set as a new first click
+                        touchtime = new Date().getTime();
+                    }
+                }
+            });
+        }
+
+        function playMediaContent(obj) {
+            
+        }
+        // 彈出窗口
+        // function mediaPlay(obj) {
+        //     let url = $(obj).attr('data-path');
+        //     let title = $(obj).attr('data-title');
+        //     let filetype = $(obj).attr('data-fileType');
+
+        //     $.post('/media/play', { url: url, fileType: filetype }, function (html) {
+        //         layui.layer.open({
+        //             type: 1,
+        //             content: html,
+        //             title: title,
+        //             resize: false,
+        //                     yes: function (index, layero) {
+        //                 layui.layer.close(index);
+        //             }
+        //         });
+        //     })
+           
+        // }
+    </script>
+
+}
+
+<style>
+    .media-row {
+        height:30px;
+    }
+
+    .media-icon {
+        font-size:25px;
+    }
+    .media-icon.layui-icon-home{
+        font-size:30px;
+            line-height: 30px;
+           /*  margin-left: 10px; */
+    }
+</style>
+<div class="media-row layui-row">
+    <div class="layui-col-xs12 layui-col-sm12">
+        <a class="layui-btn layui-btn-primary layui-border-blue" href="/media2/index"><i class="media-icon layui-icon layui-icon-home"></i></a>
+    </div>
+</div>
+
+<div id="mediaFileList" style="margin-bottom:50px;">
+</div>
+
+
+<script>
+    scanSubFolder('@topPath');  
+</script>
