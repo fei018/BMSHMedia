@@ -2,18 +2,25 @@
 @{
     Layout = null;
 
-    //List<MediaFileVM> mp3s = Model.MediaFileList.Where(x => x.FileType == MediaFileTypeEnum.Audio).ToList() ?? new();
-
-    //List<MediaFileVM> mp4s = Model.MediaFileList.Where(x => x.FileType == MediaFileTypeEnum.Video).ToList() ?? new();
-
     List<MediaFolderVM> folders = Model.MediaFolderList;
 
-    string uplevel = Model.UpLevelFolderPath;
+    List<MediaFileVM> files = Model.MediaFileList;
+
+    string uplevelPath = Model.UpLevelFolderPath;
+
+    bool isShowUpIcon = Model.IsShowUpLevelLinkIcon;
 }
 
 <style>
     .file-item-icon.text-secondary .fa.fa-folder-o {
         color: #1d99f3;
+    }
+
+    .playSubmitBtn {
+        border: none;
+        background: none;
+        text-decoration: underline;
+        outline: none;
     }
 </style>
 
@@ -23,12 +30,15 @@
     <div class="file-item-name pb-2">Filename</div>
     <div class="file-item-changed pb-2">Changed</div>
     </div>  *@
-    <div class="file-item media-item-folder" data-path="@uplevel">
-        <div class="file-item-icon file-item-level-up fa fa-level-up text-secondary"></div>
-        <a href="javascript:void(0)" class="file-item-name">
-            ..
-        </a>
-    </div>
+    @if (isShowUpIcon)
+    {
+        <div class="file-item media-item-folder" data-path="@uplevelPath">
+            <div class="file-item-icon file-item-level-up fa fa-level-up text-secondary"></div>
+            <a href="javascript:void(0)" class="file-item-name">
+                ..
+            </a>
+        </div>
+    }
 
     @foreach (var item in folders)
     {
@@ -43,19 +53,23 @@
                 @item.FolderName
             </a>
             @* <div class="file-item-actions btn-group">
-        <button type="button" class="btn btn-default btn-sm rounded-pill icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></button>
-        <div class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-        </div>
-        </div> *@
+                <button type="button" class="btn btn-default btn-sm rounded-pill icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="javascript:void(0)">下載</a>
+                </div>
+            </div> *@
         </div>
     }
 </div>
-<h4>--文件--</h4>
+
+@if (files.Count > 0)
+{
+    <h4>--文件--</h4>
+}
 <div class="file-manager-container file-manager-col-view">
-    @foreach (var item in Model.MediaFileList)
+    @foreach (var item in files)
     {
-        <div class="file-item media-item-file" >
+        <div class="file-item media-item-file">
             <div class="file-item-select-bg bg-primary"></div>
             @*  <label class="file-item-checkbox custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input" />
@@ -69,22 +83,32 @@
             {
                 <div class="file-item-icon text-secondary fa fa-youtube-play"></div>
             }
-            <a href="javascript:void(0)" class="file-item-name" onclick="mediaPlay(this)" style="text-decoration:underline;"
-               data-path="@item.Url" data-title="@item.FileName" data-fileType="@item.FileType">
-                @item.FileName
-            </a>
+            @* <a href="javascript:void(0)" class="file-item-name" onclick="mediaPlay(this)" style="text-decoration:underline;"
+        data-path="@item.Url" data-title="@item.FileName" data-fileType="@item.FileType">
+        @item.FileName
+        </a> *@
+            <form action="/media/play" method="post" target="_blank">
+                <button type="submit" class="playSubmitBtn">@item.FileName</button>
+                <input type="hidden" asp-for="@item.Url" name="Url" />
+                <input type="hidden" asp-for="@item.FileType" name="FileType" />
+                <input type="hidden" asp-for="@item.MineType" name="MineType" />
+                <input type="hidden" asp-for="@item.FileName" name="FileName" />
+            </form>
             @* <div class="file-item-actions btn-group">
-        <button type="button" class="btn btn-default btn-sm rounded-pill icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></button>
-        <div class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-        </div>
-        </div> *@
+                <button type="button" class="btn btn-default btn-sm rounded-pill icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="javascript:void(0)" >下載</a>
+                </div>
+            </div> *@
         </div>
     }
+
 </div>
 
 
 <script>
 
     addLisenter_dbclick_media('.media-item-folder');
+
+
 </script>

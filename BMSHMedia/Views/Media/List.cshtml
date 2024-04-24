@@ -53,11 +53,11 @@
                 @item.FolderName
             </a>
             @* <div class="file-item-actions btn-group">
-                <button type="button" class="btn btn-default btn-sm rounded-pill icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></button>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="javascript:void(0)">下載</a>
-                </div>
-            </div> *@
+        <button type="button" class="btn btn-default btn-sm rounded-pill icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></button>
+        <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="javascript:void(0)">下載</a>
+        </div>
+        </div> *@
         </div>
     }
 </div>
@@ -95,14 +95,108 @@
                 <input type="hidden" asp-for="@item.FileName" name="FileName" />
             </form>
             @* <div class="file-item-actions btn-group">
-                <button type="button" class="btn btn-default btn-sm rounded-pill icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></button>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="javascript:void(0)" >下載</a>
-                </div>
-            </div> *@
+        <button type="button" class="btn btn-default btn-sm rounded-pill icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></button>
+        <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="javascript:void(0)" >下載</a>
+        </div>
+        </div> *@
         </div>
     }
 
+</div>
+
+<style>
+    .layui-card {
+        /*         border-style:solid;
+            border-width:1px;
+            border-color: #1d99f3; */
+        background-color: ghostwhite;
+        height: 105px;
+    }
+
+        .layui-card .layui-card-body .media-folder-name {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+    .media-icon.media-icon-folder {
+        color: #1d99f3;
+    }
+
+    .layui-card-body .more-line-ellipsis {
+        text-decoration: underline;
+    }
+
+    .play-btn-submit {
+        border: none;
+        background: none;
+        text-decoration: underline;
+        outline: none;
+        overflow:hidden;
+        text-overflow:ellipsis;
+    }
+</style>
+<div>
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>資料夾</legend>
+    </fieldset>
+
+    <div class="layui-row layui-col-space15">
+        @foreach (var folder in folders)
+        {
+            <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
+                <div class="layui-card">
+                    <div class="layui-card-header ">
+                        <i class="media-icon media-icon-folder layui-icon layui-icon-template-1"></i>
+                    </div>
+                    <div class="layui-card-body">
+                        <a class="more-line-ellipsis" href="javascript:void(0);"
+                           onclick="scanSubFolder('@folder.RelativeEncodePath')">
+                            @(folder.FolderName)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (files.Count > 0)
+    {
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>文件</legend>
+        </fieldset>
+    }
+    <div class="layui-row layui-col-space15">
+        @foreach (var file in files)
+        {
+            <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
+                <div class="layui-card">
+                    <div class="layui-card-header ">
+                        @if (file.FileType == MediaFileTypeEnum.Audio)
+                        {
+                            <i class="media-icon media-icon-folder layui-icon layui-icon-music"></i>
+                        }
+                        @if (file.FileType == MediaFileTypeEnum.Video)
+                        {
+                            <i class="media-icon media-icon-folder layui-icon layui-icon-video"></i>
+                        }
+                    </div>
+                    <div class="layui-card-body">
+                        <form action="/media/play" method="post" target="_blank">
+                            <button type="submit" class="play-btn-submit"><span class="more-line-ellipsis">@file.FileName</span></button>
+                            <input type="hidden" asp-for="@file.Url" name="Url" />
+                            <input type="hidden" asp-for="@file.FileType" name="FileType" />
+                            <input type="hidden" asp-for="@file.MineType" name="MineType" />
+                            <input type="hidden" asp-for="@file.FileName" name="FileName" />
+                        </form>
+                        @* <a class="more-line-ellipsis">
+                            @file.FileName
+                        </a> *@
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
 
 

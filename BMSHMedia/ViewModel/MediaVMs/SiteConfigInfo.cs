@@ -14,8 +14,8 @@ namespace BMSHMedia.ViewModel.MediaVMs
 
         public static void SetSiteConfig(string mediarootPath)
         {
-            MediaRootPath = mediarootPath;
-            //MediaRootPath =  @"\\192.168.0.201\BMSHFile\Video";
+            //MediaRootPath = mediarootPath;
+            MediaRootPath =  @"\\192.168.0.201\BMSHFile\Video";
             //MediaRootPath = "C:\\CodeProject\\web";
         }
 

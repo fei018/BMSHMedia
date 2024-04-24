@@ -5,24 +5,67 @@
 
     <title>佛教愍生講堂</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link href="~/media-file/css/bootstrap.min.css" rel="stylesheet" />
+   @*  <link href="~/media-file/css/bootstrap.min.css" rel="stylesheet" /> *@
     <link href="~/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/media-file/css/media.css" rel="stylesheet" />
-    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    @* <link href="~/media-file/css/media.css" rel="stylesheet" /> *@
+    <link href="~/layui-v2.9.8/css/layui.css" rel="stylesheet" />
     @* <link href="~/media-file/css/video-js.min.css" rel="stylesheet" /> *@
-
+    
     <script src="~/jquery.min.js"></script>
-    <script src="~/layui/layui.js"></script>
+    <script src="~/layui-v2.9.8/layui.js"></script>
     @* <script src="~/media-file/js/video.min.js"></script> *@
 
+    <style>
+        body{
+            max-width:900px;
+            margin:0 auto;
+        }
+
+        .layui-header .layui-logo{
+            position:absolute;
+            width:84px;
+            text-align:center;
+            line-height:60px;
+            /* box-shadow:none; */
+        }
+        .layui-main1{
+            padding:10px;
+        }
+
+        .more-line-ellipsis {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            word-break: break-all;
+        }
+    </style>
     @RenderSection("ScriptTop", false)
 </head>
 <body>
-    <div class="container flex-grow-1 light-style container-p-y" style="margin-top:5px;">
-        @RenderBody()
+    <div class="layui-header layui-bg-gray">
+        <div class="layui-logo"><a href="javascript:;">BMSH</a></div>
+
+        <ul class="layui-nav layui-layout-right layui-bg-gray">
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="layui-icon layui-icon-app"></i></a>
+                <dl class="layui-nav-child layui-nav-child-r">
+                    <dd><a href="">选项1111</a></dd>
+                    <dd><a href="">选项2</a></dd>
+                    <dd><a href="">选项3</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-main1">
+        <div>
+            @RenderBody()
+        </div>
     </div>
     
-    <script src="~/media-file/js/bootstrap.bundle.min.js"></script>
+@*     <script src="~/media-file/js/bootstrap.bundle.min.js"></script> *@
 
     <script type="text/javascript">
 
