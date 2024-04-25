@@ -1,7 +1,7 @@
-﻿using BMSHMedia.ViewModel.MediaVMs;
+﻿using BMSHMedia.Portal.ViewModel.MediaVMs;
 using System.Collections.Generic;
 
-namespace BMSHMedia.ViewModel.MediaApiVMs
+namespace BMSHMedia.Portal.ViewModel.MediaApiVMs
 {
     public class MediaFolderVM2(string sysFullPath) : MediaFolderVM(sysFullPath)
     {

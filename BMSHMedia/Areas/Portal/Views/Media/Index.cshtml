@@ -1,12 +1,12 @@
 ﻿
 @{
-    var id = MediaApiVM.MediaFolderVM2List.Find(x => x.IsTop)?.Id;
-    
+    var id = MediaApiVM.MediaContentList.Find(x => x.IsTop)?.Id;
+    string listUrl = "/portal/media/list";
 }
 
 <style>
     .media-row {
-        height: 30px;
+        height: 40px;
     }
 
     .media-icon {
@@ -58,15 +58,16 @@
 
 <script>
     function getMediaFolderById(id) {
-        $.get('/media/list', { Id: id }, function (data) {
+        $.get('@listUrl', { Id: id }, function (data) {
             $('#mediaDirList').html(data);
         }, 'html');
     }
+
 </script>
 
 <div class="media-row layui-row">
-    <div class="layui-col-xs12 layui-col-sm12">
-        <a class="layui-btn layui-btn-primary layui-border-blue" href="/media/index"><i class="media-icon layui-icon layui-icon-home"></i></a>
+    <div class="layui-col-xs3 layui-col-sm3">
+        <a class="layui-btn layui-btn-primary layui-border-blue" onclick="getMediaFolderById('@id');"><i class="media-icon layui-icon layui-icon-template-1"></i></a>
     </div>
 </div>
 <div id="mediaDirList">

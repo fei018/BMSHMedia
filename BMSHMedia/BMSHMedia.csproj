@@ -23,10 +23,6 @@
     <ProjectReference Include="..\BMSHMedia.DataAccess\BMSHMedia.DataAccess.csproj" />
     <ProjectReference Include="..\BMSHMedia.ViewModel\BMSHMedia.ViewModel.csproj" />
  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="SqliteDb\" />
-  </ItemGroup>
 </Project>
 
 

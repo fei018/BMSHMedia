@@ -1,22 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using BMSHMedia.Portal.ViewModel.MediaVMs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using WalkingTec.Mvvm.Core;
-using WalkingTec.Mvvm.Core.Extensions;
-using WalkingTec.Mvvm.Core.Support.FileHandlers;
-using WalkingTec.Mvvm.Mvc;
-using System;
 using Microsoft.Extensions.FileProviders;
-using BMSHMedia.ViewModel.MediaVMs;
+using Microsoft.Extensions.Options;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-using BMSHMedia.ViewModel.MediaApiVMs;
+using WalkingTec.Mvvm.Core;
+using WalkingTec.Mvvm.Core.Support.FileHandlers;
+using WalkingTec.Mvvm.Mvc;
 
 namespace BMSHMedia
 {
@@ -48,18 +46,20 @@ namespace BMSHMedia
             {
                 options.UseWtmMvcOptions();
             })
-            .AddJsonOptions(options => {
+            .AddJsonOptions(options =>
+            {
                 options.UseWtmJsonOptions();
             })
-            
+
             .ConfigureApiBehaviorOptions(options =>
             {
                 options.UseWtmApiOptions();
             })
             .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
             .AddWtmDataAnnotationsLocalization(typeof(Program));
-            
-            services.AddWtmContext(ConfigRoot, (options)=> {
+
+            services.AddWtmContext(ConfigRoot, (options) =>
+            {
                 options.DataPrivileges = DataPrivilegeSettings();
                 options.CsSelector = CSSelector;
                 options.FileSubDirSelector = SubDirSelector;
@@ -75,16 +75,11 @@ namespace BMSHMedia
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IOptionsMonitor<Configs> configs)
         {
-            IconFontsHelper.GenerateIconFont("wwwroot/layui","wwwroot/font-awesome");
+            IconFontsHelper.GenerateIconFont("wwwroot/layui", "wwwroot/font-awesome");
 
             app.UseExceptionHandler(configs.CurrentValue.ErrorHandler);
             app.UseStaticFiles();
-
-            app.UseStaticFiles(new StaticFileOptions()
-            {      
-                FileProvider = new PhysicalFileProvider(SiteConfigInfo.MediaRootPath),
-                RequestPath = SiteConfigInfo.CustomStaticWebPath,
-            });
+            AddCustomStaticFiles(ref app);
 
             app.UseWtmStaticFiles();
             app.UseRouting();
@@ -100,10 +95,11 @@ namespace BMSHMedia
             {
                 endpoints.MapControllerRoute(
                    name: "areaRoute",
-                   pattern: "{area:exists}/{controller=Media}/{action=Index}/{id?}");
+                   pattern: "{area:exists}/{controller}/{action}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Media}/{action=Index}/{id?}");
+                    pattern: "{controller=Portal}/{action=Index}/{id?}");
             });
 
             app.UseWtmContext();
@@ -133,7 +129,7 @@ namespace BMSHMedia
             List<IDataPrivilege> pris = new List<IDataPrivilege>();
             //Add data privilege to specific type
             //指定哪些模型需要数据权限
-            
+
             return pris;
         }
 
@@ -158,6 +154,20 @@ namespace BMSHMedia
         public LoginUserInfo ReloadUser(WTMContext context, string account)
         {
             return null;
+        }
+
+        private void AddCustomStaticFiles(ref IApplicationBuilder app)
+        {
+            if (!Directory.Exists(SiteConfigInfo.MediaRootPath))
+            {
+                throw new Exception(nameof(SiteConfigInfo.MediaRootPath) + ":(" + SiteConfigInfo.MediaRootPath + ") not exist.");
+            }
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(SiteConfigInfo.MediaRootPath),
+                RequestPath = SiteConfigInfo.CustomStaticWebPath,
+            });
         }
     }
 }

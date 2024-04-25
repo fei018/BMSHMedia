@@ -25,6 +25,7 @@ namespace BMSHMedia.Controllers
         {
             LoginVM vm = Wtm.CreateVM<LoginVM>();
             vm.Redirect = HttpContext.Request.Query["ReturnUrl"];
+            
             if (Wtm.ConfigInfo.IsQuickDebug == true)
             {
                 vm.ITCode = "admin";
@@ -59,11 +60,12 @@ namespace BMSHMedia.Controllers
                 string url = string.Empty;
                 if (!string.IsNullOrEmpty(vm.Redirect))
                 {
-                    url = vm.Redirect;
+                    //url = vm.Redirect;
+                    url = "/home/index";
                 }
                 else
                 {
-                    url = "/";
+                    url = "/home/index";
                 }
 
                 AuthenticationProperties properties = null;
@@ -123,7 +125,7 @@ namespace BMSHMedia.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             if (ConfigInfo.HasMainHost == false || Wtm.LoginUserInfo?.CurrentTenant != null)
             {
-                HttpContext.Response.Redirect("/");
+                HttpContext.Response.Redirect("/home/index");
             }
             else
             {

@@ -1,7 +1,6 @@
-﻿using BMSHMedia.ViewModel.MediaApiVMs;
-using BMSHMedia.ViewModel.MediaVMs;
+﻿using BMSHMedia.Portal.ViewModel.MediaApiVMs;
+using BMSHMedia.Portal.ViewModel.MediaVMs;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 
@@ -27,7 +26,7 @@ namespace BMSHMedia.Controllers
 
         [HttpPost]
         public IActionResult Play(MediaFileVM vm)
-        {           
+        {
             return View(vm);
         }
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-
-namespace BMSHMedia.ViewModel.MediaVMs
+﻿namespace BMSHMedia.Portal.ViewModel.MediaVMs
 {
     public class MediaFolderVM : MediaBaseVM
     {

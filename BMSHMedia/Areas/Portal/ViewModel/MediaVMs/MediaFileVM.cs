@@ -5,7 +5,7 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace BMSHMedia.ViewModel.MediaVMs
+namespace BMSHMedia.Portal.ViewModel.MediaVMs
 {
     public class MediaFileVM : MediaBaseVM
     {
@@ -39,7 +39,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
         public MediaFileVM() { }
 
 
-        public MediaFileVM(string fullName, MediaFileTypeEnum fileType, string mineType=null)
+        public MediaFileVM(string fullName, MediaFileTypeEnum fileType, string mineType = null)
         {
             FileFullName = fullName;
             FileName = Path.GetFileName(fullName);
@@ -50,7 +50,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
             Url = GetUrl(fullName);
         }
 
-        
+
         public string ToJsonString()
         {
             return JsonSerializer.Serialize(this);
@@ -59,7 +59,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
         public static string GetUrl(string fullName)
         {
             // 去掉 MediaRootPath
-            var path =CutMediaRootPath(fullName);
+            var path = CutMediaRootPath(fullName);
 
             return $"{SiteConfigInfo.CustomStaticWebPath}/" + EncodeFilePathUrl(path);
         }
@@ -81,6 +81,6 @@ namespace BMSHMedia.ViewModel.MediaVMs
             return path;
         }
 
-        
+
     }
 }

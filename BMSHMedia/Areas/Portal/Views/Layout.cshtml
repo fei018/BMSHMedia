@@ -1,10 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string mediaIndexUrl = "/portal/media/index";
+}
+
+
+<!DOCTYPE html>
 <html lang="zh-hk">
 <head>
     <meta charset="utf-8">
 
     <title>佛教愍生講堂</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
     <link href="~/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/layui-v2.9.8/css/layui.css" rel="stylesheet" />
@@ -49,9 +54,7 @@
             <li class="layui-nav-item">
                 <a href="javascript:;"><i class="layui-icon layui-icon-app"></i></a>
                 <dl class="layui-nav-child layui-nav-child-r">
-                    <dd><a href="">选项1111</a></dd>
-                    <dd><a href="">选项2</a></dd>
-                    <dd><a href="">选项3</a></dd>
+                    <dd><a href="@mediaIndexUrl">講座開示</a></dd>
                 </dl>
             </li>
         </ul>

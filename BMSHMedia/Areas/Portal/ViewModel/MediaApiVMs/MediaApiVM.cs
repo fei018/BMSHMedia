@@ -1,16 +1,16 @@
-﻿using BMSHMedia.ViewModel.MediaVMs;
+﻿using BMSHMedia.Portal.ViewModel.MediaVMs;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace BMSHMedia.ViewModel.MediaApiVMs
+namespace BMSHMedia.Portal.ViewModel.MediaApiVMs
 {
     public class MediaApiVM
     {
 
-        public static List<MediaFolderVM2> MediaFolderVM2List { get; set; } = new();
+        public static List<MediaFolderVM2> MediaContentList { get; set; } = new();
 
         public bool Success { get; set; }
 
@@ -24,7 +24,7 @@ namespace BMSHMedia.ViewModel.MediaApiVMs
         #region ScanAll
         public void ScanAll()
         {
-            MediaFolderVM2List = new();
+            MediaContentList = new();
 
             string root = SiteConfigInfo.MediaRootPath;
 
@@ -47,7 +47,7 @@ namespace BMSHMedia.ViewModel.MediaApiVMs
                 Files = subFiles
             };
 
-            MediaFolderVM2List.Add(folder);
+            MediaContentList.Add(folder);
 
             foreach (var dir in subDirs)
             {
@@ -80,7 +80,7 @@ namespace BMSHMedia.ViewModel.MediaApiVMs
                 ParentId = parentId,
             };
 
-            MediaFolderVM2List.Add(vm);
+            MediaContentList.Add(vm);
 
             if (subDirs.Count > 0)
             {
@@ -99,7 +99,7 @@ namespace BMSHMedia.ViewModel.MediaApiVMs
             await Task.Run(() =>
             {
                 ScanAll();
-                json = JsonSerializer.Serialize(MediaFolderVM2List, new JsonSerializerOptions(JsonSerializerDefaults.Web));
+                json = JsonSerializer.Serialize(MediaContentList, new JsonSerializerOptions(JsonSerializerDefaults.Web));
 
             });
 
@@ -110,7 +110,7 @@ namespace BMSHMedia.ViewModel.MediaApiVMs
         #region async ScanAll
         public static async Task ScanAllAsync()
         {
-            await Task.Run(()=>
+            await Task.Run(() =>
             {
                 new MediaApiVM().ScanAll();
             });

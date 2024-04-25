@@ -22,7 +22,7 @@ namespace BMSHMedia.Controllers
         [AllRights]
         public IActionResult Index()
         {
-            ViewData["title"] = "BMSHMedia";
+            ViewData["title"] = "BMSH";
             return View();
         }
 
@@ -161,7 +161,9 @@ namespace BMSHMedia.Controllers
             return rv;
         }
 
+#pragma warning disable CS8981 // 類型名稱只包含小寫的 ASCII 字元。此類名稱可能保留供此語言使用。
         public class github
+#pragma warning restore CS8981 // 類型名稱只包含小寫的 ASCII 字元。此類名稱可能保留供此語言使用。
         {
             public int stargazers_count { get; set; }
             public int forks_count { get; set; }

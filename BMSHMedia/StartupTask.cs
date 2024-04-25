@@ -1,7 +1,6 @@
-﻿using BMSHMedia.ViewModel.MediaApiVMs;
-using BMSHMedia.ViewModel.MediaVMs;
+﻿using BMSHMedia.Portal.ViewModel.MediaApiVMs;
+using BMSHMedia.Portal.ViewModel.MediaVMs;
 using Microsoft.Extensions.Configuration;
-using System.Text;
 
 namespace BMSHMedia
 {

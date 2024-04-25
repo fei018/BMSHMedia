@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 
 
-namespace BMSHMedia.ViewModel.MediaVMs
+namespace BMSHMedia.Portal.ViewModel.MediaVMs
 {
     public class MediaScanVM
     {

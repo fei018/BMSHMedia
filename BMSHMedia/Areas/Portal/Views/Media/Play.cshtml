@@ -6,10 +6,10 @@
 
 <style>
     .media-player-body {
-        margin: auto;
+        margin: 0 auto;
         text-align: center;
         width:370px;
-        min-height:600px;
+        min-height:500px;
         
     }
 
@@ -29,7 +29,7 @@
 
     @if (Model.FileType == MediaFileTypeEnum.Video)
     {
-        <video controls autoplay width="360" >
+        <video controls autoplay width="350" >
             <source src="@Model.Url" type="@Model.MineType" />
             ???
         </video>
