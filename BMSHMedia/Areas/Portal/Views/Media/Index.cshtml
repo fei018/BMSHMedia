@@ -5,6 +5,9 @@
 }
 
 <style>
+    .media-main{
+        width:auto;
+    }
     .media-row {
         height: 40px;
     }
@@ -65,13 +68,14 @@
 
 </script>
 
-<div class="media-row layui-row">
-    <div class="layui-col-xs3 layui-col-sm3">
-        <a class="layui-btn layui-btn-primary layui-border-blue" onclick="getMediaFolderById('@id');"><i class="media-icon layui-icon layui-icon-template-1"></i></a>
+<div class="media-main">
+    <div class="media-row layui-row">
+        <div class="layui-col-xs3 layui-col-sm3">
+            <a class="layui-btn layui-btn-primary layui-border-blue" onclick="getMediaFolderById('@id');"><i class="media-icon layui-icon layui-icon-template-1"></i></a>
+        </div>
     </div>
-</div>
-<div id="mediaDirList">
-    
+    <div id="mediaDirList">
+    </div>
 </div>
 
 <script>

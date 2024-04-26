@@ -1,0 +1,26 @@
+﻿.portal-index-main {
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+
+.portal-index-h1 {
+    padding-top: 20px;
+    font-weight: 500;
+    font-size: 50px;
+    /*color: #16baaa;*/
+}
+
+.portal-index-h2 {
+    padding: 16px 0;
+    line-height: 52px;
+    font-size: 32px;
+    font-weight: 500;
+ /*   color: #16baaa;*/
+}
+
+.portal-index-p {
+    padding: 16px 0;
+    font-size: 20px;
+    text-align:justify;
+}

@@ -1,0 +1,54 @@
+﻿@{
+    string title = "佛教愍生講堂";
+    string portalIndexUrl = "/portal/index";
+    string masterUrl = "/portal/master";
+    string mediaIndexUrl = "/portal/media/index";
+}
+
+
+<!DOCTYPE html>
+<html lang="zh-hk">
+<head>
+    <meta charset="utf-8">
+
+    <title>@title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <link href="~/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/layui-v2.9.8/css/layui.css" rel="stylesheet" />
+    
+    <script src="~/jquery.min.js"></script>
+    <script src="~/layui-v2.9.8/layui.js"></script>
+    <link href="~/portal/portal-layout.css" rel="stylesheet" />
+
+    @RenderSection("ScriptTop", false)
+</head>
+<body>
+    <div class="layui-header layui-bg-gray">
+        <div class="layui-logo"><a href="@portalIndexUrl">@title</a></div>
+
+        <ul class="layui-nav layui-layout-right layui-bg-gray">
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="layui-icon layui-icon-app"></i></a>
+                <dl class="layui-nav-child layui-nav-child-r">
+                    <dd><a href="@portalIndexUrl">首頁</a></dd>
+                    <dd><a href="@masterUrl">法師簡介</a></dd>
+                    <dd><a href="@mediaIndexUrl">講座開示</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-main1">
+        <div>
+            @RenderBody()
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+    </script>
+
+    @RenderSection("ScriptEnd",false)
+</body>
+</html>

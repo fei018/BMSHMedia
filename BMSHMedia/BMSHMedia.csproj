@@ -9,6 +9,13 @@
     <CopyRefAssembliesToPublishDirectory>true</CopyRefAssembliesToPublishDirectory>
 </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="wwwroot\media-file\**" />
+    <Content Remove="wwwroot\media-file\**" />
+    <EmbeddedResource Remove="wwwroot\media-file\**" />
+    <None Remove="wwwroot\media-file\**" />
+  </ItemGroup>
+
 
 
 

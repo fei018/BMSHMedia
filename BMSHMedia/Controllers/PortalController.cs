@@ -6,7 +6,13 @@ namespace BMSHMedia.Controllers
     {
         public IActionResult Index()
         {
-            return RedirectToAction("Index", "Media", new {Area="Portal"});
+            //return RedirectToAction("Index", "Media", new {Area="Portal"});
+            return View();
+        }
+
+        public IActionResult Master()
+        {
+            return View();
         }
     }
 }
