@@ -20,14 +20,14 @@ namespace BMSHMedia.Controllers
         {
             try
             {
-                var vm = MediaApiVM.MediaContentList.SingleOrDefault(x => x.Id == Id);
+                var vm = MediaApiVM.GetMediaContentList().SingleOrDefault(x => x.Id == Id);
                 if (vm != null)
                 {
                     return PartialView(vm);
                 }
                 else
                 {
-                    return this.ErrorView($"{nameof(MediaApiVM.MediaContentList)}, id:({Id}) not found.");
+                    return this.ErrorView($"MediaContentList, id:({Id}) not found.");
                 }               
             }
             catch (Exception ex)

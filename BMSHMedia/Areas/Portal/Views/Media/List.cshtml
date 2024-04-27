@@ -1,8 +1,8 @@
-﻿@model MediaFolderVM2
+﻿@model MediaContentVM
 @{
     Layout = null;
 
-    var subFolders = MediaApiVM.MediaContentList.Where(x => x.ParentId == Model.Id);
+    var subFolders = MediaApiVM.GetMediaContentList().Where(x => x.ParentId == Model.Id);
 
     var files = Model.Files;
 

@@ -1,16 +1,19 @@
-﻿using BMSHMedia.Portal.ViewModel.MediaVMs;
+﻿using BMSHMedia.Helper;
+using BMSHMedia.Portal.ViewModel.MediaVMs;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
 using System.Threading.Tasks;
+using WalkingTec.Mvvm.Core.Extensions;
 
 namespace BMSHMedia.Portal.ViewModel.MediaApiVMs
 {
     public class MediaApiVM
     {
 
-        public static List<MediaFolderVM2> MediaContentList { get; set; } = new();
+        private List<MediaContentVM> MediaContentList { get; set; } = new();
 
         public bool Success { get; set; }
 
@@ -40,7 +43,7 @@ namespace BMSHMedia.Portal.ViewModel.MediaApiVMs
             var subDirs = _scan.MediaFolderList;
             var subFiles = _scan.MediaFileList;
 
-            var folder = new MediaFolderVM2(root)
+            var folder = new MediaContentVM(root)
             {
                 Id = Guid.NewGuid().ToString(),
                 IsTop = true,
@@ -72,7 +75,7 @@ namespace BMSHMedia.Portal.ViewModel.MediaApiVMs
             var subDirs = _scan.MediaFolderList;
             var files = _scan.MediaFileList;
 
-            var vm = new MediaFolderVM2(currentDir)
+            var vm = new MediaContentVM(currentDir)
             {
                 Id = Guid.NewGuid().ToString(),
                 IsTop = false,
@@ -108,14 +111,24 @@ namespace BMSHMedia.Portal.ViewModel.MediaApiVMs
         #endregion
 
         #region async ScanAll
+        private static string cacheKey = "MediaContentList";
+
         public static async Task ScanAllAsync()
         {
             await Task.Run(() =>
             {
-                new MediaApiVM().ScanAll();
-            });
+                var vm = new MediaApiVM();
+                vm.ScanAll();
+                MediaCacheHelper.Cache.Add(cacheKey, vm.MediaContentList);
+            });        
         }
         #endregion
 
+        #region GetMediaContentList
+        public static List<MediaContentVM> GetMediaContentList()
+        {
+            return MediaCacheHelper.Cache.Get<List<MediaContentVM>>(cacheKey);
+        }
+        #endregion
     }
 }

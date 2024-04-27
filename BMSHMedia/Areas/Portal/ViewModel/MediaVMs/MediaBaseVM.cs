@@ -32,7 +32,9 @@ namespace BMSHMedia.Portal.ViewModel.MediaVMs
         /// <returns></returns>
         public static string EncodeFilePathUrl(string path)
         {
+#pragma warning disable SYSLIB0013 // 類型或成員已經過時
             return Uri.EscapeUriString(path.Replace('\\', '/'));
+#pragma warning restore SYSLIB0013 // 類型或成員已經過時
         }
 
         public static string CutMediaRootPath(string sysFullPath)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BMSHMedia.Portal.ViewModel.MediaApiVMs
 {
-    public class MediaFolderVM2(string sysFullPath) : MediaFolderVM(sysFullPath)
+    public class MediaContentVM(string sysFullPath) : MediaFolderVM(sysFullPath)
     {
         public string Id { get; set; }
 

@@ -1,16 +1,22 @@
-﻿using BMSHMedia.Portal.ViewModel.MediaApiVMs;
+﻿using BMSHMedia.Helper;
 using BMSHMedia.Portal.ViewModel.MediaVMs;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BMSHMedia
 {
     public class StartupTask
     {
-        public static void Run(IConfiguration config)
+        public static void Run(IConfiguration config, IServiceCollection services)
         {
             SiteConfigInfo.SetSiteConfig(config.GetSection("AppSettings").GetSection("MediaRootPath").Value);
 
-            MediaApiVM.ScanAllAsync().Wait();
+            var serviceProvider = services.BuildServiceProvider();
+
+            MediaCacheHelper.SetCache(serviceProvider.GetRequiredService<IDistributedCache>());
+
+
         }
     }
 }

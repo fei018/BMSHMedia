@@ -1,6 +1,6 @@
 ﻿
 @{
-    var id = MediaApiVM.MediaContentList.Find(x => x.IsTop)?.Id;
+    var id = MediaApiVM.GetMediaContentList().Find(x => x.IsTop)?.Id;
     string listUrl = "/portal/media/list";
 }
 
