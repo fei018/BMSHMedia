@@ -9,6 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BMSHMedia.Model\BMSHMedia.Model.csproj" />
-  </ItemGroup >
+  </ItemGroup>
 </Project>
 

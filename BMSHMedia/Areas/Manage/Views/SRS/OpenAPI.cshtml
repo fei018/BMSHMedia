@@ -1,0 +1,14 @@
+﻿@model BMSHMedia.ViewModel.SRSVMs.SRSOpenAPIVM
+
+<wt:form vm="@Model">
+    <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:textbox field="Entity.RTMPUrl" />
+        <wt:textbox field="Entity.PlayUrl" />
+        <wt:textbox field="Entity.PublishKeyApiUrl" />
+        <wt:textbox field="Entity.ApiSecret" />
+    </wt:row>
+    <wt:row align="AlignEnum.Right">
+        <wt:submitbutton />
+        <wt:closebutton />
+    </wt:row>
+</wt:form>

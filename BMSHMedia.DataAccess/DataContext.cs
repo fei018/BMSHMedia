@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BMSHMedia.Model.Manage.SRS;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace BMSHMedia.DataAccess
         public DbSet<FrameworkUserRole> FrameworkUserRoles { get; set; }
         public DbSet<FrameworkUserGroup> FrameworkUserGroups { get; set; }
 
+        public DbSet<SRSStackInfo> SRSStackInfos { get; set; }
+
         public DataContext(CS cs)
              : base(cs)
         {
@@ -32,6 +35,7 @@ namespace BMSHMedia.DataAccess
         }
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
+        #region seed
         public override async Task<bool> DataInit(object allModules, bool IsSpa)
         {
             var state = await base.DataInit(allModules, IsSpa);
@@ -321,6 +325,8 @@ namespace BMSHMedia.DataAccess
                 catch { }
             }
         }
+        #endregion
+
     }
 
     /// <summary>
@@ -331,7 +337,7 @@ namespace BMSHMedia.DataAccess
     {
         public DataContext CreateDbContext(string[] args)
         {
-            return new DataContext("your full connection string", DBTypeEnum.SqlServer);
+            return new DataContext("", DBTypeEnum.SQLite);
         }
     }
 

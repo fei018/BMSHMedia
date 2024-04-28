@@ -3,7 +3,6 @@ using BMSHMedia.Portal.ViewModel.MediaVMs;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
 using System.Threading.Tasks;
 using WalkingTec.Mvvm.Core.Extensions;
@@ -111,7 +110,7 @@ namespace BMSHMedia.Portal.ViewModel.MediaApiVMs
         #endregion
 
         #region async ScanAll
-        private static string cacheKey = "MediaContentList";
+        private const string cacheKey = "MediaContentList";
 
         public static async Task ScanAllAsync()
         {
@@ -120,7 +119,7 @@ namespace BMSHMedia.Portal.ViewModel.MediaApiVMs
                 var vm = new MediaApiVM();
                 vm.ScanAll();
                 MediaCacheHelper.Cache.Add(cacheKey, vm.MediaContentList);
-            });        
+            });
         }
         #endregion
 
