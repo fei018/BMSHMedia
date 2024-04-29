@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace BMSHMedia.Portal.ViewModel.MediaVMs
+namespace BMSHMedia.ViewModel.MediaVMs
 {
     public class MediaBaseVM
     {

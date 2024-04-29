@@ -19,13 +19,13 @@ namespace BMSHMedia.Manage.Controllers
             return PartialView();
         }
 
-        [ActionDescription("直播Key")]
-        public IActionResult LiveKey()
+        [ActionDescription("直播發佈Url")]
+        public IActionResult PublishUrl()
         {
             try
             {
                 var vm = Wtm.CreateVM<SRSOpenAPIVM>();
-                vm.GetLiveKey();
+                vm.GetPublishUrl();
                 return PartialView(vm);
             }
             catch (Exception ex)

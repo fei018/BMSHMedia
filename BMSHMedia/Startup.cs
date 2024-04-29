@@ -1,4 +1,4 @@
-﻿using BMSHMedia.Portal.ViewModel.MediaVMs;
+﻿using BMSHMedia.ViewModel.MediaVMs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Filters;

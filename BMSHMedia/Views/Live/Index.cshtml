@@ -1,0 +1,46 @@
+﻿@model BMSHMedia.ViewModel.SRSVMs.SRSOpenAPIVM
+@{
+    string playUrl = Model.GetPlayUrl();
+    string hlsUrl = Model.GetHLSUrl();
+}
+
+<script src="~/portal/mpegts.js"></script>
+
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>直播</legend>
+</fieldset>
+<div style="margin:auto;text-align:center;max-height:600px;margin-bottom:30px;">
+    <video id="livePlayer" autoplay controls width="350" ></video>
+</div>
+@* <div style="text-align:center">
+    <button class="layui-btn layui-btn-primary layui-border" onclick="window.close();">關閉</button>
+</div> *@
+
+<script>
+    (function () {
+        var videoElement = document.getElementById('livePlayer');
+
+        if (!mpegts.isSupported()) {
+
+            if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
+                videoElement.src = '@hlsUrl';
+                return;
+            }
+
+            alert('not support.');
+            return;
+        }
+
+        if (mpegts.getFeatureList().mseLivePlayback) {            
+            var player = mpegts.createPlayer({
+                type: 'mse',  // could also be mpegts, m2ts, flv
+                isLive: true,
+                url: '@playUrl'
+            });
+            player.attachMediaElement(videoElement);
+            player.load();
+            //player.play();
+        }
+    })();
+</script>
+

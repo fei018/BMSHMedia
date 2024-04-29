@@ -4,9 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using WalkingTec.Mvvm.Core;
 
-namespace BMSHMedia.Areas.Portal.Conntrollers
+namespace BMSHMedia.Controllers
 {
-    [Area("Portal")]
     public class LiveController : Controller
     {
         private readonly WTMContext _wtm;

@@ -1,11 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
-namespace BMSHMedia.Portal.ViewModel.MediaVMs
+namespace BMSHMedia.ViewModel.MediaVMs
 {
     public class MediaFileVM : MediaBaseVM
     {

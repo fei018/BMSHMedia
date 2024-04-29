@@ -1,8 +1,9 @@
 ﻿using BMSHMedia.Helper;
-using BMSHMedia.Portal.ViewModel.MediaVMs;
+using BMSHMedia.ViewModel.MediaVMs;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
 
 namespace BMSHMedia
 {
@@ -16,7 +17,7 @@ namespace BMSHMedia
 
             MediaCacheHelper.SetCache(serviceProvider.GetRequiredService<IDistributedCache>());
 
-
+            Task.Run(MediaApiVM.ScanAllAsync);
         }
     }
 }

@@ -1,14 +1,12 @@
-﻿using BMSHMedia.Portal.ViewModel.MediaApiVMs;
-using BMSHMedia.Portal.ViewModel.MediaVMs;
+﻿using BMSHMedia.Extentions;
+using BMSHMedia.ViewModel.MediaVMs;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using BMSHMedia.Extentions;
 
 namespace BMSHMedia.Controllers
 {
-    [Area("Portal")]
     public class MediaController : Controller
     {
         public IActionResult Index()
@@ -28,7 +26,7 @@ namespace BMSHMedia.Controllers
                 else
                 {
                     return this.ErrorView($"MediaContentList, id:({Id}) not found.");
-                }               
+                }
             }
             catch (Exception ex)
             {
@@ -42,11 +40,11 @@ namespace BMSHMedia.Controllers
             return View(vm);
         }
 
-        public async Task<IActionResult> ReloadMedia()
+        public IActionResult Reload()
         {
             try
             {
-                await MediaApiVM.ScanAllAsync();
+                Task.Run(MediaApiVM.ScanAllAsync);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)

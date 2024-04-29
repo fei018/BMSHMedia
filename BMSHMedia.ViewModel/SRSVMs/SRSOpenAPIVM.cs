@@ -16,13 +16,9 @@ namespace BMSHMedia.ViewModel.SRSVMs
         #region post form
         public SRSStackInfo Entity { get; set; }
 
-        [Display(Name = "直播Key")]
-        public string LiveKey_View {  get; set; }
+        [Display(Name = "直播發佈Url")]
+        public string PublishUrl_View {  get; set; }
 
-        [Display(Name = "RTMPUrl")]
-        public string RTMPUrl_View { get; set; }
-
-        //public string PlayUrl_View { get; set; }
         #endregion
 
         public void SaveApiSecret()
@@ -32,7 +28,7 @@ namespace BMSHMedia.ViewModel.SRSVMs
             {
                 entity.RTMPUrl = Entity.RTMPUrl;
                 entity.ApiSecret = Entity.ApiSecret.Trim();
-                entity.PublishKeyApiUrl = Entity.PublishKeyApiUrl.Trim();
+                entity.ApiUrl_PublishKey = Entity.ApiUrl_PublishKey.Trim();
                 entity.PlayUrl = Entity.PlayUrl.Trim();
 
                 DC.UpdateEntity(entity);
@@ -45,27 +41,42 @@ namespace BMSHMedia.ViewModel.SRSVMs
             DC.SaveChanges();
         }
 
-        public void GetLiveKey()
+        public void GetPublishUrl()
         {
             var entity = DC.Set<SRSStackInfo>().ToList().SingleOrDefault();
-            
-            RTMPUrl_View = entity.RTMPUrl;
 
-            string posturl = entity.PublishKeyApiUrl;
+            string posturl = entity.ApiUrl_PublishKey;
 
             var http = new HttpClient();
             http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", entity.ApiSecret);
             var response =  http.PostAsync(posturl, null).Result;
-            response.EnsureSuccessStatusCode();
+
+            try
+            {
+                response.EnsureSuccessStatusCode();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("SRS call OpenAPI return : " + ex.Message);
+            }
 
             var json = response.Content.ReadFromJsonAsync<JsonNode>().Result;
-            LiveKey_View = "?secret=" + (string)json["data"]["publish"];
+            string secret = "?secret=" + (string)json["data"]["publish"];
+
+            PublishUrl_View = entity.RTMPUrl + secret;
         }
 
         public string GetPlayUrl()
         {
             var entity = DC.Set<SRSStackInfo>().ToList().SingleOrDefault();
             return entity.PlayUrl;
+        }
+
+        public string GetHLSUrl()
+        {
+            var entity = DC.Set<SRSStackInfo>().ToList().SingleOrDefault();
+            string url = entity.PlayUrl.Replace("flv", "m3u8", StringComparison.OrdinalIgnoreCase);
+            return url;
         }
     }
 }

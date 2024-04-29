@@ -7,7 +7,7 @@ namespace BMSHMedia.Model.Manage.SRS
     [Table("Info_SRSStack")]
     public class SRSStackInfo : TopBasePoco
     {
-        [Display(Name = "PlayUrl")]
+        [Display(Name = "直播PlayUrl")]
         [Required(ErrorMessage = "{0}必填")]
         public string PlayUrl { get; set; }
 
@@ -15,12 +15,12 @@ namespace BMSHMedia.Model.Manage.SRS
         [Required(ErrorMessage = "{0}必填")]
         public string RTMPUrl { get; set; }
 
-        [Display(Name = "ApiSecret")]
+        [Display(Name = "OpenAPIKey")]
         [Required(ErrorMessage = "{0}必填")]
         public string ApiSecret { get; set; }
 
-        [Display(Name = "HostUrl")]
+        [Display(Name = "ApiUrl_PublishKey")]
         [Required(ErrorMessage = "{0}必填")]
-        public string PublishKeyApiUrl { get; set; }
+        public string ApiUrl_PublishKey { get; set; }
     }
 }

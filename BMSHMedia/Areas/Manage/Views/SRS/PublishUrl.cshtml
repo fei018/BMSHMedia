@@ -1,0 +1,27 @@
+﻿@model BMSHMedia.ViewModel.SRSVMs.SRSOpenAPIVM
+
+<wt:form vm="@Model">
+    <wt:row items-per-row="ItemsPerRowEnum.One" space="15">
+        <wt:textbox field="PublishUrl_View" readonly id="RTMPUrl" />
+
+        @*  <wt:textbox field="LiveKey_View" readonly id="LiveKey" />
+        <wt:button text="Copy" click="copyLiveKey();" /> *@
+    </wt:row>
+
+    <wt:row align="AlignEnum.Right">
+        <wt:button text="Copy" click="copyRTMPUrl();" />
+        <wt:closebutton />
+    </wt:row>
+</wt:form>
+
+<script>
+    function copyRTMPUrl() {
+        let key = document.getElementById('RTMPUrl');
+        navigator.clipboard.writeText(key.value);
+    }
+
+    // function copyLiveKey(btn){
+    //     let key = document.getElementById('LiveKey');
+    //     navigator.clipboard.writeText(key.value);
+    // }
+</script>

@@ -1,5 +1,4 @@
 ﻿using BMSHMedia.Helper;
-using BMSHMedia.Portal.ViewModel.MediaVMs;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using WalkingTec.Mvvm.Core.Extensions;
 
-namespace BMSHMedia.Portal.ViewModel.MediaApiVMs
+namespace BMSHMedia.ViewModel.MediaVMs
 {
     public class MediaApiVM
     {

@@ -1,4 +1,4 @@
-﻿namespace BMSHMedia.Portal.ViewModel.MediaVMs
+﻿namespace BMSHMedia.ViewModel.MediaVMs
 {
     public class MediaFolderVM : MediaBaseVM
     {
