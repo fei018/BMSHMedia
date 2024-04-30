@@ -117,7 +117,16 @@ namespace BMSHMedia.ViewModel.MediaVMs
             {
                 var vm = new MediaApiVM();
                 vm.ScanAll();
-                MediaCacheHelper.Cache.Add(cacheKey, vm.MediaContentList);
+
+                if(MediaCacheHelper.Cache.TryGetValue(cacheKey,out List<MediaContentVM> list))
+                {
+                    MediaCacheHelper.Cache.Remove(cacheKey);
+                    MediaCacheHelper.Cache.Add(cacheKey, vm.MediaContentList);
+                }
+                else
+                {
+                    MediaCacheHelper.Cache.Add(cacheKey, vm.MediaContentList);
+                }
             });
         }
         #endregion

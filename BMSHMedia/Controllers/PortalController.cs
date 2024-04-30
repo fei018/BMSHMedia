@@ -14,5 +14,15 @@ namespace BMSHMedia.Controllers
         {
             return View();
         }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        public IActionResult Calendar()
+        {
+            return View();
+        }
     }
 }

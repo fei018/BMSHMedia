@@ -36,7 +36,14 @@ namespace BMSHMedia.Controllers
         [ActionDescription("FrontPage")]
         public IActionResult FrontPage()
         {
-            return PartialView();
+            if (Wtm.ConfigInfo.IsQuickDebug == true)
+            {
+                return PartialView();
+            }
+            else
+            {
+                return PartialView("Test");
+            }
         }
 
         public IActionResult GetActionChart()

@@ -29,8 +29,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="WalkingTec.Mvvm.TagHelpers.LayUI" Version="8.0.8" />
-    <PackageReference Include="WalkingTec.Mvvm.Mvc" Version="8.0.8" />
+    <PackageReference Include="WalkingTec.Mvvm.TagHelpers.LayUI" Version="8.0.9" />
+    <PackageReference Include="WalkingTec.Mvvm.Mvc" Version="8.0.9" />
 </ItemGroup>
 
   <ItemGroup>
