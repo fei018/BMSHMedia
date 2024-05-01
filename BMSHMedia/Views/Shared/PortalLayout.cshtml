@@ -1,4 +1,6 @@
 ﻿@{
+    string year = DateTime.Now.Year.ToString();
+
     string title = "佛教愍生講堂";
     string portalIndexUrl = "/portal/index";
     string masterUrl = "/portal/master";
@@ -16,10 +18,10 @@
 <!DOCTYPE html>
 <html lang="zh-hk">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
 
     <title>@title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
 
     <link href="~/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/layui-v2.9.8/css/layui.css" rel="stylesheet" />
@@ -32,34 +34,44 @@
     @RenderSection("ScriptTop", false)
 </head>
 <body>
-    <div class="layui-header layui-bg-gray">
-        <div class="layui-logo"><a href="@portalIndexUrl">@title</a></div>
+    <div class="portal-body">
+        <div class="layui-header layui-bg-gray">
+            <div class="layui-logo">
+                <a href="@portalIndexUrl">
+                    <img src="~/favicon-16x16.png" title="logo" /> @title
+                </a>
+            </div>
 
-        <ul class="layui-nav layui-layout-right layui-bg-gray">
-            <li class="layui-nav-item">
-                <a href="javascript:;"><i class="fa fa-calendar-check-o"></i></a>
-                <dl class="layui-nav-child layui-nav-child-r">
-                    <dd><a href="@mediaIndexUrl">講座開示</a></dd>
-                    <dd><a href="@liveUrl">直播</a></dd>
-                    <dd><a href="@calendarUrl">法會日曆</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;"><i class="layui-icon layui-icon-app"></i></a>
-                <dl class="layui-nav-child layui-nav-child-r">
-                    <dd><a href="@portalIndexUrl">首頁</a></dd>
-                    <dd><a href="@masterUrl">法師簡介</a></dd>                  
-                    <dd><a href="@contactUrl">聯絡資料</a></dd>
-                    <dd><a href="@facebookUrl" target="_blank"><i class="fa fa-facebook-official"></i> facebook</a></dd>
-                    <dd><a href="@youtubeUrl" target="_blank"><i class="fa fa-youtube"></i> youtube</a></dd>
-                </dl>
-            </li>
-        </ul>
-    </div>
+            <ul class="layui-nav layui-layout-right layui-bg-gray">
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="fa fa-calendar-check-o"></i></a>
+                    <dl class="layui-nav-child layui-nav-child-r">
+                        <dd><a href="@mediaIndexUrl">講座開示</a></dd>
+                        <dd><a href="@liveUrl">直播</a></dd>
+                        <dd><a href="@calendarUrl">法會日曆</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="layui-icon layui-icon-app"></i></a>
+                    <dl class="layui-nav-child layui-nav-child-r">
+                        <dd><a href="@portalIndexUrl">首頁</a></dd>
+                        <dd><a href="@masterUrl">法師簡介</a></dd>
+                        <dd><a href="@contactUrl">聯絡資料</a></dd>
+                        <dd><a href="@facebookUrl" target="_blank"><i class="fa fa-facebook-official"></i> facebook</a></dd>
+                        <dd><a href="@youtubeUrl" target="_blank"><i class="fa fa-youtube"></i> youtube</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
 
-    <div class="layui-main1">
-        <div>
-            @RenderBody()
+        <div class="portal-main">
+            <div>
+                @RenderBody()
+            </div>
+        </div>
+
+        <div class="portal-footer">
+            ©@year <span><img src="~/favicon-16x16.png" /></span>佛教愍生講堂
         </div>
     </div>
 
@@ -67,6 +79,6 @@
 
     </script>
 
-    @RenderSection("ScriptEnd",false)
+    @RenderSection("ScriptEnd", false)
 </body>
 </html>

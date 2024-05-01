@@ -1,18 +1,41 @@
-﻿body {
+﻿html,body {
+    height: 100%;
     max-width: 900px;
     margin: 0 auto;
 }
 
+.portal-body {
+    position:relative;
+    min-height:100%;
+    
+}
+
 .layui-header .layui-logo {
     position: absolute;
-    width: 100px;
+    width: 105px;
     text-align: center;
     line-height: 60px;
     /* box-shadow:none; */
 }
 
-.layui-main1 {
+    .layui-header .layui-logo img {
+        top:25px;
+    }
+
+.portal-main {
     padding: 10px;
+    padding-bottom: 65px;
+}
+
+.portal-footer {
+    position:absolute;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    height:60px;
+    text-align:center;
+    line-height:60px;
+    
 }
 
 .more-line-ellipsis {
