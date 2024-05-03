@@ -1,0 +1,122 @@
+﻿@{
+    string year = DateTime.Now.Year.ToString();
+
+    string title = "佛教愍生講堂";
+    string portalIndexUrl = "/portal/index";
+    string masterUrl = "/portal/master";
+    string mediaIndexUrl = "/media/index";
+    string liveUrl = "/live/index";
+    string mansangContactUrl = "/portal/ManSangContact";
+
+    string facebookUrl = "https://m.facebook.com/100064540160423/?locale=zh_HK";
+    string youtubeUrl = "https://m.youtube.com/@user-zf6wr8zk4m";
+
+    string calendarUrl = "/portal/calendar";
+}
+
+
+<!DOCTYPE html>
+<html lang="zh-hk">
+<head>
+    <meta charset="utf-8" />
+
+    <title>@title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+
+    <link href="~/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/bootstrap-v5.3.3/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/layui-v2.9.8/css/layui.css" rel="stylesheet" />
+    <link href="~/portal/portal-layout.css" rel="stylesheet" />
+
+    <script src="~/jquery.min.js"></script>
+    <script src="~/bootstrap-v5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="~/layui-v2.9.8/layui.js"></script>
+    <script src="~/portal/portal.js"></script>
+
+    @RenderSection("ScriptTop", false)
+</head>
+<body>
+    <div class="portal-body">
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="@portalIndexUrl">
+                    <img src="~/logo-title.png" alt="佛教愍生講堂" height="25"/>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        @* <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/">主頁</a>
+                        </li> *@
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                北角愍生講堂
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="@portalIndexUrl">緣起</a></li>
+                                <li><a class="dropdown-item" href="@mansangContactUrl">聯絡資料</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                東涌羅漢寺
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">緣起</a></li>
+                                <li><a class="dropdown-item" href="#">聯絡資料</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                弘法活動
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">最新活動</a></li>
+                                <li><a class="dropdown-item" href="@calendarUrl">活動日曆</a></li>
+                                <li><a class="dropdown-item" href="@mediaIndexUrl">講座開示</a></li>
+                                <li><a class="dropdown-item" href="@liveUrl">直播</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                慈善功德
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">延生超薦</a></li>
+                                <li><a class="dropdown-item" href="#">佛前供燈</a></li>
+                                <li><a class="dropdown-item" href="#">供僧供齋</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="@facebookUrl" target="_blank"><i class="fa fa-facebook-official"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="portal-main">
+            @RenderBody()
+        </div>
+
+        <div class="portal-footer">
+            ©@year <span class="text-muted">佛教愍生講堂</span>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+    </script>
+
+    @RenderSection("ScriptEnd", false)
+</body>
+</html>

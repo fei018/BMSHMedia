@@ -1,6 +1,6 @@
 ﻿html,body {
     height: 100%;
-    max-width: 900px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
@@ -9,36 +9,34 @@
     min-height:100%;
     
 }
-
-.layui-header .layui-logo {
-    position: absolute;
-    width: 140px;
-    text-align: center;
-    line-height: 60px;
-    left:5px;
-    /* box-shadow:none; */
-}
-
-    .layui-header .layui-logo img {
-        top:25px;
-        height:25px;
-    }
-
 .portal-main {
-    padding: 10px;
+    padding: 3px;
     padding-bottom: 65px;
 }
 
 .portal-footer {
-    position:absolute;
-    bottom:0px;
-    left:0px;
-    right:0px;
-    height:60px;
-    text-align:center;
-    line-height:60px;
-    
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
 }
+
+/*.layui-header .layui-logo {
+    position: absolute;
+    width: 140px;
+    text-align: center;
+    line-height: 60px;
+    left:5px;*/
+    /* box-shadow:none; */
+/*}
+
+    .layui-header .layui-logo img {
+        top:25px;
+        height:25px;
+    }*/
 
 .more-line-ellipsis {
     overflow: hidden;
@@ -53,3 +51,4 @@ img {
     max-width: 100%;
     max-height: 100%;
 }
+
