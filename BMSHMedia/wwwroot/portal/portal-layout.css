@@ -12,14 +12,16 @@
 
 .layui-header .layui-logo {
     position: absolute;
-    width: 105px;
+    width: 140px;
     text-align: center;
     line-height: 60px;
+    left:5px;
     /* box-shadow:none; */
 }
 
     .layui-header .layui-logo img {
         top:25px;
+        height:25px;
     }
 
 .portal-main {
