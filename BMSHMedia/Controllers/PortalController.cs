@@ -10,6 +10,11 @@ namespace BMSHMedia.Controllers
             return View();
         }
 
+        public IActionResult ManSangOrigin()
+        {
+            return View();
+        }
+
         public IActionResult Master()
         {
             return View();

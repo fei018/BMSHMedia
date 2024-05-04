@@ -1,4 +1,4 @@
-﻿using BMSHMedia.Model.Manage.SRS;
+﻿using BMSHMedia.Model.SRS;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -69,13 +69,21 @@ namespace BMSHMedia.ViewModel.SRSVMs
         public string GetPlayUrl()
         {
             var entity = DC.Set<SRSStackInfo>().ToList().SingleOrDefault();
+            if (entity == null)
+            {
+                throw new Exception(nameof(SRSStackInfo) + " query null from database.");
+            }
+            if (string.IsNullOrEmpty(entity.PlayUrl))
+            {
+                throw new Exception($"{nameof(SRSStackInfo)} {nameof(entity.PlayUrl)} is null.");
+            }
             return entity.PlayUrl;
         }
 
         public string GetHLSUrl()
         {
-            var entity = DC.Set<SRSStackInfo>().ToList().SingleOrDefault();
-            string url = entity.PlayUrl.Replace("flv", "m3u8", StringComparison.OrdinalIgnoreCase);
+            string playUrl = GetPlayUrl();
+            string url = playUrl.Replace("flv", "m3u8", StringComparison.OrdinalIgnoreCase);
             return url;
         }
     }

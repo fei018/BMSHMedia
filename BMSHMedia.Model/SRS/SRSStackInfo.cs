@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using WalkingTec.Mvvm.Core;
 
-namespace BMSHMedia.Model.Manage.SRS
+namespace BMSHMedia.Model.SRS
 {
     [Table("Info_SRSStack")]
     public class SRSStackInfo : TopBasePoco

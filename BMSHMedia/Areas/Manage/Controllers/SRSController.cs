@@ -1,5 +1,5 @@
 ﻿using BMSHMedia.Extentions;
-using BMSHMedia.Model.Manage.SRS;
+using BMSHMedia.Model.SRS;
 using BMSHMedia.ViewModel.SRSVMs;
 using Microsoft.AspNetCore.Mvc;
 using System;

@@ -1,4 +1,4 @@
-﻿using BMSHMedia.Model.Manage.SRS;
+﻿using BMSHMedia.Model.SRS;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using System;
