@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WalkingTec.Mvvm.Core;
 
-namespace BMSHMedia.Model.Pages
+namespace BMSHMedia.ViewModel.NavPostVMs
 {
-    public class NavMenu : TreePoco<NavMenu>
+    public class NavMenuVM
     {
-        
+
     }
 }
