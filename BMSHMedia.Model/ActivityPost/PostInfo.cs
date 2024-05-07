@@ -5,7 +5,7 @@ using WalkingTec.Mvvm.Core;
 namespace BMSHMedia.Model.NavPage
 {
     [Table("Info_Post")]
-    [Display(Name = "文章頁面")]
+    [Display(Name = "活動帖子")]
     public class PostInfo : BasePoco
     {
         [Display(Name = "標題")]
@@ -16,5 +16,6 @@ namespace BMSHMedia.Model.NavPage
         //[Required(ErrorMessage = "{0}必填")]
         public string Content { get; set; }
 
+        public FileAttachment fileAttachment { get; set; }
     }
 }
