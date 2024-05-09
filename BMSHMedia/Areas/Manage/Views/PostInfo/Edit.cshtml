@@ -1,0 +1,18 @@
+﻿@model BMSHMedia.ViewModel.Manage.PostInfoVMs.PostInfoVM
+@inject IStringLocalizer<Program> Localizer;
+
+<div style="padding:0 100px;margin:auto;overflow: auto;">
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="Entity.Title" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:ueditor field="Entity.Content" height="600" />
+        </wt:row>
+        <wt:hidden field="Entity.ID" />
+        <wt:row align="AlignEnum.Right">
+            <wt:submitbutton />
+            <wt:closebutton />
+        </wt:row>
+    </wt:form>
+</div>

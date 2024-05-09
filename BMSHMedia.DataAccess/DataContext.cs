@@ -1,4 +1,5 @@
-﻿using BMSHMedia.Model.SRS;
+﻿using BMSHMedia.Model.PostNews;
+using BMSHMedia.Model.SRS;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using System;
@@ -18,6 +19,8 @@ namespace BMSHMedia.DataAccess
         public DbSet<FrameworkUserGroup> FrameworkUserGroups { get; set; }
 
         public DbSet<SRSStackInfo> SRSStackInfos { get; set; }
+
+        public DbSet<PostInfo> PostInfos { get; set; }
 
         public DataContext(CS cs)
              : base(cs)
@@ -337,7 +340,7 @@ namespace BMSHMedia.DataAccess
     {
         public DataContext CreateDbContext(string[] args)
         {
-            return new DataContext("", DBTypeEnum.SQLite);
+            return new DataContext("Server=localhost\\sqlexpress;Database=bmshmedia_db;Trusted_Connection=True;Encrypt=false;", DBTypeEnum.SqlServer);
         }
     }
 
