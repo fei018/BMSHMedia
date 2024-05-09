@@ -5,17 +5,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using WalkingTec.Mvvm.Core;
 using WalkingTec.Mvvm.Core.Extensions;
-using BMSHMedia.Model.PostNews;
+using BMSHMedia.Model.Activity;
 
 
-namespace BMSHMedia.ViewModel.Manage.PostInfoVMs
+namespace BMSHMedia.ViewModel.ActivityPostVMs
 {
-    public partial class PostInfoBatchVM : BaseBatchVM<PostInfo, PostInfo_BatchEdit>
+    public partial class ActivityPostBatchVM : BaseBatchVM<ActivityPost, ActivityPost_BatchEdit>
     {
-        public PostInfoBatchVM()
+        public ActivityPostBatchVM()
         {
-            ListVM = new PostInfoListVM();
-            LinkedVM = new PostInfo_BatchEdit();
+            ListVM = new ActivityPostListVM();
+            LinkedVM = new ActivityPost_BatchEdit();
         }
 
     }
@@ -23,7 +23,7 @@ namespace BMSHMedia.ViewModel.Manage.PostInfoVMs
 	/// <summary>
     /// Class to define batch edit fields
     /// </summary>
-    public class PostInfo_BatchEdit : BaseVM
+    public class ActivityPost_BatchEdit : BaseVM
     {
 
         protected override void InitVM()

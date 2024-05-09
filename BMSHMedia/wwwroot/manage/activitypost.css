@@ -1,0 +1,15 @@
+﻿.activity-post {
+    width:70%;
+    margin: 0 auto;
+    overflow: auto;
+    padding:20px 0;
+}
+
+@media screen and (max-width:800px){
+    .activity-post {
+        width: 100%;
+        margin: 0 auto;
+        overflow: auto;
+        padding: 20px 0;
+    }
+}

@@ -1,0 +1,22 @@
+﻿@model BMSHMedia.ViewModel.ActivityPostVMs.ActivityPostVM
+@inject IStringLocalizer<Program> Localizer;
+
+<link href="~/manage/activitypost.css" rel="stylesheet" />
+
+<div class="activity-post">
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="Entity.Title" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textarea field="Entity.Text" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:multiupload field="Entity.AttachList" upload-type="ImageFile" preview-height="100" preview-width="100" upload-subdir="ActivityPost\\image" />
+        </wt:row>
+        <wt:row align="AlignEnum.Right">
+            <wt:submitbutton />
+            <wt:closebutton />
+        </wt:row>
+    </wt:form>
+</div>

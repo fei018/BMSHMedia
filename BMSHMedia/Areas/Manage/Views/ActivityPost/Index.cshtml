@@ -1,4 +1,4 @@
-﻿@model BMSHMedia.ViewModel.Manage.PostInfoVMs.PostInfoListVM
+﻿@model BMSHMedia.ViewModel.ActivityPostVMs.ActivityPostListVM
 @inject IStringLocalizer<Program> Localizer;
 
 <wt:searchpanel vm="@Model" reset-btn="true">
@@ -6,4 +6,4 @@
 <wt:textbox field="Searcher.Title" />
 </wt:row>
 </wt:searchpanel>
-<wt:grid vm="@Model" url="/Manage/PostInfo/Search"/>
+<wt:grid vm="@Model" url="/Manage/ActivityPost/Search"/>

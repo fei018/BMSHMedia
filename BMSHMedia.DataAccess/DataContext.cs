@@ -1,4 +1,4 @@
-﻿using BMSHMedia.Model.PostNews;
+﻿using BMSHMedia.Model.Activity;
 using BMSHMedia.Model.SRS;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -20,7 +20,8 @@ namespace BMSHMedia.DataAccess
 
         public DbSet<SRSStackInfo> SRSStackInfos { get; set; }
 
-        public DbSet<PostInfo> PostInfos { get; set; }
+        public DbSet<ActivityPost> ActivityPosts { get; set; }
+        public DbSet<ActivityPostAttach> ActivityPostAttaches { get; set; }
 
         public DataContext(CS cs)
              : base(cs)

@@ -4,28 +4,28 @@ using System;
 using WalkingTec.Mvvm.Core;
 using WalkingTec.Mvvm.Mvc;
 using WalkingTec.Mvvm.Core.Extensions;
-using BMSHMedia.ViewModel.Manage.PostInfoVMs;
+using BMSHMedia.ViewModel.ActivityPostVMs;
 using WalkingTec.Mvvm.Mvc.Binders;
 
 namespace BMSHMedia.Controllers
 {
     [Area("Manage")]
-    [ActionDescription("帖子")]
-    public partial class PostInfoController : BaseController
+    [ActionDescription("活動Post")]
+    public partial class ActivityPostController : BaseController
     {
         #region Search
         [ActionDescription("Sys.Search")]
         public ActionResult Index()
         {
-            var vm = Wtm.CreateVM<PostInfoListVM>();
+            var vm = Wtm.CreateVM<ActivityPostListVM>();
             return PartialView(vm);
         }
 
         [ActionDescription("Sys.Search")]
         [HttpPost]
-        public string Search(PostInfoSearcher searcher)
+        public string Search(ActivityPostSearcher searcher)
         {
-            var vm = Wtm.CreateVM<PostInfoListVM>(passInit: true);
+            var vm = Wtm.CreateVM<ActivityPostListVM>(passInit: true);
             if (ModelState.IsValid)
             {
                 vm.Searcher = searcher;
@@ -40,18 +40,17 @@ namespace BMSHMedia.Controllers
         #endregion
 
         #region Create
-        
         [ActionDescription("Sys.Create")]
         public ActionResult Create()
         {
-            var vm = Wtm.CreateVM<PostInfoVM>();
+            var vm = Wtm.CreateVM<ActivityPostVM>();
             return PartialView(vm);
         }
 
         [HttpPost]
         [ActionDescription("Sys.Create")]
         [StringNeedLTGT]
-        public ActionResult Create(PostInfoVM vm)
+        public ActionResult Create(ActivityPostVM vm)
         {
             if (!ModelState.IsValid)
             {
@@ -77,7 +76,7 @@ namespace BMSHMedia.Controllers
         [ActionDescription("Sys.Edit")]
         public ActionResult Edit(string id)
         {
-            var vm = Wtm.CreateVM<PostInfoVM>(id);
+            var vm = Wtm.CreateVM<ActivityPostVM>(id);
             return PartialView(vm);
         }
 
@@ -85,7 +84,7 @@ namespace BMSHMedia.Controllers
         [HttpPost]
         [ValidateFormItemOnly]
         [StringNeedLTGT]
-        public ActionResult Edit(PostInfoVM vm)
+        public ActionResult Edit(ActivityPostVM vm)
         {
             if (!ModelState.IsValid)
             {
@@ -111,7 +110,7 @@ namespace BMSHMedia.Controllers
         [ActionDescription("Sys.Delete")]
         public ActionResult Delete(string id)
         {
-            var vm = Wtm.CreateVM<PostInfoVM>(id);
+            var vm = Wtm.CreateVM<ActivityPostVM>(id);
             return PartialView(vm);
         }
 
@@ -119,7 +118,7 @@ namespace BMSHMedia.Controllers
         [HttpPost]
         public ActionResult Delete(string id, IFormCollection nouse)
         {
-            var vm = Wtm.CreateVM<PostInfoVM>(id);
+            var vm = Wtm.CreateVM<ActivityPostVM>(id);
             vm.DoDelete();
             if (!ModelState.IsValid)
             {
@@ -134,35 +133,11 @@ namespace BMSHMedia.Controllers
 
         #region Details
         [ActionDescription("Sys.Details")]
-        [StringNeedLTGT]
         public ActionResult Details(string id)
         {
-            var vm = Wtm.CreateVM<PostInfoVM>(id);
+            var vm = Wtm.CreateVM<ActivityPostVM>(id);
+            vm.GetFileAttachment();
             return PartialView(vm);
-        }
-        #endregion
-
-        #region BatchEdit
-        [HttpPost]
-        [ActionDescription("Sys.BatchEdit")]
-        public ActionResult BatchEdit(string[] IDs)
-        {
-            var vm = Wtm.CreateVM<PostInfoBatchVM>(Ids: IDs);
-            return PartialView(vm);
-        }
-
-        [HttpPost]
-        [ActionDescription("Sys.BatchEdit")]
-        public ActionResult DoBatchEdit(PostInfoBatchVM vm, IFormCollection nouse)
-        {
-            if (!ModelState.IsValid || !vm.DoBatchEdit())
-            {
-                return PartialView("BatchEdit",vm);
-            }
-            else
-            {
-                return FFResult().CloseDialog().RefreshGrid().Alert(Localizer["Sys.BatchEditSuccess", vm.Ids.Length]);
-            }
         }
         #endregion
 
@@ -171,13 +146,13 @@ namespace BMSHMedia.Controllers
         [ActionDescription("Sys.BatchDelete")]
         public ActionResult BatchDelete(string[] IDs)
         {
-            var vm = Wtm.CreateVM<PostInfoBatchVM>(Ids: IDs);
+            var vm = Wtm.CreateVM<ActivityPostBatchVM>(Ids: IDs);
             return PartialView(vm);
         }
 
         [HttpPost]
         [ActionDescription("Sys.BatchDelete")]
-        public ActionResult DoBatchDelete(PostInfoBatchVM vm, IFormCollection nouse)
+        public ActionResult DoBatchDelete(ActivityPostBatchVM vm, IFormCollection nouse)
         {
             if (!ModelState.IsValid || !vm.DoBatchDelete())
             {
@@ -189,36 +164,6 @@ namespace BMSHMedia.Controllers
             }
         }
         #endregion
-
-        #region Import
-		[ActionDescription("Sys.Import")]
-        public ActionResult Import()
-        {
-            var vm = Wtm.CreateVM<PostInfoImportVM>();
-            return PartialView(vm);
-        }
-
-        [HttpPost]
-        [ActionDescription("Sys.Import")]
-        public ActionResult Import(PostInfoImportVM vm, IFormCollection nouse)
-        {
-            if (vm.ErrorListVM.EntityList.Count > 0 || !vm.BatchSaveData())
-            {
-                return PartialView(vm);
-            }
-            else
-            {
-                return FFResult().CloseDialog().RefreshGrid().Alert(Localizer["Sys.ImportSuccess", vm.EntityList.Count.ToString()]);
-            }
-        }
-        #endregion
-
-        [ActionDescription("Sys.Export")]
-        [HttpPost]
-        public IActionResult ExportExcel(PostInfoListVM vm)
-        {
-            return vm.GetExportData();
-        }
 
     }
 }

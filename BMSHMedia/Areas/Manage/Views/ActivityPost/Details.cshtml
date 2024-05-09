@@ -1,0 +1,38 @@
+﻿@model BMSHMedia.ViewModel.ActivityPostVMs.ActivityPostVM
+@inject IStringLocalizer<Program> Localizer;
+@{
+    Layout = "~/Views/Shared/_PortalLayout.cshtml";
+    var post = Model.Entity;
+    var list = Model.FileAttach;
+}
+
+@* <link href="~/manage/activitypost.css" rel="stylesheet" /> *@
+@* <div class="activity-post">
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:display field="Entity.Title" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:ueditor field="Entity.Content" height="600" disabled/>
+            @Html.Raw(Model.Entity.Content)
+        </wt:row>
+        <wt:row align="AlignEnum.Right">
+            <wt:closebutton />
+        </wt:row>
+    </wt:form>
+</div> *@
+
+<div class="layui-row layui-col-space15">
+    <div class="layui-col-sm12">
+        @post.Title
+    </div>
+    @foreach (var item in list)
+    {
+        <div>
+            <img src="/_Framework/GetFile?id=@item.ID&stream=true" />
+        </div>
+    }
+    <div class="layui-col-sm12">
+        @post.Text
+    </div>
+</div>

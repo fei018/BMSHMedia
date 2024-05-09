@@ -1,14 +1,16 @@
-﻿@model BMSHMedia.ViewModel.Manage.PostInfoVMs.PostInfoVM
+﻿@model BMSHMedia.ViewModel.ActivityPostVMs.ActivityPostVM
 @inject IStringLocalizer<Program> Localizer;
 
-<div style="padding:20px 100px;margin:auto;overflow: auto;">
+
+<link href="~/manage/activitypost.css" rel="stylesheet" />
+<div class="activity-post">
     <wt:form vm="@Model">
         <wt:quote>@Localizer["Sys.DeleteConfirm"]</wt:quote>
         <wt:row items-per-row="ItemsPerRowEnum.One">
             <wt:display field="Entity.Title" />
         </wt:row>
         <wt:row items-per-row="ItemsPerRowEnum.One">
-            <wt:ueditor field="Entity.Content" height="600" />
+            <wt:ueditor field="Entity.Text" height="600" />
         </wt:row>
         <wt:hidden field="Entity.ID" />
         <wt:row align="AlignEnum.Right">
@@ -17,4 +19,3 @@
         </wt:row>
     </wt:form>
 </div>
-

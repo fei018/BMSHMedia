@@ -5,12 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using WalkingTec.Mvvm.Core;
 using WalkingTec.Mvvm.Core.Extensions;
-using BMSHMedia.Model.PostNews;
+using BMSHMedia.Model.Activity;
 
 
-namespace BMSHMedia.ViewModel.Manage.PostInfoVMs
+namespace BMSHMedia.ViewModel.ActivityPostVMs
 {
-    public partial class PostInfoSearcher : BaseSearcher
+    public partial class ActivityPostSearcher : BaseSearcher
     {
         [Display(Name = "標題")]
         public String Title { get; set; }
