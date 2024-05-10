@@ -2,20 +2,17 @@
 @inject IStringLocalizer<Program> Localizer;
 
 
-<link href="~/manage/activitypost.css" rel="stylesheet" />
-<div class="activity-post">
-    <wt:form vm="@Model">
-        <wt:quote>@Localizer["Sys.DeleteConfirm"]</wt:quote>
-        <wt:row items-per-row="ItemsPerRowEnum.One">
-            <wt:display field="Entity.Title" />
-        </wt:row>
-        <wt:row items-per-row="ItemsPerRowEnum.One">
-            <wt:ueditor field="Entity.Text" height="600" />
-        </wt:row>
-        <wt:hidden field="Entity.ID" />
-        <wt:row align="AlignEnum.Right">
-            <wt:submitbutton theme=" ButtonThemeEnum.Warm" text="@Localizer["Sys.Delete"]" />
-            <wt:closebutton />
-        </wt:row>
-    </wt:form>
-</div>
+<wt:form vm="@Model">
+    <wt:quote>@Localizer["Sys.DeleteConfirm"]</wt:quote>
+    <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:display field="Entity.CreateTime" />
+    </wt:row>
+    <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:display field="Entity.Title" />
+    </wt:row>
+    <wt:hidden field="Entity.ID" />
+    <wt:row align="AlignEnum.Right">
+        <wt:submitbutton theme=" ButtonThemeEnum.Warm" text="@Localizer["Sys.Delete"]" />
+        <wt:closebutton />
+    </wt:row>
+</wt:form>

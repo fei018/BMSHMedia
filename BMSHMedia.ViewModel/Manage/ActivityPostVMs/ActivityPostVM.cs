@@ -14,13 +14,13 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
     public partial class ActivityPostVM : BaseCRUDVM<ActivityPost>
     {
         #region MyRegion
-        public List<FileAttachment> FileAttach { get; set; }
+        public List<FileAttachment> FileAttachmentList { get; set; }
 
         #endregion
 
         public ActivityPostVM()
         {
-            SetInclude(x=>x.AttachList);
+            SetInclude(x=>x.PostAttachList);
         }
 
         protected override void InitVM()
@@ -30,6 +30,7 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
         public override void DoAdd()
         {           
             base.DoAdd();
+
         }
 
         public override void DoEdit(bool updateAllFields = false)
@@ -45,12 +46,12 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
         #region MyRegion
         public void GetFileAttachment()
         {
-            FileAttach = new();
+            FileAttachmentList = new();
 
-            foreach (var item in Entity.AttachList)
+            foreach (var item in Entity.PostAttachList)
             {
                 var file = DC.Set<FileAttachment>().Where(x => x.ID == item.FileId).SingleOrDefault();
-                FileAttach.Add(file);
+                FileAttachmentList.Add(file);
             }
         }
         #endregion

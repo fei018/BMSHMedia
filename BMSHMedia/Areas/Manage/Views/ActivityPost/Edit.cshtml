@@ -9,7 +9,10 @@
             <wt:textbox field="Entity.Title" />
         </wt:row>
         <wt:row items-per-row="ItemsPerRowEnum.One">
-            <wt:ueditor field="Entity.Text" height="600" />
+            <wt:richtextbox field="Entity.Text" upload-url="/nopage" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:multiupload field="Entity.PostAttachList" upload-type="ImageFile" preview-height="100" preview-width="100" upload-subdir="ActivityPost\\image" />
         </wt:row>
         <wt:hidden field="Entity.ID" />
         <wt:row align="AlignEnum.Right">

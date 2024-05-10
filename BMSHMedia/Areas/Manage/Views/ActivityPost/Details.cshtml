@@ -3,7 +3,7 @@
 @{
     Layout = "~/Views/Shared/_PortalLayout.cshtml";
     var post = Model.Entity;
-    var list = Model.FileAttach;
+    var list = Model.Entity.PostAttachList;
 }
 
 @* <link href="~/manage/activitypost.css" rel="stylesheet" /> *@
@@ -29,10 +29,10 @@
     @foreach (var item in list)
     {
         <div>
-            <img src="/_Framework/GetFile?id=@item.ID&stream=true" />
+            <img src="@WtmFrameworkApiHelper.GetFile(item.FileId)" />
         </div>
     }
-    <div class="layui-col-sm12">
-        @post.Text
+    <div class="layui-col-sm12 layui-font-24">
+        @Html.Raw(post.Text)
     </div>
 </div>

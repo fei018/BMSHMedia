@@ -1,9 +1,18 @@
 ﻿@model BMSHMedia.ViewModel.ActivityPostVMs.ActivityPostListVM
 @inject IStringLocalizer<Program> Localizer;
+@{
+    string previewUrl = "/manage/activitypost/details/";
+}
 
 <wt:searchpanel vm="@Model" reset-btn="true">
 <wt:row items-per-row="ItemsPerRowEnum.Three">
 <wt:textbox field="Searcher.Title" />
 </wt:row>
 </wt:searchpanel>
-<wt:grid vm="@Model" url="/Manage/ActivityPost/Search"/>
+<wt:grid vm="@Model" url="/Manage/ActivityPost/Search" hidden-grid-index/>
+
+<script>
+    function postPreview(ids, datas) {
+        window.open(`@previewUrl${ids[0]}`, "_blank");
+    }
+</script>

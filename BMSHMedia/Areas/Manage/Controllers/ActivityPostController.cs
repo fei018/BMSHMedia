@@ -136,8 +136,7 @@ namespace BMSHMedia.Controllers
         public ActionResult Details(string id)
         {
             var vm = Wtm.CreateVM<ActivityPostVM>(id);
-            vm.GetFileAttachment();
-            return PartialView(vm);
+            return View(vm);
         }
         #endregion
 

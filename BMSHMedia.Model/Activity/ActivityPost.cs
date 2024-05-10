@@ -17,6 +17,10 @@ namespace BMSHMedia.Model.Activity
         //[Required(ErrorMessage = "{0}必填")]
         public string Text { get; set; }
 
-        public List<ActivityPostAttach> AttachList { get; set; } = new();
+        public bool IsPublish { get; set; } = false;
+
+        [Display(Name = "圖片")]
+        public List<ActivityPostAttach> PostAttachList { get; set; } = new();
+
     }
 }

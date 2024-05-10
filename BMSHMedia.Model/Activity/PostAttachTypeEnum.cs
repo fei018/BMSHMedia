@@ -1,6 +1,6 @@
 ﻿namespace BMSHMedia.Model.Activity
 {
-    public enum PostAttachCategoryEnum
+    public enum PostAttachTypeEnum
     {
         Picture,
         Video,
