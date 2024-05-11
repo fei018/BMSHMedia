@@ -17,11 +17,11 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
         {
             return new List<GridAction>
             {
-                this.MakeStandardAction("ActivityPost", GridActionStandardTypesEnum.Create, Localizer["Sys.Create"],"Manage", dialogWidth: 800, dialogHeight:800),
+                this.MakeStandardAction("ActivityPost", GridActionStandardTypesEnum.Create, Localizer["Sys.Create"],"Manage", dialogWidth: 800, dialogHeight:800).SetIsRedirect().SetShowDialog(),
                 this.MakeStandardAction("ActivityPost", GridActionStandardTypesEnum.Edit, Localizer["Sys.Edit"], "Manage", dialogWidth: 800,dialogHeight:800),
                 this.MakeStandardAction("ActivityPost", GridActionStandardTypesEnum.Delete, Localizer["Sys.Delete"], "Manage", dialogWidth: 800),
                 //this.MakeStandardAction("ActivityPost", GridActionStandardTypesEnum.Details, Localizer["Sys.Details"], "Manage", dialogWidth: 800).SetIsRedirect().SetShowDialog(),
-                this.MakeAction("ActivityPost","Details","預覽","預覽", GridActionParameterTypesEnum.SingleId,"Manage").SetOnClickScript("postPreview").SetShowInRow(),
+                this.MakeAction("ActivityPost","Details","預覽","預覽", GridActionParameterTypesEnum.SingleId,"Manage").SetOnClickScript("postPreview").SetShowInRow().SetBindVisiableColName("isPublish"),
                 this.MakeStandardAction("ActivityPost", GridActionStandardTypesEnum.BatchDelete, Localizer["Sys.BatchDelete"], "Manage", dialogWidth: 800),
             };
         }
@@ -32,6 +32,8 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
             return new List<GridColumn<ActivityPost_View>>{
                 this.MakeGridHeader(x=>x.CreateTime,width:150),
                 this.MakeGridHeader(x => x.Title),
+                this.MakeGridHeader(x=> x.Published),
+                this.MakeGridHeader(x => x.IsPublish).SetHide().SetFormat((e, v) => e.IsPublish),
                 this.MakeGridHeaderAction(width: 200)
             };
         }
@@ -44,6 +46,8 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
                 {
 				    ID = x.ID,
                     Title = x.Title,
+                    IsPublish = x.IsPublish,
+                    
                     CreateTime = x.CreateTime,
                 })
                 .OrderBy(x => x.CreateTime);

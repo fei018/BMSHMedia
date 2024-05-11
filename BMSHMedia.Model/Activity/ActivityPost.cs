@@ -22,5 +22,7 @@ namespace BMSHMedia.Model.Activity
         [Display(Name = "圖片")]
         public List<ActivityPostAttach> PostAttachList { get; set; } = new();
 
+
+        public string Published => IsPublish ? "已發佈" : "未發佈";
     }
 }

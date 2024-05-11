@@ -1,24 +1,42 @@
 ﻿@model BMSHMedia.ViewModel.ActivityPostVMs.ActivityPostVM
 @inject IStringLocalizer<Program> Localizer;
+@{
+    string editboxId = "tinyfe11b883d77e4f82af9871760c8417f1";
+}
+
 
 
 <wt:quote>
     如要取消, 請先 "刪除圖片", 再按 [關閉]<br />
     圖片格式( jpg, jpeg, gif, bmp, png, tif )
 </wt:quote>
-<wt:form vm="@Model" >
+<wt:form vm="@Model" >    
     <wt:row items-per-row="ItemsPerRowEnum.One">
         <wt:textbox field="Entity.Title" />
     </wt:row>
-    <wt:row items-per-row="ItemsPerRowEnum.One">
-        <wt:richtextbox field="Entity.Text" upload-url="/nopage" />
-    </wt:row>
+    
     <wt:row items-per-row="ItemsPerRowEnum.One">
         <wt:multiupload field="Entity.PostAttachList" upload-type="ImageFile" preview-height="100" preview-width="100" upload-subdir="ActivityPost\\image" show-preview="true"/>
     </wt:row>
 
+    <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:textbox field="Entity.Text" upload-url="/nopage" id="@editboxId" />
+    </wt:row>
     <wt:row align="AlignEnum.Right">
         <wt:submitbutton />
         <wt:closebutton click="closeLayerDialog()"/>
     </wt:row>
 </wt:form>
+
+<script>
+    tinymce.init({
+        selector: '#@editboxId',
+        menubar: false,
+        language: 'zh_CN',
+        plugins: 'link',
+        toolbar: 'styleselect formatselect fontselect fontsizeselect | link ',
+        setup: function (editor) {
+            editor.on('change', function () { editor.save(); });
+        },
+    });
+</script>
