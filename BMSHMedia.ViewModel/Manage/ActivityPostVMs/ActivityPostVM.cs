@@ -13,6 +13,10 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
 {
     public partial class ActivityPostVM : BaseCRUDVM<ActivityPost>
     {
+        public string UploadSubDir => "ActivityPost\\image";
+        public string PreviewUrl => "/manage/activitypost/preview";
+        public string DoPubilshUrl => "/manage/activitypost/dopublish";
+        public string SavePublishUrl => "/manage/activitypost/savepublish";
         #region MyRegion
         public List<FileAttachment> FileAttachmentList { get; set; }
 

@@ -10,21 +10,24 @@
     如要取消, 請先 "刪除圖片", 再按 [關閉]<br />
     圖片格式( jpg, jpeg, gif, bmp, png, tif )
 </wt:quote>
+<br />
+
 <wt:form vm="@Model" >    
     <wt:row items-per-row="ItemsPerRowEnum.One">
         <wt:textbox field="Entity.Title" />
     </wt:row>
     
     <wt:row items-per-row="ItemsPerRowEnum.One">
-        <wt:multiupload field="Entity.PostAttachList" upload-type="ImageFile" preview-height="100" preview-width="100" upload-subdir="ActivityPost\\image" show-preview="true"/>
+        <wt:multiupload field="Entity.PostAttachList" upload-type="ImageFile" preview-height="100" preview-width="100" upload-subdir="@Model.UploadSubDir" show-preview="true"/>
     </wt:row>
 
     <wt:row items-per-row="ItemsPerRowEnum.One">
-        <wt:textbox field="Entity.Text" upload-url="/nopage" id="@editboxId" />
+        <wt:textarea field="Entity.Text" id="@editboxId"></wt:textarea>
     </wt:row>
+
     <wt:row align="AlignEnum.Right">
-        <wt:submitbutton />
-        <wt:closebutton click="closeLayerDialog()"/>
+        <wt:submitbutton text="保存"/>
+        <wt:closebutton />
     </wt:row>
 </wt:form>
 

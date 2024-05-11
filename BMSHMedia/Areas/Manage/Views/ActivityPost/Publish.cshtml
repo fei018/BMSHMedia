@@ -1,0 +1,15 @@
+﻿@model BMSHMedia.ViewModel.ActivityPostVMs.ActivityPostVM
+
+<wt:form vm="@Model">
+    <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:display field="Entity.CreateTime" />
+    </wt:row>
+    <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:display field="Entity.Title" />
+    </wt:row>
+    <wt:hidden field="Entity.ID" />
+    <wt:row align="AlignEnum.Right">
+        <wt:submitbutton theme=" ButtonThemeEnum.Danger" text="發佈" />
+        <wt:closebutton />
+    </wt:row>
+</wt:form>

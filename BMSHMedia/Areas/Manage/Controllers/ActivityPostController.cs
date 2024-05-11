@@ -6,6 +6,7 @@ using WalkingTec.Mvvm.Mvc;
 using WalkingTec.Mvvm.Core.Extensions;
 using BMSHMedia.ViewModel.ActivityPostVMs;
 using WalkingTec.Mvvm.Mvc.Binders;
+using BMSHMedia.Model.Activity;
 
 namespace BMSHMedia.Controllers
 {
@@ -136,7 +137,7 @@ namespace BMSHMedia.Controllers
         public ActionResult Details(string id)
         {
             var vm = Wtm.CreateVM<ActivityPostVM>(id);
-            return View(vm);
+            return PartialView(vm);
         }
         #endregion
 
@@ -164,5 +165,77 @@ namespace BMSHMedia.Controllers
         }
         #endregion
 
+        #region Preview
+        [ActionDescription("預覽")]
+        public IActionResult Preview(string id)
+        {
+            var vm = Wtm.CreateVM<ActivityPostVM>(id);
+            return PartialView(vm);
+        }
+        #endregion
+
+        #region Publish
+        [ActionDescription("發佈")]
+        public IActionResult Publish(string id)
+        {
+            var vm = Wtm.CreateVM<ActivityPostVM>(id);
+            return PartialView(vm);
+        }
+
+        [HttpPost]
+        [ActionDescription("發佈")]
+        public IActionResult Publish(string id, IFormCollection nouse)
+        {
+            try
+            {
+                var vm = DC.Set<ActivityPost>().Find(Guid.Parse(id));
+                vm.IsPublish = true;
+                DC.UpdateProperty(vm, x => x.IsPublish);
+                DC.SaveChanges();
+                return FFResult().CloseDialog().RefreshGrid();
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+        }
+        #endregion
+
+        #region SavePublish
+        [HttpPost]
+        [ActionDescription("保存及發佈")]
+        [StringNeedLTGT]
+        public IActionResult SavePublish(ActivityPostVM vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return PartialView("Create", vm);
+            }
+            else
+            {
+                vm.DoAdd();
+                if (!ModelState.IsValid)
+                {
+                    vm.DoReInit();
+                    return PartialView("Create", vm);
+                }
+                else
+                {
+                    try
+                    {
+                        vm.Entity.IsPublish = true;
+                        DC.UpdateProperty(vm.Entity, x => x.IsPublish);
+                    }
+                    catch (Exception ex)
+                    {
+                        vm.MSD.AddModelError("", ex.Message);
+                        return PartialView("Create", vm);
+                    }
+                    return FFResult().CloseDialog().RefreshGrid();
+                }
+            }
+
+        }
+        #endregion
     }
 }
