@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BMSHMedia.ViewModel.ActivityPostVMs;
+using Microsoft.AspNetCore.Mvc;
+using WalkingTec.Mvvm.Core;
 
 namespace BMSHMedia.Controllers
 {
@@ -29,5 +31,6 @@ namespace BMSHMedia.Controllers
         {
             return View();
         }
+
     }
 }

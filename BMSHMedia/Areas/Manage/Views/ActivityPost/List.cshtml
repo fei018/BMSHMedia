@@ -1,0 +1,32 @@
+﻿@using X.PagedList;
+@using BMSHMedia.ViewModel.ActivityPostVMs;
+@using X.PagedList.Mvc.Core
+@model IPagedList<ActivityPost_View>
+@{
+    Layout = "~/Views/Shared/_PortalLayout.cshtml";
+
+}
+
+@foreach (var item in Model)
+{
+    <div class="card" style="">
+        <img src="@WtmFrameworkApiHelper.GetFileUrl(item.ID)" class="card-img-top" alt="...">
+        <div class="card-body">
+            <a href="" class="card-link"><h5 class="card-title">@item.Title</h5></a>
+            <p class="card-text">@item.Text</p>
+        </div>
+    </div>
+}
+
+@Html.PagedListPager(Model, pageIndex => Url.Action("List", new { pageIndex }), new PagedListRenderOptions
+{
+    LinkToFirstPageFormat = "Top",
+    LinkToNextPageFormat = ">>",
+    LinkToPreviousPageFormat = "<<",
+    LinkToLastPageFormat = "End",
+    MaximumPageNumbersToDisplay = 5,
+    DisplayItemSliceAndTotal = false,//从头到尾显示页码
+    UlElementClasses = new[] { "pagination justify-content-center " },
+    LiElementClasses = new[] { "page-item" },
+    PageClasses = new[] { "page-link" },
+})

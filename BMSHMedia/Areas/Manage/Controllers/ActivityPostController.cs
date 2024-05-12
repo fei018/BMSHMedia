@@ -7,8 +7,9 @@ using WalkingTec.Mvvm.Core.Extensions;
 using BMSHMedia.ViewModel.ActivityPostVMs;
 using WalkingTec.Mvvm.Mvc.Binders;
 using BMSHMedia.Model.Activity;
+using System.Threading.Tasks;
 
-namespace BMSHMedia.Controllers
+namespace BMSHMedia.Manage.Controllers
 {
     [Area("Manage")]
     [ActionDescription("活動Post")]
@@ -235,6 +236,18 @@ namespace BMSHMedia.Controllers
                 }
             }
 
+        }
+        #endregion
+
+        #region MyRegion
+        [Route("/activitypost/[action]")]
+        [Public]
+        public async Task<IActionResult> List(int pageIndex=1, int pageSize = 2)
+        {
+            var vm = Wtm.CreateVM<ActivityPostPagedListVM>();
+            var list = await vm.GetPagedList(pageIndex, pageSize);
+   
+            return View(list);
         }
         #endregion
     }

@@ -7,6 +7,7 @@ using WalkingTec.Mvvm.Core.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using BMSHMedia.Model.Activity;
+using WalkingTec.Mvvm.Core.Support.FileHandlers;
 
 
 namespace BMSHMedia.ViewModel.ActivityPostVMs
@@ -58,7 +59,7 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
 
     }
 
-    public class ActivityPost_View : ActivityPost{
-
+    public class ActivityPost_View : ActivityPost
+    { 
     }
 }
