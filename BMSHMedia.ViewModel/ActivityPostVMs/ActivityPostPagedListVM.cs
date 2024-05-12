@@ -25,8 +25,7 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
                                       IsPublish = x.IsPublish,
                                       CreateTime = x.CreateTime,
                                       PostAttachList = x.PostAttachList,
-                                  })
-                                  
+                                  })                               
                                   .ToPagedListAsync(index, pageSize);
 
             return list;
