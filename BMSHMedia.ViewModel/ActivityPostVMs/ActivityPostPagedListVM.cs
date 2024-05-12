@@ -16,6 +16,7 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
         {
             var list = DC.Set<ActivityPost>().AsNoTracking()
                                   .Include(x => x.PostAttachList)
+                                  .OrderByDescending(x => x.CreateTime)
                                   .Select(x => new ActivityPost_View
                                   {
                                       ID = x.ID,
@@ -25,6 +26,7 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
                                       CreateTime = x.CreateTime,
                                       PostAttachList = x.PostAttachList,
                                   })
+                                  
                                   .ToPagedListAsync(index, pageSize);
 
             return list;

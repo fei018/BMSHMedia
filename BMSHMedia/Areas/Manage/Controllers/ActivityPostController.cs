@@ -242,7 +242,7 @@ namespace BMSHMedia.Manage.Controllers
         #region MyRegion
         [Route("/activitypost/[action]")]
         [Public]
-        public async Task<IActionResult> List(int pageIndex=1, int pageSize = 2)
+        public async Task<IActionResult> PostList(int pageIndex=1, int pageSize = 2)
         {
             var vm = Wtm.CreateVM<ActivityPostPagedListVM>();
             var list = await vm.GetPagedList(pageIndex, pageSize);
