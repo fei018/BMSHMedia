@@ -5,7 +5,7 @@
     var post = Model.Entity;
     var list = Model.Entity.PostAttachList;
 }
-
+<script src="~/portal/bootstrap.image.viewer.js"></script>
 <style>
     /* img {
         max-height:800px;
@@ -31,3 +31,9 @@
         </div>
     }
 </div>
+
+<script>
+    $(function () {
+        $('img').bootstrapImageViewer();//The default image source file path is the src attribute of the img tag.
+    })
+</script>
