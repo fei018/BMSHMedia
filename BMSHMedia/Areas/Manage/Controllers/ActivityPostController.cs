@@ -69,6 +69,7 @@ namespace BMSHMedia.Manage.Controllers
                 else
                 {
                     return FFResult().CloseDialog().RefreshGrid();
+                    //return FFResult().AddCustomScript("ff.LoadPage('/manage/activitypost/index');");
                 }
             }
         }
@@ -202,49 +203,12 @@ namespace BMSHMedia.Manage.Controllers
         }
         #endregion
 
-        #region SavePublish
-        [HttpPost]
-        [ActionDescription("保存及發佈")]
-        [StringNeedLTGT]
-        public IActionResult SavePublish(ActivityPostVM vm)
-        {
-            if (!ModelState.IsValid)
-            {
-                return PartialView("Create", vm);
-            }
-            else
-            {
-                vm.DoAdd();
-                if (!ModelState.IsValid)
-                {
-                    vm.DoReInit();
-                    return PartialView("Create", vm);
-                }
-                else
-                {
-                    try
-                    {
-                        vm.Entity.IsPublish = true;
-                        DC.UpdateProperty(vm.Entity, x => x.IsPublish);
-                    }
-                    catch (Exception ex)
-                    {
-                        vm.MSD.AddModelError("", ex.Message);
-                        return PartialView("Create", vm);
-                    }
-                    return FFResult().CloseDialog().RefreshGrid();
-                }
-            }
-
-        }
-        #endregion
-
-        #region MyRegion
+        #region PostList
         [Route("/activitypost/[action]")]
         [Public]
-        public async Task<IActionResult> PostList(int pageIndex=1, int pageSize = 2)
+        public async Task<IActionResult> PostList(int pageIndex=1, int pageSize = 10)
         {
-            var vm = Wtm.CreateVM<ActivityPostPagedListVM>();
+            var vm = Wtm.CreateVM<ActivityPostVM>();
             var list = await vm.GetPagedList(pageIndex, pageSize);
    
             return View(list);

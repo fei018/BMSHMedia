@@ -8,8 +8,7 @@ namespace BMSHMedia.Controllers
     {
         public IActionResult Index()
         {
-            //return RedirectToAction("Index", "Media", new {Area="Portal"});
-            return View();
+            return RedirectToAction("PostList", "ActivityPost");
         }
 
         public IActionResult ManSangOrigin()

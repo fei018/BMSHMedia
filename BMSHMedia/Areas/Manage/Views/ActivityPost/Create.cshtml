@@ -26,19 +26,11 @@
 
     <wt:row align="AlignEnum.Right">
         <wt:submitbutton text="保存"/>
-        <wt:closebutton />
+        <wt:closebutton text="關閉" />
     </wt:row>
 </wt:form>
 
+<script src="~/tinymce/tinymceinit.js"></script>
 <script>
-    tinymce.init({
-        selector: '#@editboxId',
-        menubar: false,
-        language: 'zh_CN',
-        plugins: 'link',
-        toolbar: 'styleselect formatselect fontselect fontsizeselect | link ',
-        setup: function (editor) {
-            editor.on('change', function () { editor.save(); });
-        },
-    });
+    tinymceinit('#@editboxId')
 </script>

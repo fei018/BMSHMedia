@@ -6,33 +6,28 @@
     var list = Model.Entity.PostAttachList;
 }
 
-@* <link href="~/manage/activitypost.css" rel="stylesheet" /> *@
-@* <div class="activity-post">
-    <wt:form vm="@Model">
-        <wt:row items-per-row="ItemsPerRowEnum.One">
-            <wt:display field="Entity.Title" />
-        </wt:row>
-        <wt:row items-per-row="ItemsPerRowEnum.One">
-            <wt:ueditor field="Entity.Content" height="600" disabled/>
-            @Html.Raw(Model.Entity.Content)
-        </wt:row>
-        <wt:row align="AlignEnum.Right">
-            <wt:closebutton />
-        </wt:row>
-    </wt:form>
-</div> *@
+<style>
+    /* img {
+        max-height:800px;
+    } */
 
-<div class="layui-row layui-col-space15">
-    <div class="layui-col-sm12">
-        @post.Title
+    .post {
+        max-width: 768px;
+    }
+</style>
+
+<div class="m-auto post">
+    <div class="card mt-3">
+        <div class="card-body">
+            <h3 class="card-title">@post.Title</h3>
+            <p class="card-text">@Html.Raw(post.Text)</p>
+        </div>
     </div>
+
     @foreach (var item in list)
     {
-        <div>
-            <img src="@WtmFrameworkApiHelper.GetFileUrl(item.FileId)" />
+        <div class="my-3 text-center">
+            <img src="@WtmFrameworkApiHelper.GetFileUrl(item.FileId)"/>
         </div>
     }
-    <div class="layui-col-sm12 layui-font-24">
-        @Html.Raw(post.Text)
-    </div>
 </div>

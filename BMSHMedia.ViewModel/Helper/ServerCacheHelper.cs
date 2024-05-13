@@ -2,7 +2,7 @@
 
 namespace BMSHMedia.Helper
 {
-    public class MediaCacheHelper
+    public class ServerCacheHelper
     {
         public static IDistributedCache Cache { get; private set; }
 

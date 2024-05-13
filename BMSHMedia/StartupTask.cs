@@ -15,7 +15,7 @@ namespace BMSHMedia
 
             var serviceProvider = services.BuildServiceProvider();
 
-            MediaCacheHelper.SetCache(serviceProvider.GetRequiredService<IDistributedCache>());
+            ServerCacheHelper.SetCache(serviceProvider.GetRequiredService<IDistributedCache>());
 
             Task.Run(MediaApiVM.ScanAllAsync);
         }

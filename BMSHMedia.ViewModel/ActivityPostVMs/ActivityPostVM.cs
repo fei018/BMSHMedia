@@ -7,6 +7,8 @@ using WalkingTec.Mvvm.Core;
 using WalkingTec.Mvvm.Core.Extensions;
 using BMSHMedia.Model.Activity;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
+using X.PagedList;
 
 
 namespace BMSHMedia.ViewModel.ActivityPostVMs
@@ -47,7 +49,7 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
             base.DoDelete();
         }
 
-        #region MyRegion
+        #region GetFileAttachment
         public void GetFileAttachment()
         {
             FileAttachmentList = new();
@@ -57,6 +59,27 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
                 var file = DC.Set<FileAttachment>().Where(x => x.ID == item.FileId).SingleOrDefault();
                 FileAttachmentList.Add(file);
             }
+        }
+        #endregion
+
+        #region GetPagedList
+        public Task<IPagedList<ActivityPost_View>> GetPagedList(int index, int pageSize)
+        {
+            var list = DC.Set<ActivityPost>().AsNoTracking()
+                                  .Include(x => x.PostAttachList)
+                                  .OrderByDescending(x => x.CreateTime)
+                                  .Select(x => new ActivityPost_View
+                                  {
+                                      ID = x.ID,
+                                      Title = x.Title,
+                                      Text = x.Text,
+                                      IsPublish = x.IsPublish,
+                                      CreateTime = x.CreateTime,
+                                      PostAttachList = x.PostAttachList,
+                                  })
+                                  .ToPagedListAsync(index, pageSize);
+
+            return list;
         }
         #endregion
     }

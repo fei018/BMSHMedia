@@ -28,16 +28,18 @@ namespace BMSHMedia.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CreateBy")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsPublish")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -53,6 +55,30 @@ namespace BMSHMedia.DataAccess.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Info_ActivityPost");
+                });
+
+            modelBuilder.Entity("BMSHMedia.Model.Activity.ActivityPostAttach", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("FileId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("FileId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("Info_ActivityPostAttach");
                 });
 
             modelBuilder.Entity("BMSHMedia.Model.SRS.SRSStackInfo", b =>
@@ -954,6 +980,25 @@ namespace BMSHMedia.DataAccess.Migrations
                     b.ToTable("WorkflowInstances", "Elsa");
                 });
 
+            modelBuilder.Entity("BMSHMedia.Model.Activity.ActivityPostAttach", b =>
+                {
+                    b.HasOne("WalkingTec.Mvvm.Core.FileAttachment", "File")
+                        .WithMany()
+                        .HasForeignKey("FileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BMSHMedia.Model.Activity.ActivityPost", "Post")
+                        .WithMany("PostAttachList")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("File");
+
+                    b.Navigation("Post");
+                });
+
             modelBuilder.Entity("WalkingTec.Mvvm.Core.FrameworkGroup", b =>
                 {
                     b.HasOne("WalkingTec.Mvvm.Core.FrameworkGroup", "Parent")
@@ -980,6 +1025,11 @@ namespace BMSHMedia.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Photo");
+                });
+
+            modelBuilder.Entity("BMSHMedia.Model.Activity.ActivityPost", b =>
+                {
+                    b.Navigation("PostAttachList");
                 });
 
             modelBuilder.Entity("WalkingTec.Mvvm.Core.FrameworkGroup", b =>

@@ -53,29 +53,11 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
                     
                     CreateTime = x.CreateTime,
                 })
-                .OrderBy(x => x.CreateTime);
+                .OrderByDescending(x => x.CreateTime);
             return query;
         }
 
     }
 
-    public class ActivityPost_View : ActivityPost
-    { 
-        public string GetCreateDate()
-        {
-            var days = CreateTime.Value.Subtract(DateTime.Now).Days;
-            if (days >= 7)
-            {
-                return CreateTime.Value.ToString("yyyy-MM-dd");
-            }
-            if (days == 0)
-            {
-                return "今天";
-            }
-            else
-            {
-                return days.ToString() + " 天前";
-            }
-        }
-    }
+    
 }

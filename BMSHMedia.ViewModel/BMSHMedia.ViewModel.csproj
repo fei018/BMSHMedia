@@ -14,12 +14,5 @@
   <ItemGroup>
     <ProjectReference Include="..\BMSHMedia.Model\BMSHMedia.Model.csproj" />
   </ItemGroup>
-
-
-  <ItemGroup>
-    <Reference Include="NetCoreExtensionTools">
-      <HintPath>..\..\NetCoreExtensionTools\bin\Release\net8.0\NetCoreExtensionTools.dll</HintPath>
-    </Reference>
-  </ItemGroup>
 </Project>
 

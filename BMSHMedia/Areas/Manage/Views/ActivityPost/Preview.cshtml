@@ -6,17 +6,25 @@
     var list = Model.Entity.PostAttachList;
 }
 
-<div class="layui-row layui-col-space15">
-    <div class="layui-col-sm12">
-        @post.Title
+<style>
+    img {
+        max-height: 800px;
+    }
+
+</style>
+
+<div class="m-auto">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">@post.Title</h3>
+            <p class="card-text">@Html.Raw(post.Text)</p>
+        </div>
     </div>
+
     @foreach (var item in list)
     {
-        <div>
+        <div class="m-3">
             <img src="@WtmFrameworkApiHelper.GetFileUrl(item.FileId)" />
         </div>
     }
-    <div class="layui-col-sm12">
-        @Html.Raw(post.Text)
-    </div>
 </div>

@@ -1,23 +1,49 @@
 ﻿@model BMSHMedia.ViewModel.ActivityPostVMs.ActivityPostVM
 @inject IStringLocalizer<Program> Localizer;
+@{
+    string editboxId = "tinyeb79b5da49384543ba3b1576e357dbc4";
+}
 
 
-<link href="~/manage/activitypost.css" rel="stylesheet" />
-<div class="activity-post">
-    <wt:form vm="@Model">
-        <wt:row items-per-row="ItemsPerRowEnum.One">
-            <wt:textbox field="Entity.Title" />
-        </wt:row>
-        <wt:row items-per-row="ItemsPerRowEnum.One">
-            <wt:richtextbox field="Entity.Text" upload-url="/nopage" />
-        </wt:row>
-        <wt:row items-per-row="ItemsPerRowEnum.One">
-            <wt:multiupload field="Entity.PostAttachList" upload-type="ImageFile" preview-height="100" preview-width="100" upload-subdir="ActivityPost\\image" />
-        </wt:row>
-        <wt:hidden field="Entity.ID" />
-        <wt:row align="AlignEnum.Right">
-            <wt:submitbutton />
-            <wt:closebutton />
-        </wt:row>
-    </wt:form>
-</div>
+<wt:quote>
+    如要取消, 請先 "刪除圖片", 再按 [關閉]<br />
+    圖片格式( jpg, jpeg, gif, bmp, png, tif )
+</wt:quote>
+<br />
+
+<wt:form vm="@Model">
+    <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:textbox field="Entity.Title" />
+    </wt:row>
+
+    <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:multiupload field="Entity.PostAttachList" upload-type="ImageFile" preview-height="100" preview-width="100" upload-subdir="@Model.UploadSubDir" show-preview="true" />
+    </wt:row>
+
+    <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:textarea field="Entity.Text" id="@editboxId"></wt:textarea>
+    </wt:row>
+
+    <wt:hidden field="Entity.ID" />
+    <wt:row align="AlignEnum.Right">
+        <wt:submitbutton text="保存" />
+        <wt:closebutton text="關閉" />
+    </wt:row>
+</wt:form>
+
+<script src="~/tinymce/tinymceinit.js"></script>
+<script>
+    tinymceinit('#@editboxId')
+</script>
+@* <script>
+    tinymce.init({
+        selector: '#@editboxId',
+        menubar: false,
+        language: 'zh_CN',
+        plugins: 'link code',
+        toolbar: 'code undo redo restoredraft | styleselect formatselect fontselect fontsizeselect | forecolor backcolor bold italic underline link ',
+        setup: function (editor) {
+            editor.on('change', function () { editor.save(); });
+        },
+    });
+</script> *@

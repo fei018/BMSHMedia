@@ -118,14 +118,14 @@ namespace BMSHMedia.ViewModel.MediaVMs
                 var vm = new MediaApiVM();
                 vm.ScanAll();
 
-                if(MediaCacheHelper.Cache.TryGetValue(cacheKey,out List<MediaContentVM> list))
+                if(ServerCacheHelper.Cache.TryGetValue(cacheKey,out List<MediaContentVM> list))
                 {
-                    MediaCacheHelper.Cache.Remove(cacheKey);
-                    MediaCacheHelper.Cache.Add(cacheKey, vm.MediaContentList);
+                    ServerCacheHelper.Cache.Remove(cacheKey);
+                    ServerCacheHelper.Cache.Add(cacheKey, vm.MediaContentList);
                 }
                 else
                 {
-                    MediaCacheHelper.Cache.Add(cacheKey, vm.MediaContentList);
+                    ServerCacheHelper.Cache.Add(cacheKey, vm.MediaContentList);
                 }
             });
         }
@@ -134,7 +134,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
         #region GetMediaContentList
         public static List<MediaContentVM> GetMediaContentList()
         {
-            return MediaCacheHelper.Cache.Get<List<MediaContentVM>>(cacheKey);
+            return ServerCacheHelper.Cache.Get<List<MediaContentVM>>(cacheKey);
         }
         #endregion
     }

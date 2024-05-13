@@ -1,14 +1,29 @@
 ﻿@model BMSHMedia.ViewModel.SRSVMs.SRSOpenAPIVM
 @{
-    string playUrl = Model.GetPlayUrl();
-    string hlsUrl = Model.GetHLSUrl();
+    string playUrl = null;
+    string hlsUrl = null;
+    try
+    {
+        playUrl = Model.GetPlayUrl();
+        hlsUrl = Model.GetHLSUrl();
+    }
+    catch (Exception ex)
+    {
+        <p>@ex.Message</p>
+    }
 }
 
 <script src="~/portal/mpegts.js"></script>
 
-<fieldset class="layui-elem-field layui-field-title">
-    <legend>直播</legend>
-</fieldset>
+<div class="row mx-1 mb-3">
+    <div class="card ">
+        <div class="card-body text-primary">
+            直播時間: 逢星期四、六<br />
+            晚上7:30 - 晚上9:00 (放香例外)
+        </div>
+    </div>
+</div>
+
 <div style="margin:auto;text-align:center;max-height:600px;margin-bottom:30px;">
     <video id="livePlayer" autoplay controls width="350" ></video>
 </div>

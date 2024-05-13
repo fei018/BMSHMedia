@@ -275,12 +275,13 @@ namespace BMSHMedia.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Info_Post",
+                name: "Info_ActivityPost",
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsPublish = table.Column<bool>(type: "bit", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreateBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -288,7 +289,7 @@ namespace BMSHMedia.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Info_Post", x => x.ID);
+                    table.PrimaryKey("PK_Info_ActivityPost", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -433,6 +434,32 @@ namespace BMSHMedia.DataAccess.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Info_ActivityPostAttach",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PostId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FileId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Order = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Info_ActivityPostAttach", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Info_ActivityPostAttach_FileAttachments_FileId",
+                        column: x => x.FileId,
+                        principalTable: "FileAttachments",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Info_ActivityPostAttach_Info_ActivityPost_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Info_ActivityPost",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_FrameworkGroups_ParentId",
                 table: "FrameworkGroups",
@@ -447,6 +474,16 @@ namespace BMSHMedia.DataAccess.Migrations
                 name: "IX_FrameworkUsers_PhotoId",
                 table: "FrameworkUsers",
                 column: "PhotoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Info_ActivityPostAttach_FileId",
+                table: "Info_ActivityPostAttach",
+                column: "FileId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Info_ActivityPostAttach_PostId",
+                table: "Info_ActivityPostAttach",
+                column: "PostId");
         }
 
         /// <inheritdoc />
@@ -490,7 +527,7 @@ namespace BMSHMedia.DataAccess.Migrations
                 name: "FunctionPrivileges");
 
             migrationBuilder.DropTable(
-                name: "Info_Post");
+                name: "Info_ActivityPostAttach");
 
             migrationBuilder.DropTable(
                 name: "Info_SRSStack");
@@ -513,6 +550,9 @@ namespace BMSHMedia.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "FileAttachments");
+
+            migrationBuilder.DropTable(
+                name: "Info_ActivityPost");
         }
     }
 }
