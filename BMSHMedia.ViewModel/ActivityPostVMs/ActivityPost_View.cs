@@ -11,7 +11,7 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
     {
         public string GetCreateDate()
         {
-            var days = CreateTime.Value.Subtract(DateTime.Now).Days;
+            var days = DateTime.Now.Subtract(CreateTime.Value).Days;
             if (days >= 7)
             {
                 return CreateTime.Value.ToString("yyyy-MM-dd");

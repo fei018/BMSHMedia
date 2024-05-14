@@ -67,6 +67,7 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
         {
             var list = DC.Set<ActivityPost>().AsNoTracking()
                                   .Include(x => x.PostAttachList)
+                                  .Where(x=>x.IsPublish)
                                   .OrderByDescending(x => x.CreateTime)
                                   .Select(x => new ActivityPost_View
                                   {

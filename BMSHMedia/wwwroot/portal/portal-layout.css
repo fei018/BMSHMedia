@@ -11,7 +11,7 @@
 }
 .portal-main {
     padding: 3px;
-    padding-bottom: 65px;
+    padding-bottom: 200px;
 }
 
 .portal-footer {
@@ -19,24 +19,11 @@
     bottom: 0px;
     left: 0px;
     right: 0px;
-    height: 60px;
+    height: 120px;
     text-align: center;
-    line-height: 60px;
+    padding-top:25px;
+    /*line-height: 80px;*/
 }
-
-/*.layui-header .layui-logo {
-    position: absolute;
-    width: 140px;
-    text-align: center;
-    line-height: 60px;
-    left:5px;*/
-    /* box-shadow:none; */
-/*}
-
-    .layui-header .layui-logo img {
-        top:25px;
-        height:25px;
-    }*/
 
 .more-line-ellipsis {
     overflow: hidden;
@@ -50,5 +37,17 @@
 img {
     max-width: 100%;
     max-height: 100%;
+}
+
+@media screen and (max-width:576px){
+/*    .portal-footer {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        height: 80px;
+        text-align: center;
+        line-height: 80px;
+    }*/
 }
 

@@ -135,7 +135,10 @@ namespace BMSHMedia.Manage.Controllers
         #endregion
 
         #region Details
-        [ActionDescription("Sys.Details")]
+        
+        [Route("/activitypost/[action]")]
+        //[ActionDescription("Sys.Details")]
+        [Public]
         public ActionResult Details(string id)
         {
             var vm = Wtm.CreateVM<ActivityPostVM>(id);
@@ -167,14 +170,6 @@ namespace BMSHMedia.Manage.Controllers
         }
         #endregion
 
-        #region Preview
-        [ActionDescription("預覽")]
-        public IActionResult Preview(string id)
-        {
-            var vm = Wtm.CreateVM<ActivityPostVM>(id);
-            return PartialView(vm);
-        }
-        #endregion
 
         #region Publish
         [ActionDescription("發佈")]
@@ -204,14 +199,26 @@ namespace BMSHMedia.Manage.Controllers
         #endregion
 
         #region PostList
+        private int _pageSize = 3;
+
         [Route("/activitypost/[action]")]
         [Public]
-        public async Task<IActionResult> PostList(int pageIndex=1, int pageSize = 10)
+        public async Task<IActionResult> PostList()
         {
             var vm = Wtm.CreateVM<ActivityPostVM>();
-            var list = await vm.GetPagedList(pageIndex, pageSize);
-   
+            var list = await vm.GetPagedList(1, _pageSize);
+
             return View(list);
+        }
+
+        [Route("/activitypost/[action]")]
+        [Public]
+        public async Task<IActionResult> PostList2(int pageIndex = 1)
+        {
+            var vm = Wtm.CreateVM<ActivityPostVM>();
+            var list = await vm.GetPagedList(pageIndex, _pageSize);
+
+            return PartialView(list);
         }
         #endregion
     }

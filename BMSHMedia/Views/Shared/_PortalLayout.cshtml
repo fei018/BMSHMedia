@@ -23,7 +23,8 @@
     <meta charset="utf-8" />
 
     <title>@title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="keywords" content="@title" />
 
     <link href="~/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/bootstrap-v5.3.3/css/bootstrap.min.css" rel="stylesheet" />
@@ -115,8 +116,20 @@
             @RenderBody()
         </div>
 
-        <div class="portal-footer">
-            ©@year <span class="text-muted">佛教愍生講堂</span>
+        <div class="portal-footer bg-light">
+            <div class="row justify-content-center fs-6 my-3">
+                <div class="col-auto">
+                    <i class="fa fa-phone"></i> 2808 2373
+                </div>
+                <div class="col-auto">
+                    <i class="fa fa-whatsapp"></i> 6880 1958
+                </div>
+            </div>
+            <div class="row justify-content-center fs-6 my-3">
+                <div class="col-auto">
+                    ©@DateTime.Now.Year.ToString() <span class="text-muted">佛教愍生講堂</span>
+                </div>
+            </div>          
         </div>
     </div>
 
