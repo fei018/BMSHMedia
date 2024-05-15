@@ -1,0 +1,40 @@
+﻿html, body {
+    height: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.more-line-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    word-break: break-all;
+}
+
+.portal-body {
+    position: relative;
+    min-height: 100%;
+}
+
+.portal-main {
+    padding: 3px;
+    padding-bottom: 200px;
+}
+
+.portal-footer {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: 120px;
+    text-align: center;
+    padding-top: 25px;
+    /*line-height: 80px;*/
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}

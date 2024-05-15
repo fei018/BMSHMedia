@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BMSHMedia.ViewModel", "BMSH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{EBA2AB75-B8E6-487C-9960-7677FA3C1D53}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMSHMedia.WebClient", "BMSHMedia.WebClient\BMSHMedia.WebClient.csproj", "{1887FA85-9673-4132-998A-1CFAC24D6CDB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{EBA2AB75-B8E6-487C-9960-7677FA3C1D53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBA2AB75-B8E6-487C-9960-7677FA3C1D53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBA2AB75-B8E6-487C-9960-7677FA3C1D53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1887FA85-9673-4132-998A-1CFAC24D6CDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1887FA85-9673-4132-998A-1CFAC24D6CDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1887FA85-9673-4132-998A-1CFAC24D6CDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1887FA85-9673-4132-998A-1CFAC24D6CDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
