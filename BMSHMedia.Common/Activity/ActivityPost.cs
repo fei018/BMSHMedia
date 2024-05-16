@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace BMSHMedia.WebClientCommon.Activity
+namespace BMSHMedia.Common.Activity
 {
     public class ActivityPost
     {

@@ -3,7 +3,7 @@ using System.IO;
 
 namespace BMSHMedia.ViewModel.MediaVMs
 {
-    public class MediaBaseVM
+    public class MediaVMHelper
     {
         /// <summary>
         /// 編碼 全字符集

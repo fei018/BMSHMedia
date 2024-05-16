@@ -1,4 +1,4 @@
-﻿namespace BMSHMedia.WebClientCommon.Activity
+﻿namespace BMSHMedia.Common.Activity
 {
     public class ActivityPostApiResult
     {

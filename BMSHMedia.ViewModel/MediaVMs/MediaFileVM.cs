@@ -1,11 +1,12 @@
-﻿using System;
+﻿using BMSHMedia.Common.Media;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Text.Json;
 
 namespace BMSHMedia.ViewModel.MediaVMs
 {
-    public class MediaFileVM : MediaBaseVM
+    public class MediaFileVM : IMediaFile
     {
         [Display(Name = "文件名")]
         //[Required(ErrorMessage = "Validate.{0}required")]
@@ -57,9 +58,9 @@ namespace BMSHMedia.ViewModel.MediaVMs
         public static string GetUrl(string fullName)
         {
             // 去掉 MediaRootPath
-            var path = CutMediaRootPath(fullName);
+            var path = MediaVMHelper.CutMediaRootPath(fullName);
 
-            return $"{SiteConfigInfo.CustomStaticWebPath}/" + EncodeFilePathUrl(path);
+            return $"{SiteConfigInfo.CustomStaticWebPath}/" + MediaVMHelper.EncodeFilePathUrl(path);
         }
 
         /// <summary>
@@ -70,7 +71,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
         public static string GetFileRelativeParentPath(string fileFullName)
         {
             // 去掉 MediaRootPath
-            var path = CutMediaRootPath(fileFullName);
+            var path = MediaVMHelper.CutMediaRootPath(fileFullName);
 
             var filename = Path.GetFileName(fileFullName);
 

@@ -11,7 +11,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
     public class MediaApiVM
     {
 
-        private List<MediaContentVM> MediaContentList { get; set; } = new();
+        private List<MediaFolderVM> MediaContentList { get; set; } = new();
 
         public bool Success { get; set; }
 
@@ -41,7 +41,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
             var subDirs = _scan.MediaFolderList;
             var subFiles = _scan.MediaFileList;
 
-            var folder = new MediaContentVM(root)
+            var folder = new MediaFolderVM(root)
             {
                 Id = Guid.NewGuid().ToString(),
                 IsTop = true,
@@ -73,7 +73,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
             var subDirs = _scan.MediaFolderList;
             var files = _scan.MediaFileList;
 
-            var vm = new MediaContentVM(currentDir)
+            var vm = new MediaFolderVM(currentDir)
             {
                 Id = Guid.NewGuid().ToString(),
                 IsTop = false,
@@ -109,7 +109,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
         #endregion
 
         #region async ScanAll
-        private const string cacheKey = "MediaContentList";
+        private const string cacheKey = "MediaFolderList";
 
         public static async Task ScanAllAsync()
         {
@@ -118,7 +118,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
                 var vm = new MediaApiVM();
                 vm.ScanAll();
 
-                if(ServerCacheHelper.Cache.TryGetValue(cacheKey,out List<MediaContentVM> list))
+                if(ServerCacheHelper.Cache.TryGetValue(cacheKey,out List<MediaFolderVM> list))
                 {
                     ServerCacheHelper.Cache.Remove(cacheKey);
                     ServerCacheHelper.Cache.Add(cacheKey, vm.MediaContentList);
@@ -131,10 +131,10 @@ namespace BMSHMedia.ViewModel.MediaVMs
         }
         #endregion
 
-        #region GetMediaContentList
-        public static List<MediaContentVM> GetMediaContentList()
+        #region GetMediaFolderList
+        public static List<MediaFolderVM> GetMediaFolderList()
         {
-            return ServerCacheHelper.Cache.Get<List<MediaContentVM>>(cacheKey);
+            return ServerCacheHelper.Cache.Get<List<MediaFolderVM>>(cacheKey);
         }
         #endregion
     }

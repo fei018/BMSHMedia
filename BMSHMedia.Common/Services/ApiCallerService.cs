@@ -1,5 +1,5 @@
 ﻿
-namespace BMSHMedia.WebClient.Services
+namespace BMSHMedia.Common.Services
 {
     public class ApiCallerService
     {

@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Localization\zh-TW.json" />
+    <Content Remove="Resources\zh-TW.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Localization\zh-TW.json" />
+    <EmbeddedResource Include="Resources\zh-TW.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BMSHMedia.WebClientCommon\BMSHMedia.WebClientCommon.csproj" />
+    <ProjectReference Include="..\BMSHMedia.Common\BMSHMedia.Common.csproj" />
   </ItemGroup>
 
 </Project>

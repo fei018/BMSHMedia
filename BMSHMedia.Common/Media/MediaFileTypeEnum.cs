@@ -1,4 +1,4 @@
-﻿namespace BMSHMedia.ViewModel.MediaVMs
+﻿namespace BMSHMedia.Common.Media
 {
     public enum MediaFileTypeEnum
     {

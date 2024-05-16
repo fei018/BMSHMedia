@@ -1,15 +1,11 @@
-﻿using System;
+﻿using BMSHMedia.Model.Activity;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 using WalkingTec.Mvvm.Core;
-using WalkingTec.Mvvm.Core.Extensions;
-using BMSHMedia.Model.Activity;
-using System.IO;
-using Microsoft.EntityFrameworkCore;
 using X.PagedList;
-using Api = BMSHMedia.WebClientCommon.Activity;
+using ApiCommon = BMSHMedia.Common.Activity;
 
 namespace BMSHMedia.ViewModel.ActivityPostVMs
 {
@@ -86,15 +82,15 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
         #endregion
 
         #region GetActivityPostApiResult
-        public async Task<Api.ActivityPostApiResult> GetActivityPostApiResult(int pageIndex, int pageSize)
+        public async Task<ApiCommon.ActivityPostApiResult> GetActivityPostApiResult(int pageIndex, int pageSize)
         {
             var list = await GetPagedList(pageIndex, pageSize);
 
-            Api.ActivityPostApiResult result = new()
+            ApiCommon.ActivityPostApiResult result = new()
             {
                 PageIndex = pageIndex,
                 PageCount = list.PageCount,
-                PostList = list.Select(x => new Api.ActivityPost
+                PostList = list.Select(x => new ApiCommon.ActivityPost
                 {
                     ID = x.ID.ToString(),
                     CreateTime = x.CreateTime.Value,

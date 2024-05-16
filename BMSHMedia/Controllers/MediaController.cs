@@ -18,7 +18,7 @@ namespace BMSHMedia.Controllers
         {
             try
             {
-                var vm = MediaApiVM.GetMediaContentList().SingleOrDefault(x => x.Id == Id);
+                var vm = MediaApiVM.GetMediaFolderList().SingleOrDefault(x => x.Id == Id);
                 if (vm != null)
                 {
                     return PartialView(vm);

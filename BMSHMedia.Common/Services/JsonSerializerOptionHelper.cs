@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace BMSHMedia.WebClient.Services
+namespace BMSHMedia.Common.Services
 {
     public class JsonSerializerOptionHelper
     {

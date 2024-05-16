@@ -1,7 +1,18 @@
-﻿namespace BMSHMedia.ViewModel.MediaVMs
+﻿using BMSHMedia.Common.Media;
+using System.Collections.Generic;
+
+namespace BMSHMedia.ViewModel.MediaVMs
 {
-    public class MediaFolderVM : MediaBaseVM
+    public class MediaFolderVM : IMediaFolder
     {
+        public string Id { get; set; }
+
+        public string ParentId { get; set; }
+
+        public bool IsTop { get; set; }
+
+        public List<IMediaFile> Files { get; set; } = new();
+
         public string FolderName { get; set; }
 
         /// <summary>
@@ -15,7 +26,7 @@
         public string SysParentPath { get; set; }
 
         /// <summary>
-        /// 取掉設置的根路徑的 相對路徑, 已編碼, 放在List頁面裡
+        /// 取掉設置的根路徑的 相對路徑
         /// </summary>
         public string RelativeEncodePath { get; set; }
 
@@ -44,7 +55,7 @@
         /// <returns></returns>
         public static string GetEncodeListPagePath(string sysFullPath)
         {
-            return EncodePath(CutMediaRootPath(sysFullPath));
+            return MediaVMHelper.EncodePath(MediaVMHelper.CutMediaRootPath(sysFullPath));
         }
     }
 }

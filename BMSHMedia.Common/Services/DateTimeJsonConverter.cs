@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace BMSHMedia.WebClient.Services
+namespace BMSHMedia.Common.Services
 {
     public class DateTimeJsonConverter : JsonConverter<DateTime>
     {

@@ -1,8 +1,6 @@
-using BMSHMedia.WebClient.Services;
-using BootstrapBlazor.Components;
+using BMSHMedia.Common.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using System.Globalization;
 
 namespace BMSHMedia.WebClient
 {
@@ -26,7 +24,7 @@ namespace BMSHMedia.WebClient
             builder.Services.ConfigureJsonLocalizationOptions(op =>
             {
                 op.IgnoreLocalizerMissing = true;
-                op.ResourcesPath = "Localization";
+                op.ResourcesPath = "Resources";
             });
 
             await builder.Build().RunAsync();

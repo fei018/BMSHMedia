@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BMSHMedia.Common.Media;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,47 +9,43 @@ namespace BMSHMedia.ViewModel.MediaVMs
 {
     public class MediaScanVM
     {
-        public List<MediaFileVM> MediaFileList { get; set; }
+        public List<IMediaFile> MediaFileList { get; set; }
 
         public List<MediaFolderVM> MediaFolderList { get; set; }
 
-        public string UpLevelFolderPath { get; set; }
+        //public string UpLevelFolderPath { get; set; }
 
         /// <summary>
         /// 是否顯示 上一級目錄Icon
         /// </summary>
-        public bool IsShowUpLevelLinkIcon { get; set; } = true;
-
-        #region contr
-        public MediaScanVM() { }
-        #endregion
+        //public bool IsShowUpLevelLinkIcon { get; set; } = true;
 
         #region CheckRootPath
-        private void CheckRootPath(string sysFullPath)
-        {
-            //// 判斷是否 mediarootpath
-            if (MediaBaseVM.IsMediaRootPath(sysFullPath))
-            {
-                IsShowUpLevelLinkIcon = false;
-                UpLevelFolderPath = MediaBaseVM.EncodePath(SiteConfigInfo.MediaRootPath); //上一級目錄                
-            }
-            else
-            {
-                IsShowUpLevelLinkIcon = true;
+        //private void CheckRootPath(string sysFullPath)
+        //{
+        //    //// 判斷是否 mediarootpath
+        //    if (MediaVMHelper.IsMediaRootPath(sysFullPath))
+        //    {
+        //        IsShowUpLevelLinkIcon = false;
+        //        UpLevelFolderPath = MediaVMHelper.EncodePath(SiteConfigInfo.MediaRootPath); //上一級目錄                
+        //    }
+        //    else
+        //    {
+        //        IsShowUpLevelLinkIcon = true;
 
-                // 獲取父目錄路徑
-                string path = MediaFolderVM.GetSysParentPath(sysFullPath);
+        //        // 獲取父目錄路徑
+        //        string path = MediaFolderVM.GetSysParentPath(sysFullPath);
 
-                if (!MediaBaseVM.IsMediaRootPath(path))
-                {
-                    // cut meadia root path
-                    path = MediaBaseVM.CutMediaRootPath(path);
-                }
+        //        if (!MediaVMHelper.IsMediaRootPath(path))
+        //        {
+        //            // cut meadia root path
+        //            path = MediaVMHelper.CutMediaRootPath(path);
+        //        }
 
-                // encode path
-                UpLevelFolderPath = MediaBaseVM.EncodePath(path); //上一級目錄              
-            }
-        }
+        //        // encode path
+        //        UpLevelFolderPath = MediaVMHelper.EncodePath(path); //上一級目錄              
+        //    }
+        //}
         #endregion
 
         #region Scan Folder
@@ -108,34 +105,34 @@ namespace BMSHMedia.ViewModel.MediaVMs
         #endregion
 
         #region ScanFolderAndFiles
-        public void ScanFolderAndFiles(string encodePostPath)
-        {
-            if (string.IsNullOrEmpty(encodePostPath))
-            {
-                throw new Exception("ScanFolderAndFiles(string encodePostPath) IsNullOrEmpty.");
-            }
+        //public void ScanFolderAndFiles(string encodePostPath)
+        //{
+        //    if (string.IsNullOrEmpty(encodePostPath))
+        //    {
+        //        throw new Exception("ScanFolderAndFiles(string encodePostPath) IsNullOrEmpty.");
+        //    }
 
-            string path = MediaBaseVM.DecodePath(encodePostPath);
+        //    string path = MediaVMHelper.DecodePath(encodePostPath);
 
-            string sysFullPath = MediaBaseVM.GetSysFullPath(path);
+        //    string sysFullPath = MediaVMHelper.GetSysFullPath(path);
 
-            if (!Directory.Exists(sysFullPath)) { throw new Exception(path + " 不存在."); }
+        //    if (!Directory.Exists(sysFullPath)) { throw new Exception(path + " 不存在."); }
 
-            CheckRootPath(sysFullPath);
+        //    CheckRootPath(sysFullPath);
 
-            ScanFolders(sysFullPath);
+        //    ScanFolders(sysFullPath);
 
-            ScanFiles(sysFullPath);
-        }
+        //    ScanFiles(sysFullPath);
+        //}
         #endregion
 
         #region static Scan
-        public static List<MediaFileVM> SearchFiles(string dir)
-        {
-            var scan = new MediaScanVM();
-            scan.ScanFiles(dir);
-            return scan.MediaFileList;
-        }
+        //public static List<IMediaFile> SearchFiles(string dir)
+        //{
+        //    var scan = new MediaScanVM();
+        //    scan.ScanFiles(dir);
+        //    return scan.MediaFileList;
+        //}
         #endregion
     }
 }
