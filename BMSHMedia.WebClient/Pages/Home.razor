@@ -1,8 +1,44 @@
 ﻿@page "/"
+@using BMSHMedia.WebClientCommon.Activity;
+@inject BMSHMedia.WebClient.Services.ApiCallerService ApiCaller;
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+@foreach (var item in PostList)
+{
+    <div>
+        @item.Title<br />
+        @item.Text
+    </div>
+}
+<Pagination Alignment="Alignment.Center" PageCount="@PageCount" OnPageLinkClick="@OnPageClick"></Pagination>
 
-Welcome to your new app.
-<DateTimePicker TValue="DateTimeOffset?" ShowIcon="false" />
+@code {
+    private List<ActivityPost> PostList = new();
+
+    private int PageIndex { get; set; }
+    private int PageCount { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await ApiCaller.HttpClient.GetAsync("/api/activitypost/postlist/1");
+        response.EnsureSuccessStatusCode();
+
+        var result = await response.Content.ReadFromJsonAsync<ActivityPostApiResult>(JsonSerializerOptionHelper.GetOption());
+        PageCount = result.PageCount;
+        PostList = result.PostList;
+
+        await base.OnInitializedAsync();
+    }
+
+    private async Task OnPageClick(int pageIndex)
+    {
+        var response = await ApiCaller.HttpClient.GetAsync("/api/activitypost/postlist/" + pageIndex);
+        response.EnsureSuccessStatusCode();
+        var result = await response.Content.ReadFromJsonAsync<ActivityPostApiResult>(JsonSerializerOptionHelper.GetOption());
+        PageCount = result.PageCount;
+        PostList = result.PostList;
+
+        StateHasChanged();
+    }
+}

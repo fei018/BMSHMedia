@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BMSHMedia.DataAccess", "BMS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BMSHMedia.ViewModel", "BMSHMedia.ViewModel\BMSHMedia.ViewModel.csproj", "{18CBAE30-1E7C-4F61-B733-5CDCD3BAC5C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{EBA2AB75-B8E6-487C-9960-7677FA3C1D53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{EBA2AB75-B8E6-487C-9960-7677FA3C1D53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMSHMedia.WebClient", "BMSHMedia.WebClient\BMSHMedia.WebClient.csproj", "{1887FA85-9673-4132-998A-1CFAC24D6CDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BMSHMedia.WebClient", "BMSHMedia.WebClient\BMSHMedia.WebClient.csproj", "{1887FA85-9673-4132-998A-1CFAC24D6CDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMSHMedia.WebClientCommon", "BMSHMedia.WebClientCommon\BMSHMedia.WebClientCommon.csproj", "{8890579F-1709-4081-9A35-AC3C120E0421}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{1887FA85-9673-4132-998A-1CFAC24D6CDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1887FA85-9673-4132-998A-1CFAC24D6CDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1887FA85-9673-4132-998A-1CFAC24D6CDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8890579F-1709-4081-9A35-AC3C120E0421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8890579F-1709-4081-9A35-AC3C120E0421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8890579F-1709-4081-9A35-AC3C120E0421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8890579F-1709-4081-9A35-AC3C120E0421}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BMSHMedia.Model\BMSHMedia.Model.csproj" />
+    <ProjectReference Include="..\BMSHMedia.WebClientCommon\BMSHMedia.WebClientCommon.csproj" />
   </ItemGroup>
 </Project>
 

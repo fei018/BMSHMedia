@@ -3,11 +3,11 @@ namespace BMSHMedia.WebClient.Services
 {
     public class ApiCallerService
     {
-        private readonly HttpClient _http;
+        public HttpClient HttpClient { get; private set; }
 
         public ApiCallerService(HttpClient http)
         {
-            _http = http;
+            HttpClient = http;
         }
 
 

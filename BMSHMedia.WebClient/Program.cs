@@ -14,7 +14,7 @@ namespace BMSHMedia.WebClient
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
             //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-            builder.Services.AddHttpClient<ApiCallerService>(op => { op.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress); });
+            builder.Services.AddHttpClient<ApiCallerService>(op => { op.BaseAddress = new Uri("http://localhost:30002"); });
 
             builder.Services.AddBootstrapBlazor(op =>
             {

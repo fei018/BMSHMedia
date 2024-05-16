@@ -9,7 +9,7 @@ using BMSHMedia.Model.Activity;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using X.PagedList;
-
+using Api = BMSHMedia.WebClientCommon.Activity;
 
 namespace BMSHMedia.ViewModel.ActivityPostVMs
 {
@@ -19,6 +19,7 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
         public string PreviewUrl => "/manage/activitypost/preview";
         public string DoPubilshUrl => "/manage/activitypost/dopublish";
         public string SavePublishUrl => "/manage/activitypost/savepublish";
+
         #region MyRegion
         public List<FileAttachment> FileAttachmentList { get; set; }
 
@@ -26,7 +27,7 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
 
         public ActivityPostVM()
         {
-            SetInclude(x=>x.PostAttachList);
+            SetInclude(x => x.PostAttachList);
         }
 
         protected override void InitVM()
@@ -34,7 +35,7 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
         }
 
         public override void DoAdd()
-        {           
+        {
             base.DoAdd();
 
         }
@@ -67,7 +68,7 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
         {
             var list = DC.Set<ActivityPost>().AsNoTracking()
                                   .Include(x => x.PostAttachList)
-                                  .Where(x=>x.IsPublish)
+                                  .Where(x => x.IsPublish)
                                   .OrderByDescending(x => x.CreateTime)
                                   .Select(x => new ActivityPost_View
                                   {
@@ -81,6 +82,30 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
                                   .ToPagedListAsync(index, pageSize);
 
             return list;
+        }
+        #endregion
+
+        #region GetActivityPostApiResult
+        public async Task<Api.ActivityPostApiResult> GetActivityPostApiResult(int pageIndex, int pageSize)
+        {
+            var list = await GetPagedList(pageIndex, pageSize);
+
+            Api.ActivityPostApiResult result = new()
+            {
+                PageIndex = pageIndex,
+                PageCount = list.PageCount,
+                PostList = list.Select(x => new Api.ActivityPost
+                {
+                    ID = x.ID.ToString(),
+                    CreateTime = x.CreateTime.Value,
+                    IsPublish = x.IsPublish,
+                    Text = x.Title,
+                    Title = x.Title,
+                    FileIDList = x.PostAttachList.Select(y => y.FileId.ToString()).ToList(),
+                }).ToList()
+            };
+
+            return result;
         }
         #endregion
     }

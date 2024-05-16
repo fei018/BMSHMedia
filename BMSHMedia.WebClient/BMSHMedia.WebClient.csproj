@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
@@ -19,6 +19,10 @@
     <PackageReference Include="BootstrapBlazor.FontAwesome" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.4" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BMSHMedia.WebClientCommon\BMSHMedia.WebClientCommon.csproj" />
   </ItemGroup>
 
 </Project>
