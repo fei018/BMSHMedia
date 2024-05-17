@@ -1,6 +1,7 @@
-﻿@using X.PagedList;
+﻿@using BMSHMedia.Common.Services
+@using X.PagedList;
 @using BMSHMedia.ViewModel.ActivityPostVMs;
-@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core;
 @model IPagedList<ActivityPost_View>
 @{
     // Layout = "~/Views/Shared/_PortalLayout.cshtml";
@@ -43,13 +44,13 @@
                 {
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="@WtmFrameworkApiHelper.GetFileUrl(@item.PostAttachList[0].FileId)" class="img-fluid rounded-start" alt="...">
+                            <img src="@WtmFrameworkApiHelper.GetFileUrl(@item.PostAttachList[0].FileId.ToString())" class="img-fluid rounded-start" alt="...">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h3 class="card-title"><a href="@detailUrl?id=@item.ID" target="_blank" class="card-link">@item.Title</a></h3>
                                 <p class="card-text">@Html.Raw(item.Text)</p>
-                                <p class="card-text"><small class="text-muted">@item.GetCreateDate()</small></p>
+                                <p class="card-text"><small class="text-muted">@item.GetCreateTime()</small></p>
                             </div>
                         </div>
                     </div>
@@ -59,7 +60,7 @@
                     <div class="card-body">
                         <h3 class="card-title"><a href="@detailUrl/@item.ID" class="card-link">@item.Title</a></h3>
                         <p class="card-text">@Html.Raw(item.Text)</p>
-                        <p class="card-text"><small class="text-muted">@item.GetCreateDate()</small></p>
+                        <p class="card-text"><small class="text-muted">@item.GetCreateTime()</small></p>
                     </div>
                 }
             </div>

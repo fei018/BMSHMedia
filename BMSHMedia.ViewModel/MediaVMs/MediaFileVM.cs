@@ -1,12 +1,11 @@
-﻿using BMSHMedia.Common.Media;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Text.Json;
 
 namespace BMSHMedia.ViewModel.MediaVMs
 {
-    public class MediaFileVM : IMediaFile
+    public class MediaFileVM
     {
         [Display(Name = "文件名")]
         //[Required(ErrorMessage = "Validate.{0}required")]

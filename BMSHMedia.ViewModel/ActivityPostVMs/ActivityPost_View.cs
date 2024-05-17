@@ -9,20 +9,30 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
 {
     public class ActivityPost_View : ActivityPost
     {
-        public string GetCreateDate()
+        public string GetCreateTime()
         {
             var days = DateTime.Now.Subtract(CreateTime.Value).Days;
-            if (days >= 7)
+
+            if (days < 1)
             {
-                return CreateTime.Value.ToString("yyyy-MM-dd");
+                var hours = DateTime.Now.Subtract(CreateTime.Value).Hours;
+                if (hours < 1)
+                {
+                    var minutes = DateTime.Now.Subtract(CreateTime.Value).Minutes;
+                    return minutes < 1 ? "1分鐘內" : minutes.ToString() + "分鐘前";
+                }
+                else
+                {
+                    return hours.ToString() + "小時前";
+                }
             }
-            if (days == 0)
+            else if (days < 7)
             {
-                return "今天";
+                return days.ToString() + "日前";
             }
             else
             {
-                return days.ToString() + " 天前";
+                return CreateTime.Value.ToString("yyyy-MM-dd");
             }
         }
     }

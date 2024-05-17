@@ -1,6 +1,4 @@
-﻿using BMSHMedia.Common.Media;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -9,7 +7,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
 {
     public class MediaScanVM
     {
-        public List<IMediaFile> MediaFileList { get; set; }
+        public List<MediaFileVM> MediaFileList { get; set; }
 
         public List<MediaFolderVM> MediaFolderList { get; set; }
 

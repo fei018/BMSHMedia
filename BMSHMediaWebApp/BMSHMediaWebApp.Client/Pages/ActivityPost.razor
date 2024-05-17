@@ -1,0 +1,69 @@
+﻿@page "/activitypost"
+@using BMSHMedia.Common.Activity;
+@inject ApiCallerService ApiCaller;
+
+<PageTitle>活動消息</PageTitle>
+
+@if (PostList.Count > 0)
+{
+ @*    @foreach (var item in PostList)
+    {
+        <div class="row g-3">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                
+            </div>
+        </div>
+    } *@
+
+    <ListView TItem="ActivityPostApiVM" Items="@PostList" >
+         <HeaderTemplate>
+             <div>活動消息</div>
+         </HeaderTemplate>
+          <BodyTemplate>
+            <Card Color="Color.Primary">
+                <BodyTemplate>
+                    @if (context.FileIDList.Any())
+                    {
+                        <img src="@ApiCaller.GetFileUrl(context.FileIDList[0])" />
+                    }
+                    <h5>@context.Title</h5>
+                    <p class="card-text">@context.Text</p>
+                </BodyTemplate>
+                <FooterTemplate>
+                    <span>@context.GetCreateTime()</span>
+                </FooterTemplate>
+            </Card>
+          </BodyTemplate>
+     </ListView>
+
+    <Pagination Alignment="Alignment.Center" PageCount="@PageCount" OnPageLinkClick="@OnPageClick"></Pagination>
+}
+else
+{
+    <p>沒有活動消息</p>
+}
+
+
+@code {
+    private List<ActivityPostApiVM> PostList = new();
+
+    private int PageCount { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await ApiCaller.GetActivityPostApiResult(1);
+        PageCount = result.PageCount;
+        PostList = result.PostList;
+
+        await base.OnInitializedAsync();
+    }
+
+    private async Task OnPageClick(int pageIndex)
+    {
+        var result = await ApiCaller.GetActivityPostApiResult(pageIndex);
+        PageCount = result.PageCount;
+        PostList = result.PostList;
+
+        StateHasChanged();
+    }
+}

@@ -1,9 +1,8 @@
-﻿using BMSHMedia.Common.Media;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace BMSHMedia.ViewModel.MediaVMs
 {
-    public class MediaFolderVM : IMediaFolder
+    public class MediaFolderVM
     {
         public string Id { get; set; }
 
@@ -11,7 +10,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
 
         public bool IsTop { get; set; }
 
-        public List<IMediaFile> Files { get; set; } = new();
+        public List<MediaFileVM> Files { get; set; } = new();
 
         public string FolderName { get; set; }
 

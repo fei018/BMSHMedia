@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WalkingTec.Mvvm.Core;
 using X.PagedList;
-using ApiCommon = BMSHMedia.Common.Activity;
+using Api = BMSHMedia.Common.Activity;
 
 namespace BMSHMedia.ViewModel.ActivityPostVMs
 {
@@ -16,10 +16,7 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
         public string DoPubilshUrl => "/manage/activitypost/dopublish";
         public string SavePublishUrl => "/manage/activitypost/savepublish";
 
-        #region MyRegion
         public List<FileAttachment> FileAttachmentList { get; set; }
-
-        #endregion
 
         public ActivityPostVM()
         {
@@ -72,7 +69,7 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
                                       Title = x.Title,
                                       Text = x.Text,
                                       IsPublish = x.IsPublish,
-                                      CreateTime = x.CreateTime,
+                                      CreateTime = x.CreateTime.Value,
                                       PostAttachList = x.PostAttachList,
                                   })
                                   .ToPagedListAsync(index, pageSize);
@@ -82,23 +79,22 @@ namespace BMSHMedia.ViewModel.ActivityPostVMs
         #endregion
 
         #region GetActivityPostApiResult
-        public async Task<ApiCommon.ActivityPostApiResult> GetActivityPostApiResult(int pageIndex, int pageSize)
+        public async Task<Api.ActivityPostApiResult> GetActivityPostApiResult(int index, int pageSize)
         {
-            var list = await GetPagedList(pageIndex, pageSize);
-
-            ApiCommon.ActivityPostApiResult result = new()
+            var list = await GetPagedList(index, pageSize);
+            var result = new Api.ActivityPostApiResult
             {
-                PageIndex = pageIndex,
                 PageCount = list.PageCount,
-                PostList = list.Select(x => new ApiCommon.ActivityPost
+                PostList = list.Select(x => new Api.ActivityPostApiVM
                 {
                     ID = x.ID.ToString(),
                     CreateTime = x.CreateTime.Value,
                     IsPublish = x.IsPublish,
-                    Text = x.Title,
                     Title = x.Title,
+                    Text = x.Text,
                     FileIDList = x.PostAttachList.Select(y => y.FileId.ToString()).ToList(),
-                }).ToList()
+
+                }).ToList(),
             };
 
             return result;

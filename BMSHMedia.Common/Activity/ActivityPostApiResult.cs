@@ -2,8 +2,8 @@
 {
     public class ActivityPostApiResult
     {
-        public List<ActivityPost> PostList { get; set; } = new();
-        public int PageIndex { get; set; }
+        public List<ActivityPostApiVM> PostList { get; set; } = new();
+
         public int PageCount { get; set; }
     }
 }
