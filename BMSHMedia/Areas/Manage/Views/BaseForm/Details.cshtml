@@ -1,0 +1,29 @@
+﻿@model BMSHMedia.ViewModel.BaseFormVMs.BaseFormVM
+@inject IStringLocalizer<Program> Localizer;
+
+@* <script src="~/formbuilder/jquery-ui.min.js"></script> *@
+<script src="~/formbuilder/form-render.min.js"></script>
+<wt:form vm="@Model">
+<wt:row items-per-row="ItemsPerRowEnum.Two">
+<wt:display field="Entity.FormName" />
+@* <wt:display field="Entity.FormData" /> *@
+
+</wt:row>
+    <wt:row align="AlignEnum.Right">
+        <wt:closebutton />
+    </wt:row>
+</wt:form>
+
+<div id="form">
+    
+</div>
+
+<script>
+    jQuery(function ($) {
+        //var fbTemplate = document.getElementById('fb-template');
+        $('#form').formRender({
+            dataType: 'json',
+            formData: @Html.Raw(Model.Entity.FormData),
+        });
+    });
+</script>

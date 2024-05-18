@@ -20,5 +20,10 @@
     <ProjectReference Include="..\BMSHMedia.Common\BMSHMedia.Common.csproj" />
     <ProjectReference Include="..\BMSHMedia.Model\BMSHMedia.Model.csproj" />
   </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Manage\" />
+  </ItemGroup>
 </Project>
 

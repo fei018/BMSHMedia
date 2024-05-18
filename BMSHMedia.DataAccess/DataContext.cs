@@ -1,4 +1,5 @@
 ﻿using BMSHMedia.Model.Activity;
+using BMSHMedia.Model.Form;
 using BMSHMedia.Model.SRS;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -22,6 +23,8 @@ namespace BMSHMedia.DataAccess
 
         public DbSet<ActivityPost> ActivityPosts { get; set; }
         public DbSet<ActivityPostAttach> ActivityPostAttaches { get; set; }
+
+        public DbSet<BaseForm> BaseForms { get; set; }
 
         public DataContext(CS cs)
              : base(cs)
