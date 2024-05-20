@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using WalkingTec.Mvvm.Core;
 using WalkingTec.Mvvm.Core.Extensions;
 using BMSHMedia.Model.Form;
+using Newtonsoft.Json;
 
 
 namespace BMSHMedia.ViewModel.BaseFormVMs
@@ -22,7 +23,8 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
         }
 
         public override void DoAdd()
-        {           
+        {
+            
             base.DoAdd();
         }
 

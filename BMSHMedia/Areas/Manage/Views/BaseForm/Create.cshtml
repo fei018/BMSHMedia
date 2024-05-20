@@ -1,46 +1,45 @@
 ﻿@model BMSHMedia.ViewModel.BaseFormVMs.BaseFormVM
-@inject IStringLocalizer<Program> Localizer;
+
+@{
+    string formBuilderId = "fb" + Guid.NewGuid().ToString("N");
+    string btnSaveId = "fb" + Guid.NewGuid().ToString("N");
+    string formdataId = "fb" + Guid.NewGuid().ToString("N");
+}
+
 
 <script src="~/formbuilder/jquery-ui.min.js"></script>
 <script src="~/formbuilder/form-builder.min.js"></script>
 
-<wt:form vm="@Model" >
-<wt:row items-per-row="ItemsPerRowEnum.One">
-<wt:textbox field="Entity.FormName" />
-<wt:hidden field="Entity.FormData" id="formData" />
-</wt:row>
+<wt:form vm="@Model">
+    <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:textbox field="Entity.FormName" />
+        <wt:hidden field="Entity.FormData" id="@formdataId" />
+    </wt:row>
     <wt:row align="AlignEnum.Right">
-        <wt:submitbutton  click="saveForm()"/>
+        <wt:submitbutton id="@btnSaveId" />
         <wt:closebutton />
     </wt:row>
 </wt:form>
 
-<div id="formbuilder" style="padding:50px;">
+<div id="@formBuilderId" style="padding:50px;">
 </div>
 
 <script>
-    // var options = {
-    //     i18n: {
-    //         locale: 'zh-TW',
-    //             location: 'http://localhost:30002/formbuilder'
-    //         //extension: '.lang'
-    //         //override: {
-    //         //    'en-US': {...}
-    //         //}
-    //     }
-    // };
-
-    var fb;
     jQuery($ => {
-        fb = $('#formbuilder').formBuilder();
+        var options = {
+            i18n: {
+                locale: 'zh-TW',
+                extension: '.txt',
+                location: '/formbuilder'
+            }
+        };
 
+        var fb = $('#@formBuilderId').formBuilder(options);
 
+        $('#@btnSaveId').on('click', function () {
+            $('#@formdataId').val(fb.actions.getData('json', true));
+            return true;
+        });
     });
 
-    function saveForm() {
-      
-        fb.actions.save();
-        $('#formData').val(fb.actions.getData('json', true))
-        return true;
-    }
 </script>

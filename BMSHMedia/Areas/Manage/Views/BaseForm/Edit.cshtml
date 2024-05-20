@@ -1,14 +1,45 @@
 ﻿@model BMSHMedia.ViewModel.BaseFormVMs.BaseFormVM
-@inject IStringLocalizer<Program> Localizer;
+@{
+    string formBuilderId = "fb" + Guid.NewGuid().ToString("N");
+    string btnSaveId = "fb" + Guid.NewGuid().ToString("N");
+    string formdataId = "fb" + Guid.NewGuid().ToString("N");
+}
+
+<script src="~/formbuilder/jquery-ui.min.js"></script>
+<script src="~/formbuilder/form-builder.min.js"></script>
 
 <wt:form vm="@Model">
-<wt:row items-per-row="ItemsPerRowEnum.Two">
-<wt:textbox field="Entity.FormName" />
-<wt:textbox field="Entity.FormData" />
-</wt:row>
+    <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:textbox field="Entity.FormName" />
+        <wt:hidden field="Entity.FormData" id="@formdataId" />
+    </wt:row>
     <wt:hidden field="Entity.ID" />
     <wt:row align="AlignEnum.Right">
-        <wt:submitbutton />
+        <wt:submitbutton id="@btnSaveId" />
         <wt:closebutton />
     </wt:row>
 </wt:form>
+
+<div id="@formBuilderId" style="padding:50px;">
+</div>
+
+<script>
+  jQuery($ => {
+        var options = {
+            i18n: {
+                locale: 'zh-TW',
+                extension: '.txt',
+                location: '/formbuilder'
+            },
+            formData: @Html.Raw(Model.Entity.FormData),
+        };
+
+        var fb = $('#@formBuilderId').formBuilder(options);
+
+        $('#@btnSaveId').on('click', function () {
+            $('#@formdataId').val(fb.actions.getData('json', true));
+            return true;
+        });
+    });
+
+</script>

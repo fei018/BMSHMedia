@@ -17,8 +17,8 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
         {
             return new List<GridAction>
             {
-                this.MakeStandardAction("BaseForm", GridActionStandardTypesEnum.Create, Localizer["Sys.Create"],"Manage", dialogWidth: 800).SetIsRedirect().SetShowDialog(false),
-                this.MakeStandardAction("BaseForm", GridActionStandardTypesEnum.Edit, Localizer["Sys.Edit"], "Manage", dialogWidth: 800),
+                this.MakeStandardAction("BaseForm", GridActionStandardTypesEnum.Create, Localizer["Sys.Create"],"Manage", dialogWidth: 800).SetMax(),
+                this.MakeStandardAction("BaseForm", GridActionStandardTypesEnum.Edit, Localizer["Sys.Edit"], "Manage", dialogWidth: 800).SetMax(),
                 this.MakeStandardAction("BaseForm", GridActionStandardTypesEnum.Delete, Localizer["Sys.Delete"], "Manage", dialogWidth: 800),
                 this.MakeStandardAction("BaseForm", GridActionStandardTypesEnum.Details, Localizer["Sys.Details"], "Manage", dialogWidth: 800),
                 this.MakeStandardAction("BaseForm", GridActionStandardTypesEnum.BatchEdit, Localizer["Sys.BatchEdit"], "Manage", dialogWidth: 800),

@@ -22,10 +22,13 @@ namespace BMSHMedia
     {
         public IConfiguration ConfigRoot { get; }
 
+        private readonly IWebHostEnvironment hostEnvironment;
+
         public Startup(IWebHostEnvironment env, IConfiguration config)
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             ConfigRoot = config;
+            hostEnvironment = env;
         }
 
 
@@ -69,7 +72,7 @@ namespace BMSHMedia
             // http response html 拉丁中文不编码
             services.AddSingleton(HtmlEncoder.Create(new[] { UnicodeRanges.BasicLatin, UnicodeRanges.CjkUnifiedIdeographs }));
 
-            StartupTask.Run(ConfigRoot, services);
+            StartupTask.Run(ConfigRoot, services, hostEnvironment);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

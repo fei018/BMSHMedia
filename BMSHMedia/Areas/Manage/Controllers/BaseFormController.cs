@@ -57,7 +57,7 @@ namespace BMSHMedia.Controllers
                 return PartialView(vm);
             }
             else
-            {
+            {              
                 vm.DoAdd();
                 if (!ModelState.IsValid)
                 {
@@ -84,6 +84,7 @@ namespace BMSHMedia.Controllers
         [ActionDescription("Sys.Edit")]
         [HttpPost]
         [ValidateFormItemOnly]
+        [StringNeedLTGT]
         public ActionResult Edit(BaseFormVM vm)
         {
             if (!ModelState.IsValid)
@@ -211,12 +212,12 @@ namespace BMSHMedia.Controllers
         }
         #endregion
 
-        [ActionDescription("Sys.Export")]
-        [HttpPost]
-        public IActionResult ExportExcel(BaseFormListVM vm)
-        {
-            return vm.GetExportData();
-        }
+        //[ActionDescription("Sys.Export")]
+        //[HttpPost]
+        //public IActionResult ExportExcel(BaseFormListVM vm)
+        //{
+        //    return vm.GetExportData();
+        //}
 
     }
 }
