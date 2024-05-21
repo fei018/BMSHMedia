@@ -1,5 +1,4 @@
 ﻿using BMSHMedia.DataAccess;
-using BMSHMedia.Helper;
 using BMSHMedia.ViewModel.MediaVMs;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Caching.Distributed;
@@ -11,17 +10,19 @@ namespace BMSHMedia
 {
     public class StartupTask
     {
-        public static void Run(IConfiguration config, IServiceCollection services , IWebHostEnvironment env)
+        public static void Run(IConfiguration config, IServiceCollection services, IWebHostEnvironment env)
         {
-            SiteConfigInfo.SetSiteConfig(config.GetSection("AppSettings").GetSection("MediaRootPath").Value);
-
             var serviceProvider = services.BuildServiceProvider();
 
-            ServerCacheHelper.SetCache(serviceProvider.GetRequiredService<IDistributedCache>());
+            SiteConfigInfo.SetSiteConfig(config.GetSection("AppSettings").GetSection("MediaRootPath").Value);
 
-            Task.Run(MediaApiVM.ScanAllAsync);
+            //ServerCacheHelper.SetCache(serviceProvider.GetRequiredService<IDistributedCache>());
 
-            services.AddScoped(s => new LiteDbContext(env.ContentRootPath));
+            services.AddSingleton<MediaApiVM>();
+
+            Task.Run(new MediaApiVM(serviceProvider.GetRequiredService<IDistributedCache>()).ScanAllAsync);
+
+            LiteDbContext.SetPath(env.ContentRootPath);
         }
     }
 }

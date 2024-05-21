@@ -6,9 +6,12 @@ namespace BMSHMedia.Controllers
 {
     public class PortalController : Controller
     {
+
+
         public IActionResult Index()
         {
-            return RedirectToAction("PostList", "ActivityPost");
+            //return RedirectToAction("PostList", "ActivityPost");
+            return View();
         }
 
         public IActionResult ManSangOrigin()

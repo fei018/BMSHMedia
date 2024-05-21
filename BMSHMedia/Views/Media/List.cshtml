@@ -1,9 +1,10 @@
 ﻿@using BMSHMedia.ViewModel.MediaVMs
 @model MediaFolderVM
+@inject MediaApiVM apiVM
 @{
     Layout = null;
 
-    var subFolders = MediaApiVM.GetMediaFolderList().Where(x => x.ParentId == Model.Id);
+    var subFolders = apiVM.GetMediaCacheList().Where(x => x.ParentId == Model.Id);
 
     var files = Model.Files;
 

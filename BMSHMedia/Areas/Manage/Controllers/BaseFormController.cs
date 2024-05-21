@@ -6,6 +6,13 @@ using WalkingTec.Mvvm.Mvc;
 using WalkingTec.Mvvm.Core.Extensions;
 using BMSHMedia.ViewModel.BaseFormVMs;
 using WalkingTec.Mvvm.Mvc.Binders;
+using BMSHMedia.DataAccess;
+using BMSHMedia.Model.Form;
+using Microsoft.Extensions.Primitives;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
+using BMSHMedia.Extentions;
 
 namespace BMSHMedia.Controllers
 {
@@ -13,6 +20,7 @@ namespace BMSHMedia.Controllers
     [ActionDescription("基本表單")]
     public partial class BaseFormController : BaseController
     {
+
         #region Search
         [ActionDescription("Sys.Search")]
         public ActionResult Index()
@@ -66,8 +74,8 @@ namespace BMSHMedia.Controllers
                 }
                 else
                 {
-                    //return FFResult().CloseDialog().RefreshGrid();
-                    return Ok("Ok");
+                    return FFResult().CloseDialog().RefreshGrid();
+                    
                 }
             }
         }
@@ -219,5 +227,63 @@ namespace BMSHMedia.Controllers
         //    return vm.GetExportData();
         //}
 
+        #region QuerySubmitList
+        [ActionDescription("查看遞交表單列表")]
+        public IActionResult QuerySubmitList(string id)
+        {
+            var vm = Wtm.CreateVM<BaseFormVM>();
+            vm.QuerSubmitFormList(id);
+
+            return PartialView(vm);
+        }
+        #endregion
+
+        #region /forms/post/{id}
+        [Public]
+        [Route("/forms/[action]/{id}")]
+        public IActionResult Submit(string id)
+        {
+            var vm = Wtm.CreateVM<BaseFormVM>(id);
+            return View(vm);
+        }
+        #endregion
+
+        #region HttpPost: /forms/post
+        [Route("/forms/[action]")]
+        [Public]
+        [HttpPost]
+        public IActionResult Submit(IFormCollection postForm)
+        {
+            try
+            {
+                var vm = Wtm.CreateVM<BaseFormVM>();
+                vm.SubmitForm(postForm);
+
+                return Ok("已完成提交.");
+            }
+            catch (Exception ex)
+            {
+                return this.ErrorView(ex.Message);
+            }
+        }
+        #endregion
+
+        #region MyRegion
+        [Route("/forms/[action]")]
+        [Public]
+        public IActionResult FormsIndex()
+        {
+            try
+            {
+                var vm = Wtm.CreateVM<BaseFormVM>();
+                vm.GetBaseFormList();
+                return View(vm);
+            }
+            catch (Exception ex)
+            {
+                return this.ErrorView(ex.Message);
+            }
+        }
+        #endregion
     }
 }

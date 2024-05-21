@@ -1,6 +1,6 @@
-﻿
+﻿@inject MediaApiVM apiVM
 @{
-    var id = MediaApiVM.GetMediaFolderList().Find(x => x.IsTop)?.Id;
+    var id = apiVM.GetMediaCacheList().Find(x => x.IsTop)?.Id;
     string listUrl = "/media/list";
 }
 

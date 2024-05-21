@@ -18,12 +18,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BMSHMedia.Common\BMSHMedia.Common.csproj" />
+    <ProjectReference Include="..\BMSHMedia.DataAccess\BMSHMedia.DataAccess.csproj" />
     <ProjectReference Include="..\BMSHMedia.Model\BMSHMedia.Model.csproj" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <Folder Include="Manage\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 </Project>
 

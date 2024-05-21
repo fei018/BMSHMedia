@@ -1,17 +1,19 @@
 ﻿@model BMSHMedia.ViewModel.BaseFormVMs.BaseFormVM
 @{
+    Layout = "~/Views/Shared/_PortalLayout.cshtml";
+
     string formRenderId = "fb" + Guid.NewGuid().ToString("N");
-    string postUrl = "/forms/post";
+    string postUrl = "/forms/submit";
 }
 
 <script src="~/formbuilder/form-render.min.js"></script>
 
-<form action="@postUrl" method="post">
+<form action="@postUrl" method="post" target="_blank" style="max-width:600px;" class="mx-auto mt-3">
     <input type="hidden" name="baseFormId" value="@Model.Entity.ID"/>
     <div id="@formRenderId">
     </div>
     <hr />
-    <button type="submit">提交</button>
+    <button type="submit" class="btn btn-primary">提交</button>
 </form>
 
 <script>

@@ -3,7 +3,7 @@
     /// <summary>
     /// LiteDb
     /// </summary>
-    public class FormPostNameValue
+    public class BaseFormSubmitNameValue
     {
         public string Label { get; set; }
 

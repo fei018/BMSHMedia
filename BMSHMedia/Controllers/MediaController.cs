@@ -9,6 +9,13 @@ namespace BMSHMedia.Controllers
 {
     public class MediaController : Controller
     {
+        private MediaApiVM _mediaApiVM {  get; set; }
+
+        public MediaController(MediaApiVM mediaApi)
+        {
+            _mediaApiVM = mediaApi;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -18,7 +25,7 @@ namespace BMSHMedia.Controllers
         {
             try
             {
-                var vm = MediaApiVM.GetMediaFolderList().SingleOrDefault(x => x.Id == Id);
+                var vm = _mediaApiVM.GetMediaCacheList().SingleOrDefault(x => x.Id == Id);
                 if (vm != null)
                 {
                     return PartialView(vm);
@@ -44,7 +51,7 @@ namespace BMSHMedia.Controllers
         {
             try
             {
-                Task.Run(MediaApiVM.ScanAllAsync);
+                Task.Run(_mediaApiVM.ScanAllAsync);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)

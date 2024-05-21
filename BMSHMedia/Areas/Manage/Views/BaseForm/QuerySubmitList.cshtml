@@ -1,0 +1,39 @@
+﻿@model BMSHMedia.ViewModel.BaseFormVMs.BaseFormVM
+@{
+    var list = Model.SubmitFormList;
+    var post = Model.SubmitFormList[0];
+
+    string tableId = "table" + Guid.NewGuid().ToString("N");
+}
+
+<table lay-filter="@tableId">
+    <thead>
+        <tr>
+            <th lay-data="{field:'@post.SubmitTime', width:200}">提交時間</th>
+            @foreach (var item in post.FormPostData)
+            {
+                <th lay-data="{field:'@item.Name', width:200}">@item.Label</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in list)
+        {
+            <tr>
+                <td>@item.SubmitTime</td>
+                @foreach (var data in item.FormPostData)
+                {
+                    <td>@data.Value</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    layui.table.init('@tableId', {
+        //limit:1000,
+        page:false,
+        defaultToolbar: ['filter', 'print', 'exports'],
+    });
+</script>

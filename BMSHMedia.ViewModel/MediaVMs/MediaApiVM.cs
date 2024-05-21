@@ -1,4 +1,5 @@
 ﻿using BMSHMedia.Helper;
+using Microsoft.Extensions.Caching.Distributed;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,6 +11,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
 {
     public class MediaApiVM
     {
+        private IDistributedCache _cache { get; set; }
 
         private List<MediaFolderVM> MediaContentList { get; set; } = new();
 
@@ -17,8 +19,9 @@ namespace BMSHMedia.ViewModel.MediaVMs
 
         private readonly MediaScanVM _scan;
 
-        public MediaApiVM()
+        public MediaApiVM(IDistributedCache cache)
         {
+            _cache = cache;
             _scan = new MediaScanVM();
         }
 
@@ -111,30 +114,38 @@ namespace BMSHMedia.ViewModel.MediaVMs
         #region async ScanAll
         private const string cacheKey = "MediaFolderList";
 
-        public static async Task ScanAllAsync()
+        public async Task ScanAllAsync()
         {
             await Task.Run(() =>
             {
-                var vm = new MediaApiVM();
-                vm.ScanAll();
+                this.ScanAll();
 
-                if(ServerCacheHelper.Cache.TryGetValue(cacheKey,out List<MediaFolderVM> list))
+                if(_cache.TryGetValue(cacheKey,out List<MediaFolderVM> list))
                 {
-                    ServerCacheHelper.Cache.Remove(cacheKey);
-                    ServerCacheHelper.Cache.Add(cacheKey, vm.MediaContentList);
+                    _cache.Remove(cacheKey);
+                    _cache.Add(cacheKey, this.MediaContentList);
                 }
                 else
                 {
-                    ServerCacheHelper.Cache.Add(cacheKey, vm.MediaContentList);
+                    _cache.Add(cacheKey, this.MediaContentList);
                 }
             });
         }
         #endregion
 
         #region GetMediaFolderList
-        public static List<MediaFolderVM> GetMediaFolderList()
+        public List<MediaFolderVM> GetMediaCacheList()
         {
-            return ServerCacheHelper.Cache.Get<List<MediaFolderVM>>(cacheKey);
+            if(_cache.TryGetValue(cacheKey, out List<MediaFolderVM> list))
+            {
+                return list;
+            }
+            else
+            {
+                Task.Run(ScanAllAsync).Wait();
+
+                return _cache.Get<List<MediaFolderVM>>(cacheKey);
+            }
         }
         #endregion
     }
