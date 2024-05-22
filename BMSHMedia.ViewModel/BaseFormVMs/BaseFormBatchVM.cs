@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using WalkingTec.Mvvm.Core;
 using WalkingTec.Mvvm.Core.Extensions;
 using BMSHMedia.Model.Form;
+using BMSHMedia.DataAccess;
+using Microsoft.Extensions.Hosting;
 
 
 namespace BMSHMedia.ViewModel.BaseFormVMs
@@ -17,7 +19,6 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
             ListVM = new BaseFormListVM();
             LinkedVM = new BaseForm_BatchEdit();
         }
-
     }
 
 	/// <summary>

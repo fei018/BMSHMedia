@@ -11,17 +11,19 @@
     string playUrl = "/media/play";
 }
 
-<hr />
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>資料夾</legend>
+</fieldset>
 
-<div class="row g-3 d-flex">
+<div class="layui-row layui-col-space15">
     @if (!Model.IsTop)
     {
-        <div class="col-6">
-            <div class="card h-100">
-                <div class="card-header">
-                    <i class="media-icon media-icon-folder fa fa-level-up"></i>
+        <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
+            <div class="layui-card">
+                <div class="layui-card-header ">
+                    <i class="media-icon media-icon-folder layui-icon layui-icon-return"></i>
                 </div>
-                <div class="card-body">
+                <div class="layui-card-body">
                     <a class="more-line-ellipsis" href="javascript:void(0);"
                        onclick="getMediaFolderById('@Model.ParentId')">
                         上一頁
@@ -33,12 +35,12 @@
 
     @foreach (var folder in subFolders)
     {
-        <div class="col-6">
-            <div class="card h-100">
-                <div class="card-header ">
-                    <i class="media-icon media-icon-folder fa fa-folder-o"></i>
+        <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
+            <div class="layui-card">
+                <div class="layui-card-header ">
+                    <i class="media-icon media-icon-folder layui-icon layui-icon-template-1"></i>
                 </div>
-                <div class="card-body">
+                <div class="layui-card-body">
                     <a class="more-line-ellipsis" href="javascript:void(0);"
                        onclick="getMediaFolderById('@folder.Id')">
                         @(folder.FolderName)
@@ -51,26 +53,28 @@
 
 @if (files.Count > 0)
 {
-    <hr />
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>文件</legend>
+    </fieldset>
 }
 @if (files.Count > 0)
 {
-    <div class="row g-3">
+    <div class="layui-row layui-col-space15">
         @foreach (var file in files)
         {
-            <div class="col-6">
-                <div class="card h-100">
-                    <div class="card-header ">
+            <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
+                <div class="layui-card">
+                    <div class="layui-card-header ">
                         @if (file.FileType == MediaFileTypeEnum.Audio)
                         {
-                            <i class="media-icon media-icon-folder fa fa-music"></i>
+                            <i class="media-icon media-icon-folder layui-icon layui-icon-music"></i>
                         }
                         @if (file.FileType == MediaFileTypeEnum.Video)
                         {
-                            <i class="media-icon media-icon-folder fa fa-play-circle"></i>
+                            <i class="media-icon media-icon-folder layui-icon layui-icon-video"></i>
                         }
                     </div>
-                    <div class="card-body">
+                    <div class="layui-card-body">
                         <form action="@playUrl" method="post" target="_blank">
                             <button type="submit" class="play-btn-submit"><span class="more-line-ellipsis">@file.FileName</span></button>
                             <input type="hidden" asp-for="@file.Url" name="Url" />

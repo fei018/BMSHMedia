@@ -1,18 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BMSHMedia.Extentions;
+using BMSHMedia.ViewModel.BaseFormVMs;
+using BMSHMedia.ViewModel.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using WalkingTec.Mvvm.Core;
-using WalkingTec.Mvvm.Mvc;
 using WalkingTec.Mvvm.Core.Extensions;
-using BMSHMedia.ViewModel.BaseFormVMs;
+using WalkingTec.Mvvm.Mvc;
 using WalkingTec.Mvvm.Mvc.Binders;
-using BMSHMedia.DataAccess;
-using BMSHMedia.Model.Form;
-using Microsoft.Extensions.Primitives;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Linq;
-using BMSHMedia.Extentions;
 
 namespace BMSHMedia.Controllers
 {
@@ -20,6 +15,12 @@ namespace BMSHMedia.Controllers
     [ActionDescription("基本表單")]
     public partial class BaseFormController : BaseController
     {
+        private readonly BaseFormSubmitDbService _formSubmitDbService;
+
+        public BaseFormController(BaseFormSubmitDbService formSubmitDbService)
+        {
+            _formSubmitDbService = formSubmitDbService;
+        }
 
         #region Search
         [ActionDescription("Sys.Search")]
@@ -65,7 +66,7 @@ namespace BMSHMedia.Controllers
                 return PartialView(vm);
             }
             else
-            {              
+            {
                 vm.DoAdd();
                 if (!ModelState.IsValid)
                 {
@@ -75,7 +76,7 @@ namespace BMSHMedia.Controllers
                 else
                 {
                     return FFResult().CloseDialog().RefreshGrid();
-                    
+
                 }
             }
         }
@@ -128,7 +129,10 @@ namespace BMSHMedia.Controllers
         public ActionResult Delete(string id, IFormCollection nouse)
         {
             var vm = Wtm.CreateVM<BaseFormVM>(id);
+
             vm.DoDelete();
+            _formSubmitDbService.DeleteAll(id);
+
             if (!ModelState.IsValid)
             {
                 return PartialView(vm);
@@ -150,27 +154,27 @@ namespace BMSHMedia.Controllers
         #endregion
 
         #region BatchEdit
-        [HttpPost]
-        [ActionDescription("Sys.BatchEdit")]
-        public ActionResult BatchEdit(string[] IDs)
-        {
-            var vm = Wtm.CreateVM<BaseFormBatchVM>(Ids: IDs);
-            return PartialView(vm);
-        }
+        //[HttpPost]
+        //[ActionDescription("Sys.BatchEdit")]
+        //public ActionResult BatchEdit(string[] IDs)
+        //{
+        //    var vm = Wtm.CreateVM<BaseFormBatchVM>(Ids: IDs);
+        //    return PartialView(vm);
+        //}
 
-        [HttpPost]
-        [ActionDescription("Sys.BatchEdit")]
-        public ActionResult DoBatchEdit(BaseFormBatchVM vm, IFormCollection nouse)
-        {
-            if (!ModelState.IsValid || !vm.DoBatchEdit())
-            {
-                return PartialView("BatchEdit",vm);
-            }
-            else
-            {
-                return FFResult().CloseDialog().RefreshGrid().Alert(Localizer["Sys.BatchEditSuccess", vm.Ids.Length]);
-            }
-        }
+        //[HttpPost]
+        //[ActionDescription("Sys.BatchEdit")]
+        //public ActionResult DoBatchEdit(BaseFormBatchVM vm, IFormCollection nouse)
+        //{
+        //    if (!ModelState.IsValid || !vm.DoBatchEdit())
+        //    {
+        //        return PartialView("BatchEdit",vm);
+        //    }
+        //    else
+        //    {
+        //        return FFResult().CloseDialog().RefreshGrid().Alert(Localizer["Sys.BatchEditSuccess", vm.Ids.Length]);
+        //    }
+        //}
         #endregion
 
         #region BatchDelete
@@ -188,7 +192,7 @@ namespace BMSHMedia.Controllers
         {
             if (!ModelState.IsValid || !vm.DoBatchDelete())
             {
-                return PartialView("BatchDelete",vm);
+                return PartialView("BatchDelete", vm);
             }
             else
             {
@@ -198,26 +202,26 @@ namespace BMSHMedia.Controllers
         #endregion
 
         #region Import
-		[ActionDescription("Sys.Import")]
-        public ActionResult Import()
-        {
-            var vm = Wtm.CreateVM<BaseFormImportVM>();
-            return PartialView(vm);
-        }
+        //[ActionDescription("Sys.Import")]
+        //      public ActionResult Import()
+        //      {
+        //          var vm = Wtm.CreateVM<BaseFormImportVM>();
+        //          return PartialView(vm);
+        //      }
 
-        [HttpPost]
-        [ActionDescription("Sys.Import")]
-        public ActionResult Import(BaseFormImportVM vm, IFormCollection nouse)
-        {
-            if (vm.ErrorListVM.EntityList.Count > 0 || !vm.BatchSaveData())
-            {
-                return PartialView(vm);
-            }
-            else
-            {
-                return FFResult().CloseDialog().RefreshGrid().Alert(Localizer["Sys.ImportSuccess", vm.EntityList.Count.ToString()]);
-            }
-        }
+        //      [HttpPost]
+        //      [ActionDescription("Sys.Import")]
+        //      public ActionResult Import(BaseFormImportVM vm, IFormCollection nouse)
+        //      {
+        //          if (vm.ErrorListVM.EntityList.Count > 0 || !vm.BatchSaveData())
+        //          {
+        //              return PartialView(vm);
+        //          }
+        //          else
+        //          {
+        //              return FFResult().CloseDialog().RefreshGrid().Alert(Localizer["Sys.ImportSuccess", vm.EntityList.Count.ToString()]);
+        //          }
+        //      }
         #endregion
 
         //[ActionDescription("Sys.Export")]
@@ -231,10 +235,17 @@ namespace BMSHMedia.Controllers
         [ActionDescription("查看遞交表單列表")]
         public IActionResult QuerySubmitList(string id)
         {
-            var vm = Wtm.CreateVM<BaseFormVM>();
-            vm.QuerSubmitFormList(id);
+            try
+            {
+                var vm = Wtm.CreateVM<BaseFormVM>();
+                vm.QuerySubmitFormList(id, _formSubmitDbService);
 
-            return PartialView(vm);
+                return PartialView(vm);
+            }
+            catch (Exception ex)
+            {
+                return this.ErrorView(ex.Message);
+            }
         }
         #endregion
 
@@ -248,7 +259,7 @@ namespace BMSHMedia.Controllers
         }
         #endregion
 
-        #region HttpPost: /forms/post
+        #region HttpPost: /forms/Submit
         [Route("/forms/[action]")]
         [Public]
         [HttpPost]
@@ -259,7 +270,7 @@ namespace BMSHMedia.Controllers
                 var vm = Wtm.CreateVM<BaseFormVM>();
                 vm.SubmitForm(postForm);
 
-                return Ok("已完成提交.");
+                return Ok("提交成功.");
             }
             catch (Exception ex)
             {
@@ -268,7 +279,7 @@ namespace BMSHMedia.Controllers
         }
         #endregion
 
-        #region MyRegion
+        #region /forms/FormsIndex
         [Route("/forms/[action]")]
         [Public]
         public IActionResult FormsIndex()

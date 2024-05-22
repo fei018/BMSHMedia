@@ -5,8 +5,9 @@
     string formdataId = "fb" + Guid.NewGuid().ToString("N");
 }
 
-<script src="~/formbuilder/jquery-ui.min.js"></script>
-<script src="~/formbuilder/form-builder.min.js"></script>
+<script src="~/custom/formbuilder/jquery-ui.min.js"></script>
+<script src="~/custom/formbuilder/form-builder.min.js"></script>
+<script src="~/custom/formbuilder/formbuilder-init.js"></script>
 
 <wt:form vm="@Model">
     <wt:row items-per-row="ItemsPerRowEnum.One">
@@ -20,20 +21,22 @@
     </wt:row>
 </wt:form>
 
-<div id="@formBuilderId" style="padding:50px;">
+<div id="@formBuilderId" style="width:800px;margin:0 auto;">
 </div>
 
 <script>
-  jQuery($ => {
-        var options = {
-            i18n: {
-                locale: 'zh-TW',
-                extension: '.txt',
-                location: '/formbuilder'
-            },
-            formData: @Html.Raw(Model.Entity.FormData),
-        };
+    jQuery($ => {
+        // var options = {
+        //     i18n: {
+        //         locale: 'zh-TW',
+        //         extension: '.txt',
+        //         location: '/custom/formbuilder'
+        //     },
+        //     showActionButtons: false,
+        //     formData: Html.Raw(Model.Entity.FormData),
+        // };
 
+        var options = getFormBuilderOptions(@Html.Raw(Model.Entity.FormData));
         var fb = $('#@formBuilderId').formBuilder(options);
 
         $('#@btnSaveId').on('click', function () {

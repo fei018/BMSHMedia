@@ -1,5 +1,5 @@
-﻿using BMSHMedia.Helper;
-using Microsoft.Extensions.Caching.Distributed;
+﻿using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,24 +11,24 @@ namespace BMSHMedia.ViewModel.MediaVMs
 {
     public class MediaApiVM
     {
-        private IDistributedCache _cache { get; set; }
+        private IMemoryCache _cache { get; set; }
 
-        private List<MediaFolderVM> MediaContentList { get; set; } = new();
+        private List<MediaFolderVM> MediaFoldeVMList { get; set; } = new();
 
         public bool Success { get; set; }
 
         private readonly MediaScanVM _scan;
 
-        public MediaApiVM(IDistributedCache cache)
+        public MediaApiVM(IMemoryCache memoryCache)
         {
-            _cache = cache;
+            _cache = memoryCache;
             _scan = new MediaScanVM();
         }
 
         #region ScanAll
         public void ScanAll()
         {
-            MediaContentList = new();
+            MediaFoldeVMList = new();
 
             string root = SiteConfigInfo.MediaRootPath;
 
@@ -51,7 +51,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
                 Files = subFiles
             };
 
-            MediaContentList.Add(folder);
+            MediaFoldeVMList.Add(folder);
 
             foreach (var dir in subDirs)
             {
@@ -84,7 +84,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
                 ParentId = parentId,
             };
 
-            MediaContentList.Add(vm);
+            MediaFoldeVMList.Add(vm);
 
             if (subDirs.Count > 0)
             {
@@ -103,7 +103,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
             await Task.Run(() =>
             {
                 ScanAll();
-                json = JsonSerializer.Serialize(MediaContentList, new JsonSerializerOptions(JsonSerializerDefaults.Web));
+                json = JsonSerializer.Serialize(MediaFoldeVMList, new JsonSerializerOptions(JsonSerializerDefaults.Web));
 
             });
 
@@ -120,15 +120,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
             {
                 this.ScanAll();
 
-                if(_cache.TryGetValue(cacheKey,out List<MediaFolderVM> list))
-                {
-                    _cache.Remove(cacheKey);
-                    _cache.Add(cacheKey, this.MediaContentList);
-                }
-                else
-                {
-                    _cache.Add(cacheKey, this.MediaContentList);
-                }
+                _cache.Set(cacheKey, MediaFoldeVMList);
             });
         }
         #endregion
@@ -136,7 +128,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
         #region GetMediaFolderList
         public List<MediaFolderVM> GetMediaCacheList()
         {
-            if(_cache.TryGetValue(cacheKey, out List<MediaFolderVM> list))
+            if (_cache.TryGetValue(cacheKey, out List<MediaFolderVM> list))
             {
                 return list;
             }

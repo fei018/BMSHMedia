@@ -15,6 +15,7 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
         [Display(Name = "表單名")]
         public String FormName { get; set; }
 
+
         protected override void InitVM()
         {
         }

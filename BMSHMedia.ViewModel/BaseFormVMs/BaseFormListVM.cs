@@ -25,7 +25,7 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
                 this.MakeStandardAction("BaseForm", GridActionStandardTypesEnum.BatchDelete, Localizer["Sys.BatchDelete"], "Manage", dialogWidth: 800),
                 //this.MakeStandardAction("BaseForm", GridActionStandardTypesEnum.Import, Localizer["Sys.Import"], "Manage", dialogWidth: 800),
                 //this.MakeStandardAction("BaseForm", GridActionStandardTypesEnum.ExportExcel, Localizer["Sys.Export"], "Manage"),
-                this.MakeAction("BaseForm","QuerySubmitList","遞交表單","已遞交表單", GridActionParameterTypesEnum.SingleId,"Manage",dialogWidth: 800, dialogHeight:800).SetShowInRow().SetHideOnToolBar(),
+                this.MakeAction("BaseForm","QuerySubmitList","遞交表單","已遞交表單", GridActionParameterTypesEnum.SingleId,"Manage",dialogWidth: 900, dialogHeight:800).SetShowInRow().SetHideOnToolBar(),
             };
         }
 
@@ -33,8 +33,8 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
         protected override IEnumerable<IGridColumn<BaseForm_View>> InitGridHeader()
         {
             return new List<GridColumn<BaseForm_View>>{
-                this.MakeGridHeader(x=>x.ID),
-                this.MakeGridHeader(x=>x.CreateTime),
+                this.MakeGridHeader(x=>x.ID,width:300),
+                this.MakeGridHeader(x=>x.CreateTime,width:200),
                 this.MakeGridHeader(x => x.FormName),
                 this.MakeGridHeaderAction(width: 300)
             };

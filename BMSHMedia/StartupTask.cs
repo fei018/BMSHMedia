@@ -1,9 +1,12 @@
 ﻿using BMSHMedia.DataAccess;
 using BMSHMedia.ViewModel.MediaVMs;
+using BMSHMedia.ViewModel.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace BMSHMedia
@@ -20,9 +23,9 @@ namespace BMSHMedia
 
             services.AddSingleton<MediaApiVM>();
 
-            Task.Run(new MediaApiVM(serviceProvider.GetRequiredService<IDistributedCache>()).ScanAllAsync);
+            Task.Run(new MediaApiVM(serviceProvider.GetRequiredService<IMemoryCache>()).ScanAllAsync);
 
-            LiteDbContext.SetPath(env.ContentRootPath);
+            services.AddScoped(sp => new BaseFormSubmitDbService(Path.Combine(env.ContentRootPath, config.GetSection("LiteDb_FormSubmit").Value)));
         }
     }
 }

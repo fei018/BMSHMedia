@@ -4,6 +4,8 @@
     string listUrl = "/media/list";
 }
 
+<link href="~/layui-v2.9.8/css/layui.css" rel="stylesheet" />
+
 <style>
     .media-main{
         width:auto;
@@ -69,9 +71,9 @@
 </script>
 
 <div class="media-main">
-    <div class="media-row position-relative">
-        <div class="position-absolute bottom-0">
-            <a onclick="getMediaFolderById('@id');"><i class="media-icon media-icon-folder fa fa-home" style="font-size:30px;"></i></a>
+    <div class="media-row layui-row">
+        <div class="layui-col-xs3 layui-col-sm3">
+            <a class="layui-btn layui-btn-primary layui-border-blue" onclick="getMediaFolderById('@id');"><i class="media-icon layui-icon layui-icon-template-1"></i></a>
         </div>
     </div>
     <div id="mediaDirList">

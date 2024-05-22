@@ -21,10 +21,5 @@
     <ProjectReference Include="..\BMSHMedia.DataAccess\BMSHMedia.DataAccess.csproj" />
     <ProjectReference Include="..\BMSHMedia.Model\BMSHMedia.Model.csproj" />
   </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
 </Project>
 

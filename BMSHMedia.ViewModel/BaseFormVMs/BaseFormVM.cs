@@ -10,6 +10,8 @@ using Newtonsoft.Json;
 using BMSHMedia.DataAccess;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
+using Microsoft.Extensions.Hosting;
+using BMSHMedia.ViewModel.Services;
 
 
 namespace BMSHMedia.ViewModel.BaseFormVMs
@@ -41,24 +43,23 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
         }
 
         #region QuerFormPostList
-        public List<BaseFormSubmit> SubmitFormList { get; set; }
+        public List<BaseFormSubmit> SubmitFormList { get; set; } = new();
 
-        public void QuerSubmitFormList(string id)
+        public void QuerySubmitFormList(string baseFormId, BaseFormSubmitDbService formSubmitDbService)
         {
-            using var db = LiteDbContext.GetDb_FormPost();
-            var posts = db.GetCollection<BaseFormSubmit>().Find(x => x.BaseFormId.ToLower() == id.ToLower());
+            var posts = formSubmitDbService.GetByBaseFormID(baseFormId);
 
-            if (!posts.Any())
+            if (posts.Count <= 0)
             {
-                throw new Exception(nameof(BaseForm) + "ID:(" + id + ") is null in LiteDb.");
+                throw new Exception(nameof(BaseForm) + "ID:(" + baseFormId + ") is null in LiteDb.");
             }
 
-            SubmitFormList = posts.ToList();
+            SubmitFormList = posts;
         }
         #endregion
 
         #region SubmitForm
-        public void SubmitForm(IFormCollection postForm)
+        public void SubmitForm(IFormCollection postForm, BaseFormSubmitDbService formSubmitDbService)
         {
             string id = postForm["baseFormId"].Single();
 
@@ -92,19 +93,15 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
                 FormPostData = list
             };
 
-            using var db = LiteDbContext.GetDb_FormPost();
-
-            var result = db.GetCollection<BaseFormSubmit>().Insert(post);
+            formSubmitDbService.Insert(post);
         }
         #endregion
 
         #region GetBaseFormList
-        public List<BaseForm_View> BaseFormList { get; set; }
+        public List<BaseForm_View> BaseFormList { get; set; } = new();
 
         public void GetBaseFormList()
         {
-            BaseFormList = new();
-
             var vm = Wtm.CreateVM<BaseFormListVM>();
             BaseFormList = vm.GetEntityList().ToList();
         }

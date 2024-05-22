@@ -7,8 +7,9 @@
 }
 
 
-<script src="~/formbuilder/jquery-ui.min.js"></script>
-<script src="~/formbuilder/form-builder.min.js"></script>
+<script src="~/custom/formbuilder/jquery-ui.min.js"></script>
+<script src="~/custom/formbuilder/form-builder.min.js"></script>
+<script src="~/custom/formbuilder/formbuilder-init.js"></script>
 
 <wt:form vm="@Model">
     <wt:row items-per-row="ItemsPerRowEnum.One">
@@ -26,14 +27,16 @@
 
 <script>
     jQuery($ => {
-        var options = {
-            i18n: {
-                locale: 'zh-TW',
-                extension: '.txt',
-                location: '/formbuilder'
-            }
-        };
-
+        // var options = {
+        //     i18n: {
+        //         locale: 'zh-TW',
+        //         extension: '.txt',
+        //         location: '/custom/formbuilder'
+        //     },
+        //     showActionButtons: false,
+        //     disableFields: ['autocomplete', 'button', 'date', 'file', 'hidden', 'number', 'textarea']
+        // };
+        var options = getFormBuilderOptions();
         var fb = $('#@formBuilderId').formBuilder(options);
 
         $('#@btnSaveId').on('click', function () {
@@ -41,5 +44,4 @@
             return true;
         });
     });
-
 </script>
