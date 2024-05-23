@@ -74,7 +74,7 @@ namespace BMSHMedia
             // http response html 拉丁中文不编码
             services.AddSingleton(HtmlEncoder.Create(new[] { UnicodeRanges.BasicLatin, UnicodeRanges.CjkUnifiedIdeographs }));
 
-            StartupTask.Run(ConfigRoot, services, hostEnvironment); 
+            StartupTask.Add(ConfigRoot, services, hostEnvironment); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -163,15 +163,15 @@ namespace BMSHMedia
 
         private void AddCustomStaticFiles(ref IApplicationBuilder app)
         {
-            if (!Directory.Exists(SiteConfigInfo.MediaRootPath))
+            if (!Directory.Exists(MediaConfigInfo.MediaRootPath))
             {
-                throw new Exception(nameof(SiteConfigInfo.MediaRootPath) + ":(" + SiteConfigInfo.MediaRootPath + ") not exist.");
+                throw new Exception(nameof(MediaConfigInfo.MediaRootPath) + ":(" + MediaConfigInfo.MediaRootPath + ") not exist.");
             }
 
             app.UseStaticFiles(new StaticFileOptions()
             {
-                FileProvider = new PhysicalFileProvider(SiteConfigInfo.MediaRootPath),
-                RequestPath = SiteConfigInfo.CustomStaticWebPath,
+                FileProvider = new PhysicalFileProvider(MediaConfigInfo.MediaRootPath),
+                RequestPath = MediaConfigInfo.CustomStaticWebPath,
             });
         }
     }

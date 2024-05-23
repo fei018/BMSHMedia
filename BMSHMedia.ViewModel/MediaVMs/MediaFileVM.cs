@@ -59,7 +59,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
             // 去掉 MediaRootPath
             var path = MediaVMHelper.CutMediaRootPath(fullName);
 
-            return $"{SiteConfigInfo.CustomStaticWebPath}/" + MediaVMHelper.EncodeFilePathUrl(path);
+            return $"{MediaConfigInfo.CustomStaticWebPath}/" + MediaVMHelper.EncodeFilePathUrl(path);
         }
 
         /// <summary>

@@ -1,17 +1,15 @@
-﻿using System;
+﻿using BMSHMedia.Model.Form;
+using BMSHMedia.ViewModel.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Primitives;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 using WalkingTec.Mvvm.Core;
 using WalkingTec.Mvvm.Core.Extensions;
-using BMSHMedia.Model.Form;
-using Newtonsoft.Json;
-using BMSHMedia.DataAccess;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Primitives;
-using Microsoft.Extensions.Hosting;
-using BMSHMedia.ViewModel.Services;
 
 
 namespace BMSHMedia.ViewModel.BaseFormVMs
@@ -28,7 +26,7 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
         }
 
         public override void DoAdd()
-        {           
+        {
             base.DoAdd();
         }
 
@@ -43,23 +41,27 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
         }
 
         #region QuerFormPostList
-        public List<BaseFormSubmit> SubmitFormList { get; set; } = new();
+        public List<BaseFormSubmit> FormSubmitList { get; set; } = new();
 
-        public void QuerySubmitFormList(string baseFormId, BaseFormSubmitDbService formSubmitDbService)
+        public async Task QueryFormSubmitList(string baseFormId)
         {
-            var posts = formSubmitDbService.GetByBaseFormID(baseFormId);
+            var submits = await DC.Set<BaseFormSubmit>().AsNoTracking()
+                                    .Include(x => x.FormSubmitDataList)
+                                    .CheckID(baseFormId, x => x.BaseFormId)
+                                    .OrderByDescending(x=>x.SubmitTime)
+                                    .ToListAsync();
 
-            if (posts.Count <= 0)
+            if (submits.Count <= 0)
             {
-                throw new Exception(nameof(BaseForm) + "ID:(" + baseFormId + ") is null in LiteDb.");
+                throw new Exception(nameof(BaseFormSubmit) + "BaseFormID:(" + baseFormId + ") is null in database.");
             }
 
-            SubmitFormList = posts;
+            FormSubmitList = submits;
         }
         #endregion
 
         #region SubmitForm
-        public void SubmitForm(IFormCollection postForm, BaseFormSubmitDbService formSubmitDbService)
+        public void SubmitForm(IFormCollection postForm)
         {
             string id = postForm["baseFormId"].Single();
 
@@ -67,7 +69,9 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
 
             var formDataJsonList = JsonConvert.DeserializeObject<List<BaseFormDataJson>>(entity.FormData);
 
-            var list = new List<BaseFormSubmitNameValue>();
+            var submitDataList = new List<BaseFormSubmitData>();
+
+            Guid newSubmitId = Guid.NewGuid();
 
             foreach (var item in formDataJsonList)
             {
@@ -75,31 +79,39 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
                 {
                     if (postForm.TryGetValue(item.Name, out StringValues value))
                     {
-                        var vm = new BaseFormSubmitNameValue()
+                        var vm = new BaseFormSubmitData()
                         {
                             Name = item.Name,
                             Value = value,
                             Label = item.Label,
+                            FormSubmitId = newSubmitId
                         };
-                        list.Add(vm);
+
+                        submitDataList.Add(vm);
                     };
-                }              
+                }
             }
 
-            var post = new BaseFormSubmit()
+            var submit = new BaseFormSubmit()
             {
                 SubmitTime = DateTime.Now,
-                BaseFormId = id,
-                FormPostData = list
+                BaseFormId = Guid.Parse(id),
+                BaseFormName = entity.FormName,
+                ID = newSubmitId
             };
 
-            formSubmitDbService.Insert(post);
+            DC.Set<BaseFormSubmit>().Add(submit);
+            DC.Set<BaseFormSubmitData>().AddRange(submitDataList);
+            DC.SaveChanges();
         }
         #endregion
 
         #region GetBaseFormList
         public List<BaseForm_View> BaseFormList { get; set; } = new();
 
+        /// <summary>
+        /// 顯示 form list 頁面數據
+        /// </summary>
         public void GetBaseFormList()
         {
             var vm = Wtm.CreateVM<BaseFormListVM>();

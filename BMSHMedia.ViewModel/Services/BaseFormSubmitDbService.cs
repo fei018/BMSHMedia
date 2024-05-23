@@ -32,16 +32,16 @@ namespace BMSHMedia.ViewModel.Services
             db.GetCollection<BaseFormSubmit>().Insert(form);
         }
 
-        public List<BaseFormSubmit> GetByBaseFormID(string baseFormID)
-        {
-            using var db = GetDb();
-            return db.GetCollection<BaseFormSubmit>().Find(x => x.BaseFormId.ToLower() == baseFormID.ToLower()).ToList();
-        }
+        //public List<BaseFormSubmit> GetByBaseFormID(string baseFormID)
+        //{
+        //    using var db = GetDb();
+        //    return db.GetCollection<BaseFormSubmit>().Find(x => x.BaseFormId.ToLower() == baseFormID.ToLower()).ToList();
+        //}
 
-        public void DeleteAll(string baseFormID)
-        {
-            using var db = GetDb();
-            db.GetCollection<BaseFormSubmit>().DeleteMany(x => x.BaseFormId == baseFormID);
-        }
+        //public void DeleteAll(string baseFormID)
+        //{
+        //    using var db = GetDb();
+        //    db.GetCollection<BaseFormSubmit>().DeleteMany(x => x.BaseFormId == baseFormID);
+        //}
     }
 }

@@ -25,7 +25,7 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
                 this.MakeStandardAction("BaseForm", GridActionStandardTypesEnum.BatchDelete, Localizer["Sys.BatchDelete"], "Manage", dialogWidth: 800),
                 //this.MakeStandardAction("BaseForm", GridActionStandardTypesEnum.Import, Localizer["Sys.Import"], "Manage", dialogWidth: 800),
                 //this.MakeStandardAction("BaseForm", GridActionStandardTypesEnum.ExportExcel, Localizer["Sys.Export"], "Manage"),
-                this.MakeAction("BaseForm","QuerySubmitList","遞交表單","已遞交表單", GridActionParameterTypesEnum.SingleId,"Manage",dialogWidth: 900, dialogHeight:800).SetShowInRow().SetHideOnToolBar(),
+                this.MakeAction("BaseForm","QuerySubmitList","表單數據","已收到表單數據", GridActionParameterTypesEnum.SingleId,"Manage",dialogWidth: 1000, dialogHeight:800).SetShowInRow().SetHideOnToolBar(),
             };
         }
 

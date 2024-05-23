@@ -30,7 +30,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
         {
             MediaFoldeVMList = new();
 
-            string root = SiteConfigInfo.MediaRootPath;
+            string root = MediaConfigInfo.MediaRootPath;
 
             if (!Directory.Exists(root))
             {
@@ -118,9 +118,11 @@ namespace BMSHMedia.ViewModel.MediaVMs
         {
             await Task.Run(() =>
             {
+                Console.WriteLine($"[{DateTime.Now}] : {nameof(MediaApiVM)} ScanAllAsync Start.");
                 this.ScanAll();
 
                 _cache.Set(cacheKey, MediaFoldeVMList);
+                Console.WriteLine($"[{DateTime.Now}] : {nameof(MediaApiVM)} ScanAllAsync Completed.");
             });
         }
         #endregion

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BMSHMedia.Extentions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -13,7 +14,10 @@ namespace BMSHMedia
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            var host = CreateWebHostBuilder(args).Build();
+            host.RegisterApplicationLifetimeEvents();
+
+            host.Run();
         }
 
         public static IHostBuilder CreateWebHostBuilder(string[] args)

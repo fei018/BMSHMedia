@@ -39,7 +39,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
 
         public static string CutMediaRootPath(string sysFullPath)
         {
-            return sysFullPath.Substring(SiteConfigInfo.MediaRootPath.Length).TrimStart('\\');
+            return sysFullPath.Substring(MediaConfigInfo.MediaRootPath.Length).TrimStart('\\');
         }
 
         /// <summary>
@@ -49,14 +49,14 @@ namespace BMSHMedia.ViewModel.MediaVMs
         /// <returns></returns>
         public static string GetSysFullPath(string relativePath)
         {
-            return Path.Combine(SiteConfigInfo.MediaRootPath, relativePath);
+            return Path.Combine(MediaConfigInfo.MediaRootPath, relativePath);
         }
 
         public static bool IsMediaRootPath(string path)
         {
             if (!string.IsNullOrEmpty(path))
             {
-                string root = SiteConfigInfo.MediaRootPath.Trim().TrimEnd('\\').ToLower();
+                string root = MediaConfigInfo.MediaRootPath.Trim().TrimEnd('\\').ToLower();
                 string current = path.Trim()?.TrimEnd('\\')?.ToLower();
 
                 if (root == current)
@@ -69,7 +69,7 @@ namespace BMSHMedia.ViewModel.MediaVMs
                 }
             }
 
-            throw new Exception(nameof(SiteConfigInfo.MediaRootPath) + " 路徑 IsNullOrEmpty.");
+            throw new Exception(nameof(MediaConfigInfo.MediaRootPath) + " 路徑 IsNullOrEmpty.");
         }
     }
 }

@@ -26,6 +26,10 @@ namespace BMSHMedia.DataAccess
 
         public DbSet<BaseForm> BaseForms { get; set; }
 
+        public DbSet<BaseFormSubmit> BaseFormSubmits { get; set; }
+
+        public DbSet<BaseFormSubmitData> BaseFormSubmitDatas { get; set; }
+
         public DataContext(CS cs)
              : base(cs)
         {

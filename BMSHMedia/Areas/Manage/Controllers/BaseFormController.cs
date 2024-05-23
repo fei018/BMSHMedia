@@ -4,6 +4,7 @@ using BMSHMedia.ViewModel.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 using WalkingTec.Mvvm.Core;
 using WalkingTec.Mvvm.Core.Extensions;
 using WalkingTec.Mvvm.Mvc;
@@ -15,12 +16,6 @@ namespace BMSHMedia.Controllers
     [ActionDescription("基本表單")]
     public partial class BaseFormController : BaseController
     {
-        private readonly BaseFormSubmitDbService _formSubmitDbService;
-
-        public BaseFormController(BaseFormSubmitDbService formSubmitDbService)
-        {
-            _formSubmitDbService = formSubmitDbService;
-        }
 
         #region Search
         [ActionDescription("Sys.Search")]
@@ -131,7 +126,6 @@ namespace BMSHMedia.Controllers
             var vm = Wtm.CreateVM<BaseFormVM>(id);
 
             vm.DoDelete();
-            _formSubmitDbService.DeleteAll(id);
 
             if (!ModelState.IsValid)
             {
@@ -233,12 +227,12 @@ namespace BMSHMedia.Controllers
 
         #region QuerySubmitList
         [ActionDescription("查看遞交表單列表")]
-        public IActionResult QuerySubmitList(string id)
+        public async Task<IActionResult> QuerySubmitList(string id)
         {
             try
             {
                 var vm = Wtm.CreateVM<BaseFormVM>();
-                vm.QuerySubmitFormList(id, _formSubmitDbService);
+                await vm.QueryFormSubmitList(id);
 
                 return PartialView(vm);
             }

@@ -1,39 +1,40 @@
 ﻿@model BMSHMedia.ViewModel.BaseFormVMs.BaseFormVM
 @{
-    var list = Model.SubmitFormList;
-    var post = Model.SubmitFormList[0];
+    var list = Model.FormSubmitList;
+    var post = Model.FormSubmitList[0];
 
     string tableId = "table" + Guid.NewGuid().ToString("N");
 }
 
-<table lay-filter="@tableId">
-    <thead>
-        <tr>
-            <th lay-data="{field:'@post.SubmitTime', width:200}">提交時間</th>
-            @foreach (var item in post.FormPostData)
-            {
-                <th lay-data="{field:'@item.Name', width:200}">@item.Label</th>
-            }
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in list)
-        {
+<div style="padding:20px;">
+    <table lay-filter="@tableId">
+        <thead>
             <tr>
-                <td>@item.SubmitTime</td>
-                @foreach (var data in item.FormPostData)
+                <th lay-data="{field:'@post.SubmitTime', width:200}">提交時間</th>
+                @foreach (var item in post.FormSubmitDataList)
                 {
-                    <td>@data.Value</td>
+                    <th lay-data="{field:'@item.Name', width:200}">@item.Label</th>
                 }
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in list)
+            {
+                <tr>
+                    <td>@item.SubmitTime</td>
+                    @foreach (var data in item.FormSubmitDataList)
+                    {
+                        <td>@data.Value</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 <script>
     layui.table.init('@tableId', {
-        //limit:1000,
-        page:false,
+        page:true,
         defaultToolbar: ['filter', 'print', 'exports'],
     });
 </script>
