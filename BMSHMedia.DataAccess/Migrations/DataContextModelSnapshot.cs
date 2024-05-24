@@ -120,7 +120,7 @@ namespace BMSHMedia.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BaseFormId")
+                    b.Property<Guid?>("BaseFormId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("BaseFormName")

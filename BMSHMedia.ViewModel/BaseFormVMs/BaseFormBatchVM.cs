@@ -19,6 +19,7 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
             ListVM = new BaseFormListVM();
             LinkedVM = new BaseForm_BatchEdit();
         }
+
     }
 
 	/// <summary>
@@ -26,6 +27,8 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
     /// </summary>
     public class BaseForm_BatchEdit : BaseVM
     {
+        [Display(Name = "發佈")]
+        public bool IsPublish {  get; set; }
 
         protected override void InitVM()
         {

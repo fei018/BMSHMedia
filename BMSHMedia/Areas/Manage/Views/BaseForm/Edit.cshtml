@@ -11,31 +11,20 @@
 
 <wt:form vm="@Model">
     <wt:row items-per-row="ItemsPerRowEnum.One">
-        <wt:textbox field="Entity.FormName" />
         <wt:hidden field="Entity.FormData" id="@formdataId" />
     </wt:row>
     <wt:hidden field="Entity.ID" />
     <wt:row align="AlignEnum.Right">
-        <wt:submitbutton id="@btnSaveId" />
+        <wt:submitbutton />
         <wt:closebutton />
     </wt:row>
 </wt:form>
 
-<div id="@formBuilderId" style="width:800px;margin:0 auto;">
+<div id="@formBuilderId" style="width:900px;margin:0 auto;">
 </div>
 
 <script>
     jQuery($ => {
-        // var options = {
-        //     i18n: {
-        //         locale: 'zh-TW',
-        //         extension: '.txt',
-        //         location: '/custom/formbuilder'
-        //     },
-        //     showActionButtons: false,
-        //     formData: Html.Raw(Model.Entity.FormData),
-        // };
-
         var options = getFormBuilderOptions(@Html.Raw(Model.Entity.FormData));
         var fb = $('#@formBuilderId').formBuilder(options);
 

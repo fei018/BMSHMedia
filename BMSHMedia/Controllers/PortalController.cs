@@ -34,5 +34,14 @@ namespace BMSHMedia.Controllers
             return View();
         }
 
+        public IActionResult LHMOrigin()
+        {
+            return View();
+        }
+
+        public IActionResult LHMContact()
+        {
+            return View();
+        }
     }
 }

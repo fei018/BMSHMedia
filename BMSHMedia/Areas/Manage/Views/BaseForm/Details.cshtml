@@ -1,19 +1,18 @@
 ﻿@model BMSHMedia.ViewModel.BaseFormVMs.BaseFormVM
 @{
     string formRenderId = "fb" + Guid.NewGuid().ToString("N");
-    string postUrl = "/form/";
 }
 
-<script src="~/formbuilder/form-render.min.js"></script>
+<script src="~/custom/formbuilder/form-render.min.js"></script>
 
-<form action="">
-    <input type="hidden" name="baseFormId"/>
-    <div id="@formRenderId">
+<div style="padding:50px;">
+    <div>
+        <wt:display field="Entity.FormName" />
     </div>
     <hr />
-    <button type="submit">提交</button>
-</form>
-
+    <div id="@formRenderId" style="border-style:dotted;padding:5px;">
+    </div>
+</div>
 
 
 <script>

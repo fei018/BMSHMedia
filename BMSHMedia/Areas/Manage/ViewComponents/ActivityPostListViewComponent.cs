@@ -1,9 +1,4 @@
-﻿using BMSHMedia.ViewModel.ActivityPostVMs;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using WalkingTec.Mvvm.Core;
-
-namespace BMSHMedia.Manage.ViewComponents
+﻿namespace BMSHMedia.Manage.ViewComponents
 {
     //public class ActivityPostListViewComponent : ViewComponent
     //{

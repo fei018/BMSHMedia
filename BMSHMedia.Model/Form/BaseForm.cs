@@ -14,5 +14,8 @@ namespace BMSHMedia.Model.Form
         [Display(Name = "表單數據")]
         [Required(ErrorMessage = "{0}必填")]
         public string FormData { get; set; }
+
+        [Display(Name = "發佈")]
+        public bool IsPublish { get; set; } = false;
     }
 }

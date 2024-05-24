@@ -46,10 +46,6 @@
     <ProjectReference Include="..\BMSHMedia.DataAccess\BMSHMedia.DataAccess.csproj" />
     <ProjectReference Include="..\BMSHMedia.ViewModel\BMSHMedia.ViewModel.csproj" />
  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Manage\Views\ActivityPost\Components\" />
-  </ItemGroup>
 </Project>
 
 

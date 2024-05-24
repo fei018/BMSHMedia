@@ -8,12 +8,14 @@
 
 <script src="~/custom/formbuilder/form-render.min.js"></script>
 
-<form action="@postUrl" method="post" target="_blank" style="max-width:600px;" class="mx-auto mt-3">
+<form action="@postUrl" method="post" target="_blank" style="max-width:600px;" class="mx-auto mt-3 px-3">
     <input type="hidden" name="baseFormId" value="@Model.Entity.ID"/>
     <div id="@formRenderId">
     </div>
     <hr />
-    <button type="submit" class="btn btn-primary">提交</button>
+    <div class="text-end">
+        <button type="submit" class="btn btn-primary">提交</button>
+    </div>
 </form>
 
 <script>

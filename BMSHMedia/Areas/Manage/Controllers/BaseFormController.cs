@@ -1,9 +1,11 @@
 ﻿using BMSHMedia.Extentions;
+using BMSHMedia.Model.Form;
 using BMSHMedia.ViewModel.BaseFormVMs;
 using BMSHMedia.ViewModel.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WalkingTec.Mvvm.Core;
 using WalkingTec.Mvvm.Core.Extensions;
@@ -81,8 +83,16 @@ namespace BMSHMedia.Controllers
         [ActionDescription("Sys.Edit")]
         public ActionResult Edit(string id)
         {
-            var vm = Wtm.CreateVM<BaseFormVM>(id);
-            return PartialView(vm);
+            try
+            {
+                var vm = Wtm.CreateVM<BaseFormVM>(id);
+                vm.CheckEdit();
+                return PartialView(vm);
+            }
+            catch (Exception ex)
+            {
+                return this.ErrorView(ex.Message);
+            }
         }
 
         [ActionDescription("Sys.Edit")]
@@ -148,27 +158,27 @@ namespace BMSHMedia.Controllers
         #endregion
 
         #region BatchEdit
-        //[HttpPost]
-        //[ActionDescription("Sys.BatchEdit")]
-        //public ActionResult BatchEdit(string[] IDs)
-        //{
-        //    var vm = Wtm.CreateVM<BaseFormBatchVM>(Ids: IDs);
-        //    return PartialView(vm);
-        //}
+        [HttpPost]
+        [ActionDescription("Sys.BatchEdit")]
+        public ActionResult BatchEdit(string[] IDs)
+        {
+            var vm = Wtm.CreateVM<BaseFormBatchVM>(Ids: IDs);
+            return PartialView(vm);
+        }
 
-        //[HttpPost]
-        //[ActionDescription("Sys.BatchEdit")]
-        //public ActionResult DoBatchEdit(BaseFormBatchVM vm, IFormCollection nouse)
-        //{
-        //    if (!ModelState.IsValid || !vm.DoBatchEdit())
-        //    {
-        //        return PartialView("BatchEdit",vm);
-        //    }
-        //    else
-        //    {
-        //        return FFResult().CloseDialog().RefreshGrid().Alert(Localizer["Sys.BatchEditSuccess", vm.Ids.Length]);
-        //    }
-        //}
+        [HttpPost]
+        [ActionDescription("Sys.BatchEdit")]
+        public ActionResult DoBatchEdit(BaseFormBatchVM vm, IFormCollection nouse)
+        {
+            if (!ModelState.IsValid || !vm.DoBatchEdit())
+            {
+                return PartialView("BatchEdit", vm);
+            }
+            else
+            {
+                return FFResult().CloseDialog().RefreshGrid().Alert(Localizer["Sys.BatchEditSuccess", vm.Ids.Length]);
+            }
+        }
         #endregion
 
         #region BatchDelete
@@ -226,7 +236,7 @@ namespace BMSHMedia.Controllers
         //}
 
         #region QuerySubmitList
-        [ActionDescription("查看遞交表單列表")]
+        [ActionDescription("查看提交表單數據")]
         public async Task<IActionResult> QuerySubmitList(string id)
         {
             try
@@ -276,13 +286,13 @@ namespace BMSHMedia.Controllers
         #region /forms/FormsIndex
         [Route("/forms/[action]")]
         [Public]
-        public IActionResult FormsIndex()
+        public async Task<IActionResult> FormsIndex(int pageIndex = 1)
         {
             try
             {
                 var vm = Wtm.CreateVM<BaseFormVM>();
-                vm.GetBaseFormList();
-                return View(vm);
+                var result = await vm.GetBaseFormPagedList(pageIndex);
+                return View(result);
             }
             catch (Exception ex)
             {
@@ -290,5 +300,6 @@ namespace BMSHMedia.Controllers
             }
         }
         #endregion
+
     }
 }

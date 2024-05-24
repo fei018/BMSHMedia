@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WalkingTec.Mvvm.Core;
 using WalkingTec.Mvvm.Core.Extensions;
+using X.PagedList;
 
 
 namespace BMSHMedia.ViewModel.BaseFormVMs
@@ -38,7 +39,26 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
         public override void DoDelete()
         {
             base.DoDelete();
+
+            var submits = DC.Set<BaseFormSubmit>().CheckID(Entity.ID,x=>x.BaseFormId).ToList();
+            DC.Set<BaseFormSubmit>().RemoveRange(submits);
+            DC.SaveChanges();
         }
+
+        #region CheckEdit
+        /// <summary>
+        /// 檢查表單是否已經有提交的數據，如有就不能再修改
+        /// </summary>
+        /// <exception cref="throw: 此表單已經有數據提交，拒絕修改"></exception>
+        public void CheckEdit()
+        {
+            var submits = DC.Set<BaseFormSubmit>().CheckID(Entity.ID, x => x.ID).ToList();
+            if (submits != null && submits.Count > 0)
+            {
+                throw new Exception("此表單已經有數據提交，拒絕修改.");
+            }
+        }
+        #endregion
 
         #region QuerFormPostList
         public List<BaseFormSubmit> FormSubmitList { get; set; } = new();
@@ -53,7 +73,7 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
 
             if (submits.Count <= 0)
             {
-                throw new Exception(nameof(BaseFormSubmit) + "BaseFormID:(" + baseFormId + ") is null in database.");
+                throw new Exception("查無數據.");
             }
 
             FormSubmitList = submits;
@@ -112,10 +132,16 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
         /// <summary>
         /// 顯示 form list 頁面數據
         /// </summary>
-        public void GetBaseFormList()
+        public async Task<IPagedList<BaseForm_View>> GetBaseFormPagedList(int pageIndex)
         {
-            var vm = Wtm.CreateVM<BaseFormListVM>();
-            BaseFormList = vm.GetEntityList().ToList();
+            var vm = await DC.Set<BaseForm>().Where(x => x.IsPublish)
+                                        .Select(x => new BaseForm_View
+                                        {
+                                            ID = x.ID,
+                                            FormName = x.FormName,
+                                        })
+                                        .ToPagedListAsync(pageIndex, 10);
+            return vm;
         }
         #endregion
     }

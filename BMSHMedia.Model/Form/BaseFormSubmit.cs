@@ -16,7 +16,7 @@ namespace BMSHMedia.Model.Form
         [Display(Name = "提交時間")]
         public DateTime SubmitTime { get; set; }
         
-        public Guid BaseFormId { get; set; }
+        public Guid? BaseFormId { get; set; }
 
         [Display(Name = "表單名")]
         public string BaseFormName { get; set; }
