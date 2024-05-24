@@ -1,0 +1,12 @@
+﻿@model BMSHMedia.ViewModel.BaseFormVMs.BaseFormVM
+
+<wt:form vm="@Model">
+    <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:checkbox field="Entity.IsPublish"/>
+        <wt:hidden field="Entity.ID" />
+    </wt:row>
+    <wt:row align="AlignEnum.Right">
+        <wt:submitbutton />
+        <wt:closebutton />
+    </wt:row>
+</wt:form>

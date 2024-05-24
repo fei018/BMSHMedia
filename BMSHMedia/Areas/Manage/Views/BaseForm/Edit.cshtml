@@ -11,11 +11,12 @@
 
 <wt:form vm="@Model">
     <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:textbox field="Entity.FormName" />
         <wt:hidden field="Entity.FormData" id="@formdataId" />
     </wt:row>
     <wt:hidden field="Entity.ID" />
     <wt:row align="AlignEnum.Right">
-        <wt:submitbutton />
+        <wt:submitbutton id="@btnSaveId"/>
         <wt:closebutton />
     </wt:row>
 </wt:form>

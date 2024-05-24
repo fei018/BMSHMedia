@@ -91,7 +91,7 @@ namespace BMSHMedia.Controllers
             }
             catch (Exception ex)
             {
-                return this.ErrorView(ex.Message);
+                return Content(ex.Message);
             }
         }
 
@@ -235,14 +235,38 @@ namespace BMSHMedia.Controllers
         //    return vm.GetExportData();
         //}
 
+        #region Publish
+        [ActionDescription("發佈")]
+        public IActionResult Publish(string id)
+        {
+            var vm = Wtm.CreateVM<BaseFormVM>(id);
+            return PartialView(vm);
+        }
+
+        [HttpPost]
+        [ActionDescription("發佈")]
+        public IActionResult Publish(BaseFormVM vm)
+        {
+            try
+            {
+                vm.DoPublish();
+                return FFResult().CloseDialog().RefreshGrid();
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+        }
+        #endregion
+
         #region QuerySubmitList
         [ActionDescription("查看提交表單數據")]
         public async Task<IActionResult> QuerySubmitList(string id)
         {
             try
             {
-                var vm = Wtm.CreateVM<BaseFormVM>();
-                await vm.QueryFormSubmitList(id);
+                var vm = Wtm.CreateVM<BaseFormVM>(id);
+                await vm.QueryFormSubmitList();
 
                 return PartialView(vm);
             }
@@ -301,5 +325,21 @@ namespace BMSHMedia.Controllers
         }
         #endregion
 
+        #region 
+        [ActionDescription("下載提交數據Excel")]
+        public async Task<IActionResult> FormSubmitExcel(string id)
+        {
+            try
+            {
+                var vm = Wtm.CreateVM<BaseFormVM>(id);
+                var result = await vm.GetFormSubmitExcel();
+                return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", vm.Entity.FormName + ".xlsx");
+            }
+            catch (Exception ex)
+            {
+                return this.ErrorView(ex.Message);
+            }
+        }
+        #endregion
     }
 }

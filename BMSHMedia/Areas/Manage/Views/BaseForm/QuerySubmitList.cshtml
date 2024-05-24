@@ -4,36 +4,47 @@
     var post = Model.FormSubmitList[0];
 
     string tableId = "table" + Guid.NewGuid().ToString("N");
+
+    string excelUrl = "/manage/baseform/FormSubmitExcel/" + Model.Entity.ID;
 }
 
-<div style="padding:20px;">
-    <table lay-filter="@tableId">
-        <thead>
-            <tr>
-                <th lay-data="{field:'@post.SubmitTime', width:200}">提交時間</th>
-                @foreach (var item in post.FormSubmitDataList)
-                {
-                    <th lay-data="{field:'@item.Name', width:200}">@item.Label</th>
-                }
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in list)
-            {
+
+@if (list.Count > 0)
+{
+    <div style="padding:20px;">
+        <a class="layui-btn" href="@excelUrl" target="_blank">匯出Excel</a>
+    </div>
+
+    <div style="padding:20px;">
+        <table lay-filter="@tableId">
+            <thead>
                 <tr>
-                    <td>@item.SubmitTime</td>
-                    @foreach (var data in item.FormSubmitDataList)
+                    <th lay-data="{field:'@post.SubmitTime', width:200}">提交時間</th>
+                    @foreach (var item in post.FormSubmitDataList)
                     {
-                        <td>@data.Value</td>
+                        <th lay-data="{field:'@item.Name', width:200}">@item.Label</th>
                     }
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var item in list)
+                {
+                    <tr>
+                        <td>@item.SubmitTime</td>
+                        @foreach (var data in item.FormSubmitDataList)
+                        {
+                            <td>@data.Value</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-<script>
-    layui.table.init('@tableId', {
-        page:true,
-    });
-</script>
+    <script>
+        layui.table.init('@tableId', {
+            page: true,
+        });
+    </script>
+}
+

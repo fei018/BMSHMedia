@@ -18,6 +18,7 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
         {
             return new List<GridAction>
             {
+                this.MakeAction("BaseForm","Publish","發佈","發佈", GridActionParameterTypesEnum.SingleId,"Manage",dialogWidth:800).SetShowInRow().SetHideOnToolBar(),
                 this.MakeStandardAction("BaseForm", GridActionStandardTypesEnum.Create, Localizer["Sys.Create"],"Manage", dialogWidth: 800).SetMax(),
                 this.MakeStandardAction("BaseForm", GridActionStandardTypesEnum.Edit, Localizer["Sys.Edit"], "Manage", dialogWidth: 800).SetMax(),
                 this.MakeStandardAction("BaseForm", GridActionStandardTypesEnum.Delete, Localizer["Sys.Delete"], "Manage", dialogWidth: 800),

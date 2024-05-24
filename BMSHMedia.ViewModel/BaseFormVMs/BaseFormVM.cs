@@ -3,9 +3,12 @@ using BMSHMedia.ViewModel.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Primitives;
+using MiniExcelLibs;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using WalkingTec.Mvvm.Core;
@@ -52,7 +55,7 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
         /// <exception cref="throw: 此表單已經有數據提交，拒絕修改"></exception>
         public void CheckEdit()
         {
-            var submits = DC.Set<BaseFormSubmit>().CheckID(Entity.ID, x => x.ID).ToList();
+            var submits = DC.Set<BaseFormSubmit>().CheckID(Entity.ID, x => x.BaseFormId).ToList();
             if (submits != null && submits.Count > 0)
             {
                 throw new Exception("此表單已經有數據提交，拒絕修改.");
@@ -63,19 +66,21 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
         #region QuerFormPostList
         public List<BaseFormSubmit> FormSubmitList { get; set; } = new();
 
-        public async Task QueryFormSubmitList(string baseFormId)
+        public async Task QueryFormSubmitList()
         {
             var submits = await DC.Set<BaseFormSubmit>().AsNoTracking()
                                     .Include(x => x.FormSubmitDataList)
-                                    .CheckID(baseFormId, x => x.BaseFormId)
+                                    .CheckID(Entity.ID, x => x.BaseFormId)
                                     .OrderByDescending(x=>x.SubmitTime)
                                     .ToListAsync();
+
+
 
             if (submits.Count <= 0)
             {
                 throw new Exception("查無數據.");
             }
-
+            
             FormSubmitList = submits;
         }
         #endregion
@@ -142,6 +147,47 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
                                         })
                                         .ToPagedListAsync(pageIndex, 10);
             return vm;
+        }
+        #endregion
+
+        #region DoPublish
+        public void DoPublish()
+        {
+            DC.UpdateProperty(Entity, x => x.IsPublish);
+            DC.SaveChanges();
+        }
+        #endregion
+
+        #region GetFormSubmitExcel
+        public async Task<byte[]> GetFormSubmitExcel()
+        {
+            using var table = new DataTable();
+
+            await QueryFormSubmitList();
+
+            var tempSubmit = FormSubmitList[0];
+
+            foreach (var item in tempSubmit.FormSubmitDataList)
+            {
+                table.Columns.Add(item.Label, typeof(string));
+            }
+
+            foreach (var submit in FormSubmitList)
+            {
+                var row = table.NewRow();
+
+                var data = submit.FormSubmitDataList;
+
+                for (var i = 0; i < data.Count; i++)
+                {
+                    row[i] = data[i].Value;
+                }
+            }
+
+            using var ms = new MemoryStream();
+            await ms.SaveAsAsync(table);
+            ms.Seek(0, SeekOrigin.Begin);
+            return ms.ToArray();
         }
         #endregion
     }
