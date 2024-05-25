@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Primitives;
 using MiniExcelLibs;
 using Newtonsoft.Json;
+using NPOI.OpenXmlFormats.Spreadsheet;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -92,28 +93,33 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
 
             var entity = DC.Set<BaseForm>().Where(x => x.ID.ToString().ToLower() == id.ToLower()).SingleOrDefault();
 
-            var formDataJsonList = JsonConvert.DeserializeObject<List<BaseFormDataJson>>(entity.FormData);
+            var formDataFormatList = JsonConvert.DeserializeObject<List<BaseFormDataFormat>>(entity.FormData);
 
             var submitDataList = new List<BaseFormSubmitData>();
 
             Guid newSubmitId = Guid.NewGuid();
 
-            foreach (var item in formDataJsonList)
+            foreach (var item in formDataFormatList)
             {
                 if (!string.IsNullOrEmpty(item.Name))
                 {
+                    var vm = new BaseFormSubmitData
+                    {
+                        Name = item.Name,
+                        Label = item.Label,
+                        FormSubmitId = newSubmitId
+                    };
+
                     if (postForm.TryGetValue(item.Name, out StringValues value))
                     {
-                        var vm = new BaseFormSubmitData()
-                        {
-                            Name = item.Name,
-                            Value = value,
-                            Label = item.Label,
-                            FormSubmitId = newSubmitId
-                        };
+                        vm.Value = value;
+                    }
+                    else
+                    {
+                        vm.Value = string.Empty;
+                    }
 
-                        submitDataList.Add(vm);
-                    };
+                    submitDataList.Add(vm);
                 }
             }
 
@@ -161,32 +167,49 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
         #region GetFormSubmitExcel
         public async Task<byte[]> GetFormSubmitExcel()
         {
-            using var table = new DataTable();
-
             await QueryFormSubmitList();
 
-            var tempSubmit = FormSubmitList[0];
+            var entity = DC.Set<BaseForm>().AsNoTracking().CheckID(Entity.ID, x => x.ID).SingleOrDefault();
 
-            foreach (var item in tempSubmit.FormSubmitDataList)
+            var formDataFormatList = JsonConvert.DeserializeObject<List<BaseFormDataFormat>>(entity.FormData);
+
+            var result = new List<Dictionary<string, object>>();
+
+            // 添加 列名 和 第一行數據 ( name = 列名, lable = 第一行數據 )
+            var column = new Dictionary<string, object>();
+            foreach (var format in formDataFormatList)
             {
-                table.Columns.Add(item.Label, typeof(string));
-            }
-
-            foreach (var submit in FormSubmitList)
-            {
-                var row = table.NewRow();
-
-                var data = submit.FormSubmitDataList;
-
-                for (var i = 0; i < data.Count; i++)
+                if (!string.IsNullOrEmpty(format.Name))
                 {
-                    row[i] = data[i].Value;
+                    column.Add(format.Name, format.Label);
                 }
             }
 
+            result.Add(column);
+
+            foreach (var submit in FormSubmitList)
+            {
+                var row = new Dictionary<string,object>();
+
+                // 新增 row， 按照 列col 給 row 添加 cell 數據
+                foreach (var col in column)
+                {
+                    var cell = submit.FormSubmitDataList.SingleOrDefault(x => x.Name == col.Key);
+                    if (cell == null)
+                    {
+                        row.Add(col.Key, string.Empty);
+                    }
+                    else
+                    {
+                        row.Add(col.Key, cell.Value);
+                    }
+                }
+
+                result.Add(row);
+            }
+
             using var ms = new MemoryStream();
-            await ms.SaveAsAsync(table);
-            ms.Seek(0, SeekOrigin.Begin);
+            await ms.SaveAsAsync(result);
             return ms.ToArray();
         }
         #endregion

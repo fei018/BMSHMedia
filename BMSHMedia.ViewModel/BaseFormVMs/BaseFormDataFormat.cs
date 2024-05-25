@@ -2,7 +2,7 @@
 
 namespace BMSHMedia.ViewModel.BaseFormVMs
 {
-    public class BaseFormDataJson
+    public class BaseFormDataFormat
     {
         public string Type { get; set; }
         public bool Required { get; set; }
