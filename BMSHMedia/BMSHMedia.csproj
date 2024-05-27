@@ -11,12 +11,16 @@
 
   <ItemGroup>
     <Compile Remove="Areas\LiveManage\**" />
+    <Compile Remove="LocalDb\**" />
     <Compile Remove="wwwroot\media-file\**" />
     <Content Remove="Areas\LiveManage\**" />
+    <Content Remove="LocalDb\**" />
     <Content Remove="wwwroot\media-file\**" />
     <EmbeddedResource Remove="Areas\LiveManage\**" />
+    <EmbeddedResource Remove="LocalDb\**" />
     <EmbeddedResource Remove="wwwroot\media-file\**" />
     <None Remove="Areas\LiveManage\**" />
+    <None Remove="LocalDb\**" />
     <None Remove="wwwroot\media-file\**" />
   </ItemGroup>
 
@@ -48,8 +52,18 @@
  </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="LocalDb\" />
     <Folder Include="UploadFile\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\custom\formbuilder\form-render - 複製.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\custom\formbuilder\form-render - 複製.min.js.gz">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 </Project>
 

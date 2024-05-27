@@ -1,11 +1,8 @@
 ﻿using BMSHMedia.Extentions;
-using BMSHMedia.Model.Form;
 using BMSHMedia.ViewModel.BaseFormVMs;
-using BMSHMedia.ViewModel.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using WalkingTec.Mvvm.Core;
 using WalkingTec.Mvvm.Core.Extensions;
@@ -291,12 +288,12 @@ namespace BMSHMedia.Controllers
         [Route("/forms/[action]")]
         [Public]
         [HttpPost]
-        public IActionResult Submit(IFormCollection postForm)
+        public async Task<IActionResult> Submit(IFormCollection postForm)
         {
             try
             {
                 var vm = Wtm.CreateVM<BaseFormVM>();
-                vm.SubmitForm(postForm);
+                await vm.SubmitForm(postForm);
 
                 return Ok("提交成功.");
             }

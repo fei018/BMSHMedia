@@ -4,10 +4,11 @@
     string editboxId = "tinyfe11b883d77e4f82af9871760c8417f1";
 }
 
+<script src="~/custom/tinymce/tinymce.min.js"></script>
 
 <wt:quote>
     如要取消, 請先 "刪除圖片", 再按 [關閉]<br />
-    圖片格式( jpg, jpeg, gif, bmp, png, tif )
+    圖片格式( jpg, jpeg, gif, bmp, png, tif ), 大小限制 1M
 </wt:quote>
 <br />
 
@@ -17,7 +18,7 @@
     </wt:row>
     
     <wt:row items-per-row="ItemsPerRowEnum.One">
-        <wt:multiupload field="Entity.PostAttachList" upload-type="ImageFile" preview-height="100" preview-width="100" upload-subdir="@Model.UploadSubDir" show-preview="true"/>
+        <wt:multiupload field="Entity.PostAttachList" file-size="1024" upload-type="ImageFile" preview-height="100" preview-width="100" upload-subdir="@Model.UploadSubDir" show-preview="true"/>
     </wt:row>
 
     <wt:row items-per-row="ItemsPerRowEnum.One">

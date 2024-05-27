@@ -1,0 +1,18 @@
+﻿@using X.PagedList;
+@using BMSHMedia.ViewModel.ActivityPostVMs;
+@using X.PagedList.Mvc.Core
+@model IPagedList<ActivityPost_View>
+@{
+    Layout = "~/Views/Shared/_PortalLayout.cshtml";
+}
+
+<div class="mt-3">
+    <h2>活動消息</h2>
+    <hr />
+    <div id="postList">
+        @await Html.PartialAsync("postlist2", Model)
+    </div>
+</div>
+
+<!-- 分頁響應 -->
+<script src="~/jquery.unobtrusive-ajax.js"></script>

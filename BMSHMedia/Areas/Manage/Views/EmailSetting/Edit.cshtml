@@ -1,0 +1,27 @@
+﻿@model BMSHMedia.ViewModel.EmailSettingVMs.EmailSettingVM
+
+<wt:form vm="@Model">
+    <wt:row items-per-row="ItemsPerRowEnum.Two">
+        <wt:textbox field="Entity.SmtpHost"/>
+    </wt:row>
+    <wt:row items-per-row="ItemsPerRowEnum.Two">
+        <wt:textbox field="Entity.SmtpPort" />
+    </wt:row>
+    <wt:row items-per-row="ItemsPerRowEnum.Two">
+        <wt:textbox field="Entity.Account" />
+    </wt:row>
+    <wt:row items-per-row="ItemsPerRowEnum.Two">
+        <wt:textbox is-password field="Entity.Password" />
+    </wt:row>
+    <wt:row items-per-row="ItemsPerRowEnum.Two">
+        <wt:textbox field="Entity.EmailFrom" />
+    </wt:row>
+    <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:textbox field="Entity.EmailTo" empty-text="多個email用分號;隔離" title="多個email用分號;隔離" />
+    </wt:row>
+
+    <wt:row align="AlignEnum.Right" >
+        <wt:submitbutton />
+        <wt:closebutton />
+    </wt:row>
+</wt:form>

@@ -1,4 +1,5 @@
 ﻿using BMSHMedia.Model.Activity;
+using BMSHMedia.Model.Email;
 using BMSHMedia.Model.Form;
 using BMSHMedia.Model.SRS;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,8 @@ namespace BMSHMedia.DataAccess
         public DbSet<BaseFormSubmit> BaseFormSubmits { get; set; }
 
         public DbSet<BaseFormSubmitData> BaseFormSubmitDatas { get; set; }
+
+        //public DbSet<EmailSetting> EmailSetting { get; set; }
 
         public DataContext(CS cs)
              : base(cs)

@@ -1,9 +1,10 @@
 ﻿@model BMSHMedia.ViewModel.ActivityPostVMs.ActivityPostVM
-@inject IStringLocalizer<Program> Localizer;
+
 @{
     string editboxId = "tinyeb79b5da49384543ba3b1576e357dbc4";
 }
 
+<script src="~/custom/tinymce/tinymce.min.js"></script>
 
 <wt:quote>
     如要取消, 請先 "刪除圖片", 再按 [關閉]<br />
@@ -35,15 +36,3 @@
 <script>
     tinymceinit('#@editboxId')
 </script>
-@* <script>
-    tinymce.init({
-        selector: '#@editboxId',
-        menubar: false,
-        language: 'zh_CN',
-        plugins: 'link code',
-        toolbar: 'code undo redo restoredraft | styleselect formatselect fontselect fontsizeselect | forecolor backcolor bold italic underline link ',
-        setup: function (editor) {
-            editor.on('change', function () { editor.save(); });
-        },
-    });
-</script> *@

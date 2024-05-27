@@ -5,7 +5,7 @@ function tinymceinit(selector) {
         menubar: false,
         language: 'zh_CN',
         plugins: 'link code media',
-        toolbar: 'undo redo restoredraft | code link media | styleselect formatselect fontselect fontsizeselect | forecolor backcolor bold italic underline',
+        toolbar: 'code undo redo restoredraft | cut copy paste pastetext | forecolor backcolor bold italic underline strikethrough fontsizeselect | alignleft aligncenter alignright alignjustify outdent indent | link media',
         setup: function (editor) {
             editor.on('change', function () { editor.save(); });
         },

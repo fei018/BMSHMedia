@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace BMSHMedia.Manage.Controllers
 {
     [Area("Manage")]
-    [ActionDescription("活動Post")]
+    [ActionDescription("活動消息")]
     public partial class ActivityPostController : BaseController
     {
         #region Search
@@ -136,7 +136,7 @@ namespace BMSHMedia.Manage.Controllers
 
         #region Details
         
-        [Route("/activitypost/[action]")]
+        [Route("/activitypost/[action]/{id}")]
         //[ActionDescription("Sys.Details")]
         [Public]
         public ActionResult Details(string id)
@@ -170,7 +170,6 @@ namespace BMSHMedia.Manage.Controllers
         }
         #endregion
 
-
         #region Publish
         [ActionDescription("發佈")]
         public IActionResult Publish(string id)
@@ -199,27 +198,27 @@ namespace BMSHMedia.Manage.Controllers
         #endregion
 
         #region PostList
-        private int _pageSize = 3;
+        private int _pageSize = 10;
 
         [Route("/activitypost/[action]")]
         [Public]
-        public async Task<IActionResult> PostList()
-        {
-            var vm = Wtm.CreateVM<ActivityPostVM>();
-            var list = await vm.GetPagedList(1, _pageSize);
-
-            return View(list);
-        }
-
-        [Route("/activitypost/[action]")]
-        [Public]
-        public async Task<IActionResult> PostList2(int pageIndex = 1)
+        public async Task<IActionResult> PostList(int pageIndex = 1)
         {
             var vm = Wtm.CreateVM<ActivityPostVM>();
             var list = await vm.GetPagedList(pageIndex, _pageSize);
 
-            return PartialView(list);
+            return View(list);
         }
+
+        //[Route("/activitypost/[action]")]
+        //[Public]
+        //public async Task<IActionResult> PostList2(int pageIndex = 1)
+        //{
+        //    var vm = Wtm.CreateVM<ActivityPostVM>();
+        //    var list = await vm.GetPagedList(pageIndex, _pageSize);
+
+        //    return PartialView(list);
+        //}
         #endregion
     }
 }

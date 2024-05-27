@@ -6,24 +6,22 @@ using WalkingTec.Mvvm.Mvc;
 
 namespace BMSHMedia.Manage.ApiControllers
 {
-    [ActionDescription("活動Post")]
-    [ApiController]
-    [Route("api/[controller]")]
-    [Public]
-    public class ActivityPostController : BaseController
-    {
-        [ActionDescription("PostList")]
-        [HttpGet("[action]/{pageIndex}")]
-        public async Task<IActionResult> PostList(int? pageIndex)
-        {
-            int pageSize = int.Parse(Wtm.ConfigInfo.AppSettings["ActivityPostPageSize"]);
+    //[ApiController]
+    //[Route("api/_[controller]")]
+    //[Public]
+    //public class ActivityPostController : BaseController
+    //{
+    //    [HttpGet("[action]/{pageIndex}")]
+    //    public async Task<IActionResult> PostList(int? pageIndex)
+    //    {
+    //        int pageSize = int.Parse(Wtm.ConfigInfo.AppSettings["ActivityPostPageSize"]);
 
-            int index = pageIndex ?? 1;
+    //        int index = pageIndex ?? 1;
 
-            var vm = Wtm.CreateVM<ActivityPostVM>();
-            var list = await vm.GetActivityPostApiResult(index, pageSize);
+    //        var vm = Wtm.CreateVM<ActivityPostVM>();
+    //        var list = await vm.GetActivityPostApiResult(index, pageSize);
 
-            return Json(list);
-        }
-    }
+    //        return Json(list);
+    //    }
+    //}
 }

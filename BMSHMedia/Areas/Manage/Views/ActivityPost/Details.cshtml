@@ -1,6 +1,6 @@
 ﻿@using BMSHMedia.Common.Services
 @model BMSHMedia.ViewModel.ActivityPostVMs.ActivityPostVM
-@inject IStringLocalizer<Program> Localizer;
+
 @{
     Layout = "~/Views/Shared/_PortalLayout.cshtml";
     var post = Model.Entity;
@@ -11,16 +11,21 @@
     .post {
         max-width: 768px;
     }
+
+    @@media screen and (max-width:600px){
+        iframe {
+            max-width:380px;
+        }
+    }
 </style>
 
-<div class="m-auto post">
-    <div class="card mt-3">
-        <div class="card-body">
-            <h3 class="card-title">@post.Title</h3>
-            <p class="card-text">@Html.Raw(post.Text)</p>
-        </div>
+<div class="m-auto mt-2 post">
+    <h3 class="card-title">@post.Title</h3>
+    <hr />
+    <div>
+        @Html.Raw(post.Text)
     </div>
-
+    <br />
     @foreach (var item in list)
     {
         <div class="my-3 text-center">

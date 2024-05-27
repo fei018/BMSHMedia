@@ -1,11 +1,8 @@
 ﻿using BMSHMedia.Model.Form;
-using BMSHMedia.ViewModel.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Primitives;
 using MiniExcelLibs;
 using Newtonsoft.Json;
-using NPOI.OpenXmlFormats.Spreadsheet;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -44,10 +41,19 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
         {
             base.DoDelete();
 
-            var submits = DC.Set<BaseFormSubmit>().CheckID(Entity.ID,x=>x.BaseFormId).ToList();
+            // 刪除 下面的提交數據
+            var submits = DC.Set<BaseFormSubmit>().CheckID(Entity.ID, x => x.BaseFormId).ToList();
             DC.Set<BaseFormSubmit>().RemoveRange(submits);
             DC.SaveChanges();
         }
+
+        #region DoPublish
+        public void DoPublish()
+        {
+            DC.UpdateProperty(Entity, x => x.IsPublish);
+            DC.SaveChanges();
+        }
+        #endregion
 
         #region CheckEdit
         /// <summary>
@@ -72,7 +78,7 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
             var submits = await DC.Set<BaseFormSubmit>().AsNoTracking()
                                     .Include(x => x.FormSubmitDataList)
                                     .CheckID(Entity.ID, x => x.BaseFormId)
-                                    .OrderByDescending(x=>x.SubmitTime)
+                                    .OrderByDescending(x => x.SubmitTime)
                                     .ToListAsync();
 
 
@@ -81,17 +87,27 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
             {
                 throw new Exception("查無數據.");
             }
-            
+
             FormSubmitList = submits;
         }
         #endregion
 
         #region SubmitForm
-        public void SubmitForm(IFormCollection postForm)
+        /// <summary>
+        /// 提交 Form
+        /// </summary>
+        /// <param name="postForm"></param>
+        /// <returns></returns>
+        public async Task SubmitForm(IFormCollection postForm)
         {
             string id = postForm["baseFormId"].Single();
 
-            var entity = DC.Set<BaseForm>().Where(x => x.ID.ToString().ToLower() == id.ToLower()).SingleOrDefault();
+            var entity = await DC.Set<BaseForm>().Where(x => x.ID.ToString().ToLower() == id.ToLower()).FirstOrDefaultAsync();
+
+            if (entity == null)
+            {
+                throw new Exception("BaseForm id: " + id + " query null from database.");
+            }
 
             var formDataFormatList = JsonConvert.DeserializeObject<List<BaseFormDataFormat>>(entity.FormData);
 
@@ -99,24 +115,28 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
 
             Guid newSubmitId = Guid.NewGuid();
 
-            foreach (var item in formDataFormatList)
+            foreach (var format in formDataFormatList)
             {
-                if (!string.IsNullOrEmpty(item.Name))
+                if (!string.IsNullOrEmpty(format.Name))
                 {
+                    // 單元數據
                     var vm = new BaseFormSubmitData
                     {
-                        Name = item.Name,
-                        Label = item.Label,
-                        FormSubmitId = newSubmitId
+                        Name = format.Name,
+                        Label = format.Label,
+                        FormSubmitId = newSubmitId,
+                        Value = string.Empty,
                     };
 
-                    if (postForm.TryGetValue(item.Name, out StringValues value))
+                    // 提交的表單 name 可能比 format.Name 結尾多字符
+                    foreach (var post in postForm)
                     {
-                        vm.Value = value;
-                    }
-                    else
-                    {
-                        vm.Value = string.Empty;
+                        // format.name 匹配 提交表單的單元 key 開頭, 
+                        if (post.Key.StartsWith(format.Name, StringComparison.OrdinalIgnoreCase))
+                        {
+                            vm.Value = post.Value;
+                            break;
+                        }
                     }
 
                     submitDataList.Add(vm);
@@ -134,18 +154,20 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
             DC.Set<BaseFormSubmit>().Add(submit);
             DC.Set<BaseFormSubmitData>().AddRange(submitDataList);
             DC.SaveChanges();
+
+            //string subject = $"{entity.FormName} 有新數據提交, {submit.SubmitTime:yyyy-MM-dd HH:mm:ss}";
+            //await Wtm.CreateVM<EmailSettingVM>().SendEmail(subject, subject);
         }
         #endregion
 
-        #region GetBaseFormList
-        public List<BaseForm_View> BaseFormList { get; set; } = new();
-
+        #region GetBaseFormPagedList
         /// <summary>
         /// 顯示 form list 頁面數據
         /// </summary>
         public async Task<IPagedList<BaseForm_View>> GetBaseFormPagedList(int pageIndex)
         {
             var vm = await DC.Set<BaseForm>().Where(x => x.IsPublish)
+                                        .OrderByDescending(x => x.CreateTime)
                                         .Select(x => new BaseForm_View
                                         {
                                             ID = x.ID,
@@ -153,14 +175,6 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
                                         })
                                         .ToPagedListAsync(pageIndex, 10);
             return vm;
-        }
-        #endregion
-
-        #region DoPublish
-        public void DoPublish()
-        {
-            DC.UpdateProperty(Entity, x => x.IsPublish);
-            DC.SaveChanges();
         }
         #endregion
 
@@ -189,7 +203,7 @@ namespace BMSHMedia.ViewModel.BaseFormVMs
 
             foreach (var submit in FormSubmitList)
             {
-                var row = new Dictionary<string,object>();
+                var row = new Dictionary<string, object>();
 
                 // 新增 row， 按照 列col 給 row 添加 cell 數據
                 foreach (var col in column)
