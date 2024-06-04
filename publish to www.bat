@@ -11,4 +11,6 @@ rem del /S /Q %web%\*
 
 robocopy .\publish %web%\ /Mir /TEE /R:0 /NP
 
+copy appsettings.json %web%\appsettings.json /y
+
 pause

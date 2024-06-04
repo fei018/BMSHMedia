@@ -13,6 +13,27 @@
     }
 }
 
+<style>
+    .media-player-body {
+        margin: 10px auto;
+        text-align: center;
+        width: 600px;
+        min-height: 500px;
+    }
+    video {
+        width: 100%;
+        object-fit: fill;
+    }
+    @@media all and (max-width:600px) {
+        .media-player-body {
+            margin: 10px auto;
+            text-align: center;
+            width: 380px;
+            min-height: 500px;
+        }
+    }
+</style>
+
 <script src="~/custom/portal/mpegts.js"></script>
 
 <div class="row mx-1 mb-3">
@@ -24,7 +45,7 @@
     </div>
 </div>
 
-<div style="margin:auto;text-align:center;max-height:600px;margin-bottom:30px;">
+<div class="media-player-body">
     <video id="livePlayer" autoplay controls width="350" ></video>
 </div>
 @* <div style="text-align:center">
