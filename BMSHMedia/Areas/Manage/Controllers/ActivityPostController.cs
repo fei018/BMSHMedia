@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace BMSHMedia.Manage.Controllers
 {
     [Area("Manage")]
-    [ActionDescription("活動消息")]
+    [ActionDescription("活動資訊")]
     public partial class ActivityPostController : BaseController
     {
         #region Search

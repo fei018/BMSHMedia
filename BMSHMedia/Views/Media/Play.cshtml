@@ -6,13 +6,14 @@
     .media-player-body {
         margin: 10px auto;
         text-align: center;
-        width:600px;
-        min-height:500px;      
+        /* max-width:800px; */
+        /* max-height:600px; */      
     }
 
     video {
         width:100%;
-        object-fit:fill;
+        object-fit: contain;
+        max-height:600px;
     }
 
     button.player-close{
@@ -21,15 +22,15 @@
 
     @@media all and (max-width:600px){
         .media-player-body {
-            margin: 10px auto;
-            text-align: center;
-            width: 380px;
-            min-height: 500px;
+            /* margin: 10px auto;
+            text-align: center; */
+            /* width: 380px; */
+            /* max-height: 600px; */
         }
     }
 </style>
 
-<div class="media-player-body">
+<div class="media-player-body container">
     @if (Model.FileType == MediaFileTypeEnum.Audio)
     {
         <audio controls autoplay>

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -15,7 +14,6 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using WalkingTec.Mvvm.Core;
 using WalkingTec.Mvvm.Core.Support.FileHandlers;
-using WalkingTec.Mvvm.Core.Support.Quartz;
 using WalkingTec.Mvvm.Mvc;
 
 namespace BMSHMedia
@@ -74,7 +72,7 @@ namespace BMSHMedia
             // http response html 拉丁中文不编码
             services.AddSingleton(HtmlEncoder.Create(new[] { UnicodeRanges.BasicLatin, UnicodeRanges.CjkUnifiedIdeographs }));
 
-            StartupTask.Add(ConfigRoot, services, hostEnvironment); 
+            StartupTask.Add(ConfigRoot, services, hostEnvironment);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
