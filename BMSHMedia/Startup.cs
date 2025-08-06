@@ -72,7 +72,7 @@ namespace BMSHMedia
             // http response html 拉丁中文不编码
             services.AddSingleton(HtmlEncoder.Create(new[] { UnicodeRanges.BasicLatin, UnicodeRanges.CjkUnifiedIdeographs }));
 
-            StartupTask.Add(ConfigRoot, services, hostEnvironment);
+            //StartupTask.Add(ConfigRoot, services, hostEnvironment);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,7 +82,7 @@ namespace BMSHMedia
 
             app.UseExceptionHandler(configs.CurrentValue.ErrorHandler);
             app.UseStaticFiles();
-            AddCustomStaticFiles(ref app);
+            //AddCustomStaticFiles(ref app);
 
             app.UseWtmStaticFiles();
             app.UseRouting();
